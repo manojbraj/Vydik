@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/listview_background_stroke"
+    android:padding="10dp"
+    android:layout_margin="10dp">
+<CheckBox
+    android:id="@+id/net_banking"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Net Banking"
+    android:textSize="18sp"/>
+<CheckBox
+    android:id="@+id/card_payment"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Card Payment"
+    android:textSize="18sp"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <Button
+        android:id="@+id/payment_option_submit"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_weight=".5"
+        android:text="Submit"
+        android:textSize="18sp"
+        android:background="@color/colorPrimary"
+        android:layout_margin="10dp"/>
+    <Button
+        android:id="@+id/payment_option_cancel"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_weight=".5"
+        android:text="Cancel"
+        android:textSize="18sp"
+        android:background="@color/gray"
+        android:layout_margin="10dp"/>
+</LinearLayout>
+</LinearLayout>

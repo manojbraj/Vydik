@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="vydik.jjbytes.com.Activities" >
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_CALENDAR"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_CALENDAR"></uses-permission>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <permission
+        android:name="vydik.jjbytes.com.Activities.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="com.bm.beherinmarket.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+    <application
+        android:name="android.support.multidex.MultiDexApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/lounch_icon"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:label="@string/app_name">
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <activity
+            android:name=".SplashScreenActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LoginActivity">
+        </activity>
+        <activity
+            android:theme="@style/MainTheme"
+            android:label="PurohitRegistration"
+            android:name=".RegistrationPoojaActivity">
+        </activity>
+        <activity
+            android:theme="@style/MainTheme"
+            android:label="PurohitRegistration"
+            android:name=".FinalRegistrationSubmit">
+        </activity>
+        <activity
+            android:label="PurohitRegistration"
+            android:name=".RegistrationFormOne"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+        <activity
+            android:label="PurohitRegistration"
+            android:name=".RegistrationFormTwo"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+        <activity
+            android:label="PurohitRegistration"
+            android:name=".RegistrationFormThree"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+        <activity
+            android:label="UserRegistration"
+            android:name=".UserRegistrationFormOne"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+        <activity
+            android:label="UserRegistration"
+            android:name=".UserRegistrationFinalSignUp"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+        <!--main class starts from hear-->
+
+        <activity
+            android:label="Home"
+            android:theme="@style/MainTheme"
+            android:name=".MainActivity">
+        </activity>
+        <activity
+            android:theme="@style/MainTheme"
+            android:label="BookPuja"
+            android:name=".BookPujaActivity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"
+                />
+        </activity>
+        <activity
+            android:label="Bhajans"
+            android:name=".BhajansActivity">
+         </activity>
+        <activity
+            android:label="MediaPlayer"
+            android:name=".MusicPlayer">
+        </activity>
+        <activity
+            android:theme="@style/MainTheme"
+            android:name=".PurohithMainActivity">
+        </activity>
+        <activity
+            android:label="Purohith"
+            android:theme="@style/MainTheme"
+            android:name=".SearchResultPurohithActivity">
+        </activity>
+        <activity
+            android:name=".GoogleCalender">
+        </activity>
+        <activity
+            android:label="PurohitDetails"
+            android:name=".PurohithDetailsActivity">
+        </activity>
+        <activity
+            android:label="PurohitDetails"
+            android:name=".PackagePujaDetailActivity">
+        </activity>
+        <activity
+            android:name=".CheckoutActivityAddress"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
+        <activity
+            android:label="Inbox"
+            android:name=".InboxActivity">
+        </activity>
+        <activity
+            android:label="Inbox"
+            android:name=".PurohitInboxActivity">
+        </activity>
+        <activity
+            android:label="BookingDetails"
+            android:name=".PurohitBookingInboxActivity">
+        </activity>
+        <activity
+            android:theme="@style/MainTheme"
+            android:name=".UserBookingList">
+        </activity>
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".PurohitProfileView">
+        </activity>
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
+            android:name=".UserProfileActivity">
+        </activity>
+
+        <!--payment gateway start-->
+        <activity
+            android:name="com.atom.mobilepaymentsdk.PayActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/app_id" />
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:label="@string/app_name" />
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/app_id"/>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationName"
+            android:value="@string/app_name" />
+        <!-- Register Broadcast receiver -->
+        <receiver
+            android:name=".GcmBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                <category android:name="vydik.jjbytes.com.Activities" />
+            </intent-filter>
+        </receiver>
+        <!-- Register Service -->
+        <service android:name=".GCMNotificationIntentService" />
+    </application>
+</manifest>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:layout_gravity="center">
+
+    <TextView
+        android:id="@+id/tv_lbl_nb"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Net Banking"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Spinner
+        android:id="@+id/sp_bankdetails"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btn_nb_paynow"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Pay Now" />
+    
+    <Button
+        android:id="@+id/btn_nb_cancel"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Cancel" />
+
+</LinearLayout>
+<!-- From: file:/F:/Vydik/libraryMobilePaymentSDK/src/main/res/layout/nb_txn_screen.xml -->

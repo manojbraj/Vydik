@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<include
+    android:id="@+id/tool_bar"
+    layout="@layout/toolbar"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:orientation="horizontal">
+<LinearLayout
+    android:layout_width="0dp"
+    android:layout_height="50dp"
+    android:layout_weight="1.5"
+    android:background="@mipmap/puja_list_title"
+    android:layout_margin="10dp">
+    <TextView
+        android:id="@+id/search_puja_name"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight=".75"
+        android:textSize="16sp"
+        android:textColor="#fff"
+        android:text="Puja Name will come hear"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:maxEms="13"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight=".25"/>
+</LinearLayout>
+<LinearLayout
+    android:layout_width="0dp"
+    android:layout_height="50dp"
+    android:layout_weight=".5">
+</LinearLayout>
+</LinearLayout>
+<ListView
+    android:id="@+id/purohith_list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:dividerHeight="5dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:divider="@null">
+</ListView>
+</LinearLayout>

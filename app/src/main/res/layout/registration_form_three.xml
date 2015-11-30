@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="10dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="Select Bank: "
+        android:textColor="#000"
+        android:textSize="16sp"
+        android:gravity="center"/>
+
+    <Spinner
+        android:id="@+id/bank_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+    </Spinner>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="Select Schemes: "
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:gravity="center"/>
+        <Spinner
+            android:id="@+id/schemes_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:entries="@array/schemes">
+        </Spinner>
+    </LinearLayout>
+    <Spinner
+        android:id="@+id/branch_name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/line"
+        android:layout_marginTop="2dp"/>
+    <EditText
+        android:id="@+id/ifsc_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:hint="Enter IFSC Code*"
+        android:layout_marginTop="10dp"
+        android:inputType="text"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/line"
+        android:layout_marginTop="2dp"/>
+    <EditText
+        android:id="@+id/acount_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:hint="Enter Account Number*"
+        android:layout_marginTop="10dp"
+        android:inputType="number"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/line"
+        android:layout_marginTop="2dp"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <EditText
+        android:id="@+id/ref_p_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".9"
+        android:background="@null"
+        android:hint="Referral Pujari Name"
+        android:layout_marginTop="10dp"
+        android:inputType="textPersonName"/>
+    <ImageView
+        android:id="@+id/rpn_image"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".1"
+        android:background="@android:drawable/ic_menu_add" />
+</LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/line"
+        android:layout_marginTop="2dp"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <EditText
+        android:id="@+id/ref_p_number"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".9"
+        android:background="@null"
+        android:hint="Referral Pujari Number"
+        android:layout_marginTop="10dp"
+        android:inputType="phone"/>
+    <ImageView
+        android:id="@+id/rpp_image"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".1"
+        android:background="@android:drawable/ic_menu_add"/>
+</LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/line"
+        android:layout_marginTop="2dp"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <EditText
+        android:id="@+id/ref_p_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".9"
+        android:background="@null"
+        android:hint="Referral Pujari Email"
+        android:layout_marginTop="10dp"
+        android:inputType="textEmailAddress"/>
+    <ImageView
+        android:id="@+id/rpe_image"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".1"
+        android:background="@android:drawable/ic_menu_add"/>
+</LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/line"
+        android:layout_marginTop="2dp"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <EditText
+        android:id="@+id/ref_c_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".9"
+        android:background="@null"
+        android:hint="Referral Client Name"
+        android:layout_marginTop="10dp"
+        android:inputType="textPersonName"/>
+    <ImageView
+        android:id="@+id/rcn_image"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".1"
+        android:background="@android:drawable/ic_menu_add"/>
+</LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/line"
+        android:layout_marginTop="2dp"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <EditText
+        android:id="@+id/ref_c_number"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".9"
+        android:background="@null"
+        android:hint="Referral Client"
+        android:layout_marginTop="10dp"
+        android:inputType="phone"/>
+    <ImageView
+        android:id="@+id/rcp_image"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".1"
+        android:background="@android:drawable/ic_menu_add"/>
+</LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/line"
+        android:layout_marginTop="2dp"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <EditText
+        android:id="@+id/ref_c_email"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".9"
+        android:background="@null"
+        android:layout_marginTop="10dp"
+        android:hint="Referral Client Email"
+        android:inputType="textEmailAddress"/>
+    <ImageView
+        android:id="@+id/rce_image"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight=".1"
+        android:background="@android:drawable/ic_menu_add"/>
+</LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/line"
+        android:layout_marginTop="2dp"/>
+</LinearLayout>
+</ScrollView>
+<Button
+    android:id="@+id/pujari_reference"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/colorPrimaryDark"
+    android:layout_alignParentBottom="true"
+    android:text="NEXT"
+    android:textColor="#fff"
+    android:textSize="20sp"
+    android:textStyle="bold"/>
+</RelativeLayout>

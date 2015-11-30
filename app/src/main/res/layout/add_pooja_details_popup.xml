@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:layout_margin="10dp"
+    android:background="@drawable/white_rectangle_background">
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Price:"
+    android:textSize="20sp"
+    android:textStyle="bold"
+    android:layout_gravity="start"
+    android:layout_marginLeft="10dp"
+    android:layout_marginTop="10dp"/>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="10dp">
+    <EditText
+        android:id="@+id/with_samagri"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@null"
+        android:hint="With Samagri"
+        android:inputType="number"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"/>
+    <EditText
+        android:id="@+id/without_samagri"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@null"
+        android:hint="Without Samagri"
+        android:inputType="number"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"/>
+</LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp">
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_weight="1"
+        android:background="@drawable/line"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"/>
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_weight="1"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/line"/>
+</LinearLayout>
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Experties"
+    android:textSize="20sp"
+    android:textStyle="bold"
+    android:layout_marginTop="5dp"
+    android:layout_marginLeft="10dp"
+    android:layout_gravity="start"/>
+<Spinner
+    android:id="@+id/expert_level"
+    android:layout_width="100dp"
+    android:layout_height="40dp"
+    android:entries="@array/experties"
+    android:layout_gravity="start"
+    android:layout_marginTop="5dp"
+    android:layout_marginLeft="10dp">
+</Spinner>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <Button
+        android:id="@+id/add_puja"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/orange_rectangle_button"
+        android:text="Add Puja"
+        android:gravity="center"
+        android:layout_margin="5dp"/>
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/gray_rectangle_shape_button"
+        android:text="Cancel"
+        android:layout_margin="5dp"
+        android:gravity="center"/>
+</LinearLayout>
+</LinearLayout>

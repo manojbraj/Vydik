@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:background="@drawable/listview_background_stroke">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:gravity="center">
+    <ImageView
+        android:id="@+id/pujari_image"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:background="@mipmap/android_logo"
+        android:layout_margin="10dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+        <TextView
+            android:id="@+id/pujari_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Purohith Name"
+            android:textColor="#000"
+            android:textStyle="bold"
+            android:textSize="24sp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Experties :"
+                android:textSize="18sp"
+                android:textColor="#000"/>
+            <TextView
+                android:id="@+id/experties_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Experties"
+                android:textSize="18sp"
+                android:textColor="#000"
+                android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Location :"
+                android:textColor="#000"
+                android:textSize="18sp"/>
+            <TextView
+                android:id="@+id/location_state_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Location and State"
+                android:textColor="#000"
+                android:textSize="18sp"
+                android:layout_marginLeft="10dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Price"
+                    android:textColor="#000"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:id="@+id/price_of_puja"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Puja Price"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:layout_marginTop="5dp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal"
+                android:gravity="center">
+            <TextView
+                android:id="@+id/book_puja_now"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:background="#ff0000"
+                android:text="VIEW DETAILS"
+                android:gravity="center"
+                android:textColor="#fff"
+                android:textSize="16sp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
+</LinearLayout>

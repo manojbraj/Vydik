@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/white_rectangle_background">
+    <CheckBox
+        android:id="@+id/with_package"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Package Puja"
+        android:textSize="16sp"
+        android:layout_margin="10dp"/>
+    <CheckBox
+        android:id="@+id/without_package"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Purohit Only"
+        android:textSize="16sp"
+        android:layout_margin="10dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/puja_submit"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/yellow_curver_icon"
+            android:layout_margin="10dp"
+            android:text="Submit"
+            android:gravity="center"/>
+        <Button
+            android:id="@+id/puja_cancel"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/gray_rectangle_shape_button"
+            android:layout_margin="10dp"
+            android:text="Cancel"
+            android:gravity="center"/>
+
+    </LinearLayout>
+</LinearLayout>
