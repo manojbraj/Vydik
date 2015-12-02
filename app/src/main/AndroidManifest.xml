@@ -155,6 +155,10 @@
         </activity>
         <activity
             android:theme="@style/AppTheme.NoActionBar"
+            android:name=".TestRclass">
+        </activity>
+        <activity
+            android:theme="@style/AppTheme.NoActionBar"
             android:name=".UserProfileActivity">
         </activity>
 
