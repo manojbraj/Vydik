@@ -74,6 +74,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
         if(getUserLoginData.size() == 0){
 
         }else {
+            /*later chage this one to getMyLogin*/
             for(int i=0;i<getUserLoginData.size();i++){
                 UserFirstName.add(getUserLoginData.get(i).getFname());
                 UserLastName.add(getUserLoginData.get(i).getLname());

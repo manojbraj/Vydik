@@ -4,14 +4,13 @@ package vydik.jjbytes.com.Models;
  * Created by user on 11/30/2015.
  */
 public class GetPurohitPujaList {
-    String id,PujaName,PujaWithPackage,PujaWithoutPackage,ExpertLevel,Languages;
+    String id,PujaName,PujaWithPackage,PujaWithoutPackage,ExpertLevel;
 
-    public GetPurohitPujaList(String id,String PujaWithPackage,String PujaWithoutPackage,String ExpertLevel,String languages){
+    public GetPurohitPujaList(String id,String PujaWithPackage,String PujaWithoutPackage,String ExpertLevel){
         this.id = id;
         this.PujaWithPackage = PujaWithPackage;
         this.PujaWithoutPackage = PujaWithoutPackage;
         this.ExpertLevel = ExpertLevel;
-        this.Languages =languages;
     }
     public GetPurohitPujaList(){
         super();
@@ -46,10 +45,5 @@ public class GetPurohitPujaList {
     public void setExpertLevel(String ExpertLevel){
         this.ExpertLevel = ExpertLevel;
     }
-    public String getLanguages(){
-        return Languages;
-    }
-    public void setLanguages(String Language){
-        this.Languages = Language;
-    }
+
 }

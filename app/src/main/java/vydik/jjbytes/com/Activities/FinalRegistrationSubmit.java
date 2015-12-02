@@ -61,6 +61,12 @@ public class FinalRegistrationSubmit extends ActionBarActivity{
     /*response get string*/
     String FirstName,LastName,Email,DOB,Phone,Education,Univercity,State,Address,City,ZipCode,GuruName,Location,SPujaName,SPriceWithSamagri,SPriceWithoutPackage,
     SExpertLevel,Languages;
+    private ArrayList<String> PujaNameArray = new ArrayList<String>();
+    private ArrayList<String> PujaWithPriceArray = new ArrayList<String>();
+    private ArrayList<String> PujaWithoutPriceArray = new ArrayList<String>();
+    private ArrayList<String> PujaExpertArray = new ArrayList<String>();
+    private ArrayList<String> PurohitLanguages = new ArrayList<String>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -331,20 +337,83 @@ public class FinalRegistrationSubmit extends ActionBarActivity{
                 }else{
                     Location = " ";
                 }
+                /*to get puja list*/
                 JSONArray pujaArray = object.getJSONArray("perfor_puja");
                 for(int i=0;i<pujaArray.length();i++){
                     int len = pujaArray.length();
-                    if(len == i){
-                      break;
+                    if(len == i+1){
+
                     }else {
                         SPujaName = (String) pujaArray.get(i);
-                        System.out.println("puja names retrieved" + SPujaName + " ArrayLength: " + pujaArray.length());
+                        PujaNameArray.add(SPujaName);
                     }
                 }
+                /*to get puja with price*/
+                JSONArray withArray = object.getJSONArray("price_with_samagri");
+                for(int j=0;j<withArray.length();j++){
+                    int len = withArray.length();
+                    System.out.println("length"+len);
+                    if(len == j+1){
+
+                    }else {
+                        SPriceWithSamagri = (String) withArray.get(j);
+                        PujaWithPriceArray.add(SPriceWithSamagri);
+                    }
+                }
+                /*to get puja without price*/
+                JSONArray withoutArray = object.getJSONArray("price_with_out_samagri");
+                for(int k=0;k<withoutArray.length();k++){
+                    int len = withoutArray.length();
+                    System.out.println("length 2"+len);
+                    if(len == k+1){
+
+                    }else {
+                        SPriceWithoutPackage = (String) withoutArray.get(k);
+                        PujaWithoutPriceArray.add(SPriceWithoutPackage);
+                    }
+                }
+                /*to get expert level*/
+                JSONArray expertArray = object.getJSONArray("expert_level");
+                for(int e=0;e<expertArray.length();e++){
+                    int len = expertArray.length();
+                    System.out.println("length 3"+len);
+                    if(len == e+1){
+
+                    }else {
+                        SExpertLevel = (String) expertArray.get(e);
+                        PujaExpertArray.add(SExpertLevel);
+                    }
+                }
+                /*to get languages*/
+                JSONArray langageArray = object.getJSONArray("language");
+                for(int l=0;l<langageArray.length();l++){
+                    int len = langageArray.length();
+                    System.out.println("length 4"+len);
+                    if(len == l){
+
+                    }else {
+                        Languages = (String) langageArray.get(l);
+                        PurohitLanguages.add(Languages);
+                    }
+                }
+
                 String Image = "add image hear";
                 String Type = "purohit";
                 if(result.equals("Successfully Registered")){
-                    database.insertLogin(constants.FirstNameValue,Image,Type);
+                    database.insertLogin(FirstName+" "+LastName, Image, Type);
+                    database.PurohitLoginDeailInsurt(FirstName,LastName,Email,DOB,Phone,Education,Univercity,State,Address,City,ZipCode,GuruName,Location);
+                    for(int i=0;i<PujaNameArray.size();i++){
+                        String v1,v2,v3,v4;
+                        v1 = PujaNameArray.get(i);
+                        v2 = PujaWithPriceArray.get(i);
+                        v3 = PujaWithoutPriceArray.get(i);
+                        v4 = PujaExpertArray.get(i);
+                        database.PurohitPujaListInsert(v1,v2,v3,v4);
+                    }
+                    for(int l=0;l<PurohitLanguages.size();l++){
+                        String lang = PurohitLanguages.get(l);
+                        database.PurohitLanguage(lang);
+                    }
                     Intent intent = new Intent(FinalRegistrationSubmit.this,PurohithMainActivity.class);
                     startActivity(intent);
                     finish();

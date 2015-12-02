@@ -16,10 +16,13 @@ import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Stack;
 
+import vydik.jjbytes.com.Models.GetPurohitLanguages;
+import vydik.jjbytes.com.Models.GetPurohitPujaList;
 import vydik.jjbytes.com.Models.GetUserLoginData;
 import vydik.jjbytes.com.Models.LoginGetDB;
 import vydik.jjbytes.com.Models.PurohitBookingInboxGetDB;
 import vydik.jjbytes.com.Models.PurohitInboxGetDB;
+import vydik.jjbytes.com.Models.PurohitLoginGet;
 import vydik.jjbytes.com.Models.UserInboxGetDB;
 import vydik.jjbytes.com.Models.UserPurohitBookingGet;
 
@@ -37,6 +40,8 @@ public class MainDatabase {
     private static final String DATABSE_USER_BOOKING_DETAILS = "user_bookings";
     private static final String DATABASE_PUROHIT_LOGIN_TABLE = "purohit_login";
     private static final String DATABASE_PUROHIT_PUJA_LOGIN_LIST = "purohit_puja_list";
+    private static final String DATABASE_PUROHIT_Langagres = "purohit_languages";
+
 
     private static final String TABLE_LOGIN = "create table login (_id integer primary key autoincrement, "
             + "email varchar, mobile varchar, logintype varchar);";
@@ -63,7 +68,10 @@ public class MainDatabase {
             + "city varchar, zipcode varchar,guruname varchar, location varchar);";
 
     private static final String TABLE_PUROHIT_PUJA_LIST = "create table purohit_puja_list (_id integer primary key autoincrement, "
-            +"PujaName varchar,PriceWithSamagri varchar,PriceWithoutSamagri varchar,ExpertLevel varchar,Languages varchar);";
+            +"PujaName varchar,PriceWithSamagri varchar,PriceWithoutSamagri varchar,ExpertLevel varchar);";
+
+    private static final String TABLE_PUROHIT_LANGUAGE = "create table purohit_languages (_id integer primary key autoincrement,"
+            +"Languages varchar);";
 
     private static final String TAG = "DatabaseClass";
     private DatabaseHelper DBHelper;
@@ -77,6 +85,9 @@ public class MainDatabase {
     ArrayList<PurohitBookingInboxGetDB> purohitBookingInboxGetDBs = new ArrayList<PurohitBookingInboxGetDB>();
     ArrayList<GetUserLoginData> getUserLoginDatas = new ArrayList<GetUserLoginData>();
     ArrayList<UserPurohitBookingGet> getuserPurohitBookingGet = new ArrayList<UserPurohitBookingGet>();
+    ArrayList<PurohitLoginGet> purohitLoginGet = new ArrayList<PurohitLoginGet>();
+    ArrayList<GetPurohitPujaList> getPurohitPujaList = new ArrayList<GetPurohitPujaList>();
+    ArrayList<GetPurohitLanguages> getPurohitLanguage = new ArrayList<GetPurohitLanguages>();
 
     public MainDatabase(Context context) {
         this.context = context;
@@ -112,6 +123,7 @@ public class MainDatabase {
                 db.execSQL(TABLE_USER_BOOKING_DETAILS);
                 db.execSQL(TABLE_PUROHIT_LOGIN);
                 db.execSQL(TABLE_PUROHIT_PUJA_LIST);
+                db.execSQL(TABLE_PUROHIT_LANGUAGE);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -180,6 +192,7 @@ public class MainDatabase {
     public int deleteReplace() {
         return db.delete(DATABASE_LOGIN_TABLE,null, null);
     }
+
 /*login insertion access delete methods ends hear*/
 
 /*user inbox insertion access delete call back start*/
@@ -338,7 +351,7 @@ public class MainDatabase {
 
     //------delete function for login-------
     public int deleteUserData() {
-        return db.delete(DATABASE_USER_TABLE,null, null);
+        return db.delete(DATABASE_USER_TABLE, null, null);
     }
 
 /*user booking table insertion updating deletion starts from hear */
@@ -386,14 +399,14 @@ public class MainDatabase {
         return db.delete(DATABSE_USER_BOOKING_DETAILS,"_id=?", new String[] { id });
     }
 
-    //--------------Reshedule Booking List---------------
+    //--------------Reschedule Booking List---------------
     public void updateRescheduleDate(String id,String date){
         ContentValues values = new ContentValues();
         values.put("date", date);
         db.update(DATABSE_USER_BOOKING_DETAILS, values, "_id" +"="+id, null);
     }
 
-/*purohit login general info input*/
+/*---------purohit login general info input-------------*/
     public long PurohitLoginDeailInsurt(String fName,String lName,String Email, String DOB,String Phone,String Education,String Univercity,String State,
                                         String Address,String City,String ZipCode,String GuruName,String Location){
         ContentValues initialValues = new ContentValues();
@@ -413,14 +426,95 @@ public class MainDatabase {
         return db.insert(DATABASE_PUROHIT_LOGIN_TABLE, null, initialValues);
     }
 
- /*purohit puja insersion*/
-    public long PurohitPujaListInsert(String PujaName,String PriceWS,String PriceWOS,String ExpertLevel,String Languages){
+/*------------get values from PurohitLoginDeailInsurt table------------*/
+    public ArrayList<PurohitLoginGet> getPurohitBasicData(){
+        Cursor cursor = db.rawQuery("select * from " + DATABASE_PUROHIT_LOGIN_TABLE , null);
+        try{
+            if (cursor.moveToFirst()) {
+                do{
+                    PurohitLoginGet purohitLoginGetInner = new PurohitLoginGet();
+                    purohitLoginGetInner.setId(cursor.getString(0));
+                    purohitLoginGetInner.setfName(cursor.getString(1));
+                    purohitLoginGetInner.setlName(cursor.getString(2));
+                    purohitLoginGetInner.setEmail(cursor.getString(3));
+                    purohitLoginGetInner.setDOB(cursor.getString(4));
+                    purohitLoginGetInner.setPhone(cursor.getString(5));
+                    purohitLoginGetInner.setEducation(cursor.getString(6));
+                    purohitLoginGetInner.setUniversity(cursor.getString(7));
+                    purohitLoginGetInner.setState(cursor.getString(8));
+                    purohitLoginGetInner.setAddress(cursor.getString(9));
+                    purohitLoginGetInner.setCity(cursor.getString(10));
+                    purohitLoginGetInner.setZipCode((cursor.getString(11)));
+                    purohitLoginGetInner.setGuruName(cursor.getString(12));
+                    purohitLoginGetInner.setLocality(cursor.getString(13));
+                    purohitLoginGet.add(purohitLoginGetInner);
+                }while (cursor.moveToNext());
+            }
+        }catch (Exception e){
+
+        }finally {
+            cursor.close();
+        }
+        return purohitLoginGet;
+    }
+
+ /*---------------purohit puja insersion----------------------*/
+    public long PurohitPujaListInsert(String PujaName,String PriceWS,String PriceWOS,String ExpertLevel){
         ContentValues initialValues = new ContentValues();
         initialValues.put("PujaName",PujaName);
         initialValues.put("PriceWithSamagri",PriceWS);
         initialValues.put("PriceWithoutSamagri",PriceWOS);
         initialValues.put("ExpertLevel",ExpertLevel);
-        initialValues.put("Languages",Languages);
         return db.insert(DATABASE_PUROHIT_PUJA_LOGIN_LIST, null, initialValues);
+    }
+
+/*-------------------get PurohitPujaListInsert values from db----------------------*/
+    public ArrayList<GetPurohitPujaList> getPujaList(){
+        Cursor cursor = db.rawQuery("select * from " + DATABASE_PUROHIT_PUJA_LOGIN_LIST , null);
+        try {
+            if (cursor.moveToFirst()) {
+                do{
+                    GetPurohitPujaList PujaList = new GetPurohitPujaList();
+                    PujaList.setId(cursor.getString(0));
+                    PujaList.setPujaName(cursor.getString(1));
+                    PujaList.setPujaWithPackage(cursor.getString(2));
+                    PujaList.setPujaWithoutPackage(cursor.getString(3));
+                    PujaList.setExpertLevel(cursor.getString(4));
+                    getPurohitPujaList.add(PujaList);
+                }while (cursor.moveToNext());
+            }
+        }catch (Exception e){
+
+        }finally {
+            cursor.close();
+        }
+        return getPurohitPujaList;
+    }
+
+/*-----------------purohit language-----------------*/
+    public long PurohitLanguage(String Language){
+        ContentValues initialValues = new ContentValues();
+        initialValues.put("Languages",Language);
+        return db.insert(DATABASE_PUROHIT_Langagres, null, initialValues);
+    }
+
+/*------------read languages of purohit------------*/
+    public ArrayList<GetPurohitLanguages> PurohitLanguages(){
+        Cursor cursor = db.rawQuery("select * from " + DATABASE_PUROHIT_Langagres , null);
+        try{
+            if (cursor.moveToFirst()) {
+                do{
+                    GetPurohitLanguages Languages = new GetPurohitLanguages();
+                    Languages.setId(cursor.getString(0));
+                    Languages.setLanguages(cursor.getString(1));
+                    getPurohitLanguage.add(Languages);
+                }while (cursor.moveToNext());
+            }
+        }catch (Exception e){
+
+        }finally {
+            cursor.close();
+        }
+        return getPurohitLanguage;
     }
 }

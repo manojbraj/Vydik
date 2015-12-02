@@ -28,21 +28,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:popupTheme="@style/AppTheme.PopupOverlay" >
-                <TextView
-                    android:id="@+id/tool_bar_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Purohit Profile"
-                    android:textColor="#fff"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:gravity="center"/>
+                app:popupTheme="@style/AppTheme.PopupOverlay">
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
-
-    <include layout="@layout/purohit_profile_nested" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -53,4 +42,5 @@
         app:layout_anchor="@id/app_bar"
         app:layout_anchorGravity="bottom|end" />
 
+    <include layout="@layout/purohit_profile_nested" />
 </android.support.design.widget.CoordinatorLayout>

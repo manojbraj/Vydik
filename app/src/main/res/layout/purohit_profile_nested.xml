@@ -6,14 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.raj.manoj.myapplication.ScrollingActivity"
     tools:showIn="@layout/purohit_profile_view">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_margin="16dp">
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -55,7 +56,7 @@
         <LinearLayout
             android:id="@+id/layout_nested_profile"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
@@ -75,12 +76,60 @@
                 android:text=":"
                 android:textSize="18sp"/>
             <TextView
+                android:id="@+id/pur_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
-                android:text="Purohit Name"
                 android:textSize="18sp"/>
         </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".45"
+                    android:text="Phone"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".05"
+                    android:text=":"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:id="@+id/pur_phone"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".5"
+                    android:textSize="18sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".45"
+                    android:text="Email"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".05"
+                    android:text=":"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:id="@+id/pur_email"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".5"
+                    android:textSize="18sp"/>
+            </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -99,10 +148,10 @@
                 android:text=":"
                 android:textSize="18sp"/>
             <TextView
+                android:id="@+id/pur_dob"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
-                android:text="14-04-1990"
                 android:textSize="18sp"/>
         </LinearLayout>
         <LinearLayout
@@ -123,10 +172,10 @@
                 android:text=":"
                 android:textSize="18sp"/>
             <TextView
+                android:id="@+id/pur_languages"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
-                android:text="Languages"
                 android:textSize="18sp"/>
         </LinearLayout>
         <LinearLayout
@@ -147,10 +196,10 @@
                 android:text=":"
                 android:textSize="18sp"/>
             <TextView
+                android:id="@+id/pur_address"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
-                android:text="purohit address"
                 android:textSize="18sp"/>
         </LinearLayout>
         <LinearLayout
@@ -171,12 +220,84 @@
                 android:text=":"
                 android:textSize="18sp"/>
             <TextView
+                android:id="@+id/pur_locality"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
-                android:text="Hanumanth Nagar"
                 android:textSize="18sp"/>
         </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".45"
+                    android:text="City"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".05"
+                    android:text=":"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:id="@+id/pur_city"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".5"
+                    android:textSize="18sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".45"
+                    android:text="State"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".05"
+                    android:text=":"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:id="@+id/pur_state"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".5"
+                    android:textSize="18sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".45"
+                    android:text="Zip Code"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".05"
+                    android:text=":"
+                    android:textSize="18sp"/>
+                <TextView
+                    android:id="@+id/pur_zip"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight=".5"
+                    android:textSize="18sp"/>
+            </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -195,10 +316,10 @@
                 android:text=":"
                 android:textSize="18sp"/>
             <TextView
+                android:id="@+id/pur_education"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
-                android:text="BE"
                 android:textSize="18sp"/>
         </LinearLayout>
         <LinearLayout
@@ -219,10 +340,10 @@
                 android:text=":"
                 android:textSize="18sp"/>
             <TextView
+                android:id="@+id/pur_university"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
-                android:text="VTU"
                 android:textSize="18sp"/>
         </LinearLayout>
         <LinearLayout
@@ -243,10 +364,10 @@
                 android:text=":"
                 android:textSize="18sp"/>
             <TextView
+                android:id="@+id/pur_guruname"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
-                android:text="Vydik"
                 android:textSize="18sp"/>
         </LinearLayout>
         </LinearLayout>
@@ -254,21 +375,21 @@
             android:id="@+id/layout_nested_puja"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:fillViewport="true"
             android:orientation="vertical"
             android:visibility="gone">
-            <TextView
-                android:id="@+id/comming_soon"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Comming Soon"
-                android:textSize="20sp"
-                android:gravity="center" />
             <ListView
                 android:id="@+id/list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="gone">
+                android:minHeight="500dp"
+                android:divider="@null">
             </ListView>
         </LinearLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/quiz_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"/>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

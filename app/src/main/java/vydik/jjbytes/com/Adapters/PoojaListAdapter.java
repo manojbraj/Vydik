@@ -86,7 +86,7 @@ public class PoojaListAdapter extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         View vi = convertView;
         if(convertView == null){
-            vi = inflater.inflate(layout.pooja_list_items,null);
+            vi = inflater.inflate(R.layout.pooja_list_items,null);
             holder = new ViewHolder();
             holder.poojaName = (TextView) vi.findViewById(R.id.pooja_name);
             holder.AddLayout = (LinearLayout) vi.findViewById(R.id.add_puja_layout);

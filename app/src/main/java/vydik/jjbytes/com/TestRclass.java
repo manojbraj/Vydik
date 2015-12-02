@@ -1,8 +1,10 @@
-package vydik.jjbytes.com.Activities;
+package vydik.jjbytes.com;
 
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -12,7 +14,9 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import vydik.jjbytes.com.Activities.R;
 import vydik.jjbytes.com.Adapters.PurohitProfilePujaListAdapter;
+import vydik.jjbytes.com.Adapters.PurohitRecycAdapter;
 import vydik.jjbytes.com.Database.MainDatabase;
 import vydik.jjbytes.com.Models.GetPurohitLanguages;
 import vydik.jjbytes.com.Models.GetPurohitPujaList;
@@ -20,16 +24,16 @@ import vydik.jjbytes.com.Models.PurohitLoginGet;
 import vydik.jjbytes.com.constants.ArrayListConstants;
 
 /**
- * Created by Manoj on 11/23/2015.
+ * Created by user on 12/2/2015.
  */
-public class PurohitProfileView extends AppCompatActivity {
+public class TestRclass extends ActionBarActivity {
     Toolbar toolbar;
     TextView ProfileView,PujaListView,TName,TPhone,TEmail,TDOB,TEducation,TUniversity,TState,TAddress,TCity,TZipCode,TGuruName,TLocality,TLanguage;
     View PFView,PJView;
     LinearLayout layout_one,layout_two;
     MainDatabase database;
     ArrayList<PurohitLoginGet> PurohitInfoOne = new ArrayList<PurohitLoginGet>();
-    ArrayList<GetPurohitPujaList> PurohitInfoTwo = new ArrayList<GetPurohitPujaList>();
+    public ArrayList<GetPurohitPujaList> PurohitInfoTwo = new ArrayList<GetPurohitPujaList>();
     ArrayList<GetPurohitLanguages> PurohitInfoThree = new ArrayList<GetPurohitLanguages>();
     String FirstName,LastName,Email,DOB,Phone,Education,Univercity,State,Address,City,ZipCode,GuruName,Location,
             SPujaName,SPriceWithSamagri,SPriceWithoutPackage,SExpertLevel,Languages;
@@ -38,6 +42,7 @@ public class PurohitProfileView extends AppCompatActivity {
     ArrayList<String> LangArray = new ArrayList<String>();
     PurohitProfilePujaListAdapter adapter;
     CollapsingToolbarLayout actionBar;
+    RecyclerView resList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +59,7 @@ public class PurohitProfileView extends AppCompatActivity {
         PurohitInfoThree = database.PurohitLanguages();
 
         if(PurohitInfoOne.size() == 0){
-            Toast.makeText(PurohitProfileView.this, "Failed to retrieve data", Toast.LENGTH_LONG).show();
+            Toast.makeText(TestRclass.this, "Failed to retrieve data", Toast.LENGTH_LONG).show();
         }else{
             for(int i=0;i<PurohitInfoOne.size();i++){
                 FirstName = PurohitInfoOne.get(i).getfName();
@@ -74,7 +79,7 @@ public class PurohitProfileView extends AppCompatActivity {
         }
 
         if(PurohitInfoTwo.size() == 0){
-            Toast.makeText(PurohitProfileView.this, "Failed to retrieve data", Toast.LENGTH_LONG).show();
+            Toast.makeText(TestRclass.this, "Failed to retrieve data", Toast.LENGTH_LONG).show();
         }else {
             for(int p=0;p<PurohitInfoTwo.size();p++){
                 SPujaName = PurohitInfoTwo.get(p).getPujaName();
@@ -115,6 +120,7 @@ public class PurohitProfileView extends AppCompatActivity {
         TLanguage = (TextView) findViewById(R.id.pur_languages);
 
         PujaList = (ListView) findViewById(R.id.list);
+        resList = (RecyclerView) findViewById(R.id.quiz_list);
         //PujaList.setScrollContainer(false);
 
         TName.setText(FirstName+" "+LastName);
@@ -137,8 +143,7 @@ public class PurohitProfileView extends AppCompatActivity {
         layout_one = (LinearLayout) findViewById(R.id.layout_nested_profile);
         layout_two = (LinearLayout) findViewById(R.id.layout_nested_puja);
 
-        LoadPujaList(arrayListConstants.PujaNameSubscribed,arrayListConstants.PujaWithSamagriSubscribed,arrayListConstants.PujaWithoutSamagriSubscribed,
-                arrayListConstants.PujaExpertLevel);
+        LoadPujaList(PurohitInfoTwo);
 
         ProfileView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,17 +161,16 @@ public class PurohitProfileView extends AppCompatActivity {
                 PJView.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
                 PFView.setBackgroundColor(getResources().getColor(R.color.gray));
                 layout_two.setVisibility(View.VISIBLE);
-                PujaList.setVisibility(View.VISIBLE);
+                resList.setVisibility(View.VISIBLE);
+                PujaList.setVisibility(View.GONE);
                 layout_one.setVisibility(View.GONE);
             }
         });
     }
 
-    private void LoadPujaList(ArrayList<String> pujaNameSubscribed, ArrayList<String> pujaWithSamagriSubscribed,
-                              ArrayList<String> pujaWithoutSamagriSubscribed, ArrayList<String> pujaExpertLevel) {
-        adapter = new PurohitProfilePujaListAdapter(PurohitProfileView.this,pujaNameSubscribed,pujaWithSamagriSubscribed,pujaWithoutSamagriSubscribed,
-                pujaExpertLevel);
-        PujaList.setAdapter(adapter);
+    private void LoadPujaList(ArrayList<GetPurohitPujaList> purohitInfoTwo) {
+        resList.setLayoutManager(new LinearLayoutManager(this));
+        //resList.setAdapter(new PurohitRecycAdapter(new TestRclass().PurohitInfoTwo()));
     }
 
     @Override
