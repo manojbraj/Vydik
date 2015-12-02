@@ -74,7 +74,7 @@ public class TestRclass extends ActionBarActivity {
             }
         }
 
-        resList = (RecyclerView) findViewById(R.id.quiz_list);
+        //resList = (RecyclerView) findViewById(R.id.quiz_list);
 
         PFView = (View) findViewById(R.id.prof_view);
         PJView = (View) findViewById(R.id.puja_view);
