@@ -174,6 +174,10 @@ public class CheckoutActivityAddress extends ActionBarActivity {
                             ULocality = Locality.getText().toString();
                             UCity = City.getText().toString();
                             UAddress = Address.getText().toString();
+                            UFName = FName.getText().toString();
+                            ULName = LName.getText().toString();
+                            UMobile = Phone.getText().toString();
+
                             /*background process code*/
                             new SubbmitBookingDetails().execute();
 
@@ -213,6 +217,19 @@ public class CheckoutActivityAddress extends ActionBarActivity {
             HttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(constants.SendBookingDetails);
             try{
+                System.out.println("user data : "+constants.SearchPujaId);
+                System.out.println("user data : "+constants.purohith_id);
+                System.out.println("user data : "+UId);
+                System.out.println("user data : "+constants.SDate);
+                System.out.println("user data : "+constants.SearchPriceBooking);
+                System.out.println("user data : "+ULocality);
+                System.out.println("user data : "+BookPujaActivity.package_type);
+                System.out.println("user data : "+UState);
+                System.out.println("user data : "+UCity);
+                System.out.println("user data : "+UAddress);
+                System.out.println("user data : "+constants.package_Name);
+                System.out.println("user data : "+UFName + "  " + ULName);
+
                 multipartEntity.addPart(constants.Booking1, new StringBody(constants.SearchPujaId));
                 multipartEntity.addPart(constants.Booking2,new StringBody(constants.purohith_id));
                 multipartEntity.addPart(constants.Booking3,new StringBody(UId));
@@ -276,6 +293,7 @@ public class CheckoutActivityAddress extends ActionBarActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             Utilities.cancelProgressDialog();
+            System.out.println("output of bookings : " + s);
             String Success =" ";
             try {
                 JSONObject object = new JSONObject(s);
