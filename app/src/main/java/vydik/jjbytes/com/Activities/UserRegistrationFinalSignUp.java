@@ -36,6 +36,7 @@ import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -71,7 +72,7 @@ public class UserRegistrationFinalSignUp extends ActionBarActivity{
     Spinner ReferenceType;
     Button FinalSignUp,UploadUserPick;
     Constants constants;
-
+    String UserSuccess;
     MainDatabase database;
 
     LinearLayout FriendReffLayout,PurohithReffLayout,reffnumfriend,reffnumpurohit;
@@ -588,22 +589,141 @@ class FinalRegistrationSubbmit extends AsyncTask<String, Void, String> {
         Utilities.cancelProgressDialog();
         System.out.println("server message" + s);
         try{
-            JSONObject object = new JSONObject(s);
-            String result = object.getString("success").toString();
+            JSONArray array = new JSONArray(s);
+            for (int i = 0; i < array.length(); i++) {
+                JSONObject jsonObject = array.getJSONObject(i);
+                if (jsonObject.has("First_name")) {
+                    if (jsonObject.getString("First_name") != null) {
+                        constants.UL1 = jsonObject.getString("First_name").toString();
+                        System.out.println("success message : " + constants.UL1);
+                    } else {
+
+                    }
+                } else {
+
+                }
+
+                if (jsonObject.has("last_name")) {
+                    if (jsonObject.getString("last_name") != null) {
+                        constants.UL2 = jsonObject.getString("last_name").toString();
+                        System.out.println("success message : " + constants.UL2);
+                    } else {
+
+                    }
+                } else {
+
+                }
+
+                if (jsonObject.has("email_id")) {
+                    if (jsonObject.getString("email_id") != null) {
+                        constants.UL3 = jsonObject.getString("email_id").toString();
+                        System.out.println("success message : " + constants.UL3);
+                    } else {
+
+                    }
+                } else {
+
+                }
+
+                if (jsonObject.has("mobile_no")) {
+                    if (jsonObject.getString("mobile_no") != null) {
+                        constants.UL4 = jsonObject.getString("mobile_no").toString();
+                        System.out.println("success message : " + constants.UL4);
+                    } else {
+
+                    }
+                } else {
+
+                }
+
+                if (jsonObject.has("locality")) {
+                    if (jsonObject.getString("locality") != null) {
+                        constants.UL5 = jsonObject.getString("locality").toString();
+                        System.out.println("success message : " + constants.UL5);
+                    } else {
+
+                    }
+                } else {
+
+                }
+
+                if (jsonObject.has("state")) {
+                    if (jsonObject.getString("state") != null) {
+                        constants.UL6 = jsonObject.getString("state").toString();
+                        System.out.println("success message : " + constants.UL6);
+                    } else {
+
+                    }
+                } else {
+
+                }
+
+                if (jsonObject.has("address")) {
+                    if (jsonObject.getString("address") != null) {
+                        constants.UL7 = jsonObject.getString("address").toString();
+                        System.out.println("success message : " + constants.UL7);
+                    } else {
+
+                    }
+                } else {
+
+                }
+
+                if (jsonObject.has("user_id")) {
+                    if (jsonObject.getString("user_id") != null) {
+                        constants.UL8 = jsonObject.getString("user_id").toString();
+                        System.out.println("success message : " + constants.UL8);
+                    } else {
+
+                    }
+                } else {
+
+                }
+
+                if (jsonObject.has("success")) {
+                    if (jsonObject.getString("success") != null) {
+                        constants.UL9 = jsonObject.getString("success").toString();
+                        UserSuccess = jsonObject.getString("success").toString();
+                        System.out.println("success message : " + UserSuccess);
+                    } else {
+
+                    }
+                } else {
+
+                }
+
+                if(jsonObject.has("profile_picture")){
+                    if(jsonObject.getString("profile_picture")!= null){
+                        constants.UL10 = jsonObject.getString("profile_picture").toString();
+                    }else{
+
+                    }
+                }else{
+
+                }
+            }
+           /* JSONObject object = new JSONObject(s);
+            String result = object.getString("success").toString();*/
             String Image = "add image hear";
-            if(result.equals("Sucessfully")){
+            if(UserSuccess.equals("Sucessfully")){
                 if(UserRegistrationFormOne.InputType.equals("facebook")){
                     database.insertLogin(LoginActivity.email,LoginActivity.FacebookImage,"facebook");
+                    database.InserUserLoginData(constants.UL1, constants.UL2, constants.UL3, constants.UL4, constants.UL5, constants.UL6,
+                            constants.UL7, constants.UL8, constants.UL10);
                     Intent intent = new Intent(UserRegistrationFinalSignUp.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 }else if(UserRegistrationFormOne.InputType.equals("google")){
                     database.insertLogin(LoginActivity.email,LoginActivity.personPhotoUrl,"google");
+                    database.InserUserLoginData(constants.UL1, constants.UL2, constants.UL3, constants.UL4, constants.UL5, constants.UL6,
+                            constants.UL7, constants.UL8, constants.UL10);
                     Intent intent = new Intent(UserRegistrationFinalSignUp.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 }else {
                     database.insertLogin(constants.UserFName, Image, "user");
+                    database.InserUserLoginData(constants.UL1, constants.UL2, constants.UL3, constants.UL4, constants.UL5, constants.UL6,
+                            constants.UL7, constants.UL8, constants.UL10);
                     Intent intent = new Intent(UserRegistrationFinalSignUp.this, MainActivity.class);
                     startActivity(intent);
                     finish();
