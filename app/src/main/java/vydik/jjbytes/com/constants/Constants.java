@@ -64,10 +64,10 @@ public class Constants {
     public static String UserFName, UserLName, UserEmail, UserPassword, UserContact, UserAddress, OTPString, ReferredFrom;
 
     /*user reference drop down selection edit box value*/
-    public static String URefFName, URefNNumber, URefPName, URefPNumber;
+    public static String URefFName ="no value", URefNNumber="no value", URefPName="no value", URefPNumber="no value";
 
     /*user dob and aniversery*/
-    public static String UserDOB, UserAnneversery;
+    public static String UserDOB, UserAnneversery="00-00-0000";
 
     /*user regisration key value pair*/
     public static String UK1 = "submit", UK2 = "firstname", UK3 = "lastname", UK4 = "email", UK5 = "pass", UK6 = "city", UK7 = "state",

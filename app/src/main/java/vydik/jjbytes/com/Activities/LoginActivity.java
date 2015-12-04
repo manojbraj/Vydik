@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageInstaller;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.graphics.Bitmap;
@@ -51,6 +52,7 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
+import com.google.api.client.googleapis.auth.clientlogin.ClientLogin;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -116,10 +118,10 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     /*facebook variable inetialization*/
     CallbackManager callbackManager;
     public LoginButton loginButton;
-    String uid = "";
+    public static String uid = "",FacebookUserFName = " ",FAcebookUserLname = " ",personName = " ",personPhotoUrl = " ";
     String api_key;
     String access_token = "";
-    String email = "",name = "",f_image = "";
+    public static String email = "",name = "",f_image = "",FacebookImage ="";
     String EditBoxMobile,EditBoxPassword;
     ConfigFile config;
     public long startTime;
@@ -212,6 +214,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                     finish();
                 }else{
                     Intent intent = new Intent(LoginActivity.this,UserRegistrationFormOne.class);
+                    intent.putExtra("type", "normalregistration");
                     startActivity(intent);
                     finish();
                 }
@@ -432,17 +435,17 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
             if (Plus.PeopleApi.getCurrentPerson(mGoogleApiClient) != null) {
                 Person currentPerson = Plus.PeopleApi
                         .getCurrentPerson(mGoogleApiClient);
-                String personName = currentPerson.getDisplayName();
-                String personPhotoUrl = currentPerson.getImage().getUrl();
+                personName = currentPerson.getDisplayName();
+                personPhotoUrl = currentPerson.getImage().getUrl();
                 String personGooglePlusProfile = currentPerson.getUrl();
-                String email = Plus.AccountApi.getAccountName(mGoogleApiClient);
+                email = Plus.AccountApi.getAccountName(mGoogleApiClient);
                 Log.e(TAG, "Name: " + personName + ", plusProfile: "
                         + personGooglePlusProfile + ", email: " + email
                         + ", Image: " + personPhotoUrl);
                 String Type = "google";
-                database.insertLogin(personName, personPhotoUrl, Type);
-                String logType = "user";
-                CallMainMethod(logType);
+                //database.insertLogin(personName, personPhotoUrl, Type);
+                String logType = "user",type = "google";
+                CallMainMethod(logType,type);
 
             } else {
                 Toast.makeText(getApplicationContext(),
@@ -453,11 +456,19 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         }
     }
 
-    private void CallMainMethod(String logType) {
+    private void CallMainMethod(String logType,String type) {
         if(logType.equals("user")){
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-            finish();
+            if(type.equals("normal")){
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }else {
+                Intent intent = new Intent(this, UserRegistrationFormOne.class);
+                intent.putExtra("type", type);
+                startActivity(intent);
+                finish();
+            }
+            /**/
         }else{
             Intent intent = new Intent(LoginActivity.this, PurohithMainActivity.class);
             startActivity(intent);
@@ -800,8 +811,8 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                     database.insertLogin("", "", "user");
                     database.InserUserLoginData(constants.UL1,constants.UL2,constants.UL3,constants.UL4,constants.UL5,constants.UL6,
                             constants.UL7,constants.UL8,constants.UL10);
-                    String logType = "user";
-                    CallMainMethod(logType);
+                    String logType = "user",type = "normal";
+                    CallMainMethod(logType,type);
                 }else{
                     Toast.makeText(LoginActivity.this, "Something went wrong please try after some time", Toast.LENGTH_LONG).show();
                 }
@@ -812,8 +823,8 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                     Toast.makeText(LoginActivity.this, FailurePasswordResult, Toast.LENGTH_LONG).show();
                 } else if (SuccessResult.equals("Sucessfully Login")) {
                     database.insertLogin("", "", "purohit");
-                    String logType = "purohit";
-                    CallMainMethod(logType);
+                    String logType = "purohit",type = "purohit";
+                    CallMainMethod(logType,type);
                 } else {
                     Toast.makeText(LoginActivity.this, "Something went wrong please try after some time", Toast.LENGTH_LONG).show();
                 }
@@ -873,17 +884,19 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         Profile profile = Profile.getCurrentProfile();
         AccessToken  token = AccessToken.getCurrentAccessToken();
 
-
         if (profile != null) {
             uid = profile.getId();
-
+            FacebookUserFName = profile.getFirstName();
+            FAcebookUserLname  = profile.getLastName();
         }
 
         if (token != null) {
             uid = token.getUserId();
             access_token = token.getToken();
         }
+
     }
+
 
     private void appLogin(boolean ani)
     {
@@ -908,7 +921,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                                     try {
                                         if (object != null)
                                             email = object.getString("email");
-                                            name = object.getString("first_name");
+
                                     } catch (JSONException e) {
 
                                     }
@@ -932,7 +945,6 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         {
             Calendar calendar = Calendar.getInstance();
             startTime = calendar.getTimeInMillis();
-
             //start animation
             animationThread.start();
         }
@@ -941,15 +953,15 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     private void loginProcess(String email, String uid, String access_token) {
         String Type = "facebook";
         URL imageURL;
-        String FacebookImage = "https://graph.facebook.com/" + uid + "/picture?type=large";
+        FacebookImage = "https://graph.facebook.com/" + uid + "/picture?type=large";
         try {
             imageURL = new URL("https://graph.facebook.com/" + uid + "/picture?type=large");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        database.insertLogin(email,FacebookImage,Type);
-        String logType = "user";
-        CallMainMethod(logType);
+        //database.insertLogin(email,FacebookImage,Type);
+        String logType = "user",type = "facebook";
+        CallMainMethod(logType,type);
     }
 
     @Override

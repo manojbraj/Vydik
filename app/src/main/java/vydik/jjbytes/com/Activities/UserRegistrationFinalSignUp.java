@@ -16,9 +16,9 @@ import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -51,7 +51,6 @@ import java.util.Locale;
 
 import vydik.jjbytes.com.Database.MainDatabase;
 import vydik.jjbytes.com.Utils.Utilities;
-import vydik.jjbytes.com.constants.ArrayListConstants;
 import vydik.jjbytes.com.constants.Constants;
 
 /**
@@ -535,13 +534,12 @@ class FinalRegistrationSubbmit extends AsyncTask<String, Void, String> {
             multipartEntity.addPart(constants.UK18,new StringBody(constants.URefPNumber));
             multipartEntity.addPart("gend", new StringBody(UserRegistrationFormOne.GenderValue));
 
-            File sourcefile = new File(constants.ImagePath);
+            File sourcefile = new File(picturePath);
             FileBody fileBody = new FileBody(sourcefile);
             multipartEntity.addPart(constants.UK19, fileBody);
+
         }catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-        } catch (Exception e){
-
         }
 
         try{
@@ -593,12 +591,23 @@ class FinalRegistrationSubbmit extends AsyncTask<String, Void, String> {
             JSONObject object = new JSONObject(s);
             String result = object.getString("success").toString();
             String Image = "add image hear";
-            String Type = "user";
             if(result.equals("Sucessfully")){
-                database.insertLogin(constants.UserFName,Image,Type);
-                Intent intent = new Intent(UserRegistrationFinalSignUp.this,MainActivity.class);
-                startActivity(intent);
-                finish();
+                if(UserRegistrationFormOne.InputType.equals("facebook")){
+                    database.insertLogin(LoginActivity.email,LoginActivity.FacebookImage,"facebook");
+                    Intent intent = new Intent(UserRegistrationFinalSignUp.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else if(UserRegistrationFormOne.InputType.equals("google")){
+                    database.insertLogin(LoginActivity.email,LoginActivity.personPhotoUrl,"google");
+                    Intent intent = new Intent(UserRegistrationFinalSignUp.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else {
+                    database.insertLogin(constants.UserFName, Image, "user");
+                    Intent intent = new Intent(UserRegistrationFinalSignUp.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }else{
                 Toast.makeText(UserRegistrationFinalSignUp.this,"Something went wrong please try after some time",Toast.LENGTH_LONG).show();
             }

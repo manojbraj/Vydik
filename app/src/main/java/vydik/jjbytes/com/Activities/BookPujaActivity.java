@@ -61,6 +61,7 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
     TextView Date;
     Constants constants;
     ArrayListConstants arrayListConstants;
+    String StatusOfPuja="false";
     Object content;
     HttpClient client = new DefaultHttpClient();
 
@@ -662,7 +663,7 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
             Utilities.cancelProgressDialog();
             System.out.println("out put of search" + s);
             try {
-                if (package_type.equals("1")) {
+               /* if (package_type.equals("3")) {
                     JSONObject object = new JSONObject(s);
                     if (object.has("purohit_id")) {
                         if (object.getString("purohit_id") != null) {
@@ -766,6 +767,7 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
                             int Price = object.getInt("new_with_price");
                             String ConvertedPrice = Integer.toString(Price);
                             constants.package_price = "Rs." + ConvertedPrice + "/-";
+
                             constants.SearchPriceBooking = ConvertedPrice;
                             arrayListConstants.PurohithPrice.add("Rs." + ConvertedPrice + "/-");
                         } else {
@@ -774,10 +776,16 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
                     } else {
 
                     }
-                } else {
+                } else {*/
                     JSONArray array = new JSONArray(s);
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject object = array.getJSONObject(i);
+                    if(object.has("status")){
+                        if(object.getString("status")!= null){
+                            StatusOfPuja = object.getString("status").toString();
+                            break;
+                        }
+                    }
                     if (object.has("purohit_id")) {
                         if (object.getString("purohit_id") != null) {
                             arrayListConstants.PurohithId.add(object.getString("purohit_id").toString());
@@ -879,6 +887,7 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
                             int Price = object.getInt("with_out_price");
                             String ConvertedPrice = Integer.toString(Price);
                             constants.SearchPriceBooking = ConvertedPrice;
+                            constants.package_price = "Rs." + ConvertedPrice + "/-";
                             arrayListConstants.PurohithPrice.add("Rs." + ConvertedPrice + "/-");
                         } else {
 
@@ -887,7 +896,7 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
 
                     }
                 }
-            }
+            //}
             }
             catch (JSONException e){
 
@@ -896,15 +905,25 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
 
             }
             if(package_type.equals("1")){
-                constants.package_Name = FirstName+" "+LastName;
-                Intent intent = new Intent(BookPujaActivity.this,PackagePujaDetailActivity.class);
-                startActivity(intent);
-                finish();
+                if(StatusOfPuja.equals("success")){
+                    Toast.makeText(BookPujaActivity.this,FirstName+" "+LastName,Toast.LENGTH_LONG).show();
+                    constants.package_Name = FirstName+" "+LastName;
+                    Intent intent = new Intent(BookPujaActivity.this,PackagePujaDetailActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else {
+                    Toast.makeText(BookPujaActivity.this,"No purohit available for the selected details please try with new Thank you",Toast.LENGTH_LONG).show();
+                }
+
             }else {
-                constants.package_Name = FirstName+" "+LastName;
-                Intent intent = new Intent(BookPujaActivity.this, SearchResultPurohithActivity.class);
-                startActivity(intent);
-                finish();
+                if(StatusOfPuja.equals("success")){
+                    constants.package_Name = FirstName+" "+LastName;
+                    Intent intent = new Intent(BookPujaActivity.this, SearchResultPurohithActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else {
+                    Toast.makeText(BookPujaActivity.this,"No purohit available for the selected details please try with new Thank you",Toast.LENGTH_LONG).show();
+                }
             }
         }
 

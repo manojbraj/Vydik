@@ -15,11 +15,8 @@ import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.text.TextUtils;
 import android.util.Log;
-import java.util.Date;
-
 import android.view.LayoutInflater;
 import android.view.View;
-
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -28,13 +25,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.model.TileOverlay;
-
-import org.w3c.dom.Text;
-
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import vydik.jjbytes.com.constants.Constants;
@@ -247,6 +241,7 @@ public class RegistrationFormOne extends ActionBarActivity {
 
         return mediaFile;
     }
+
     private void CallCameraGalleryPopup() {
         LayoutInflater inflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View PromtView = inflater.inflate(R.layout.camera_gallery_popup, null);

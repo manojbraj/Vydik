@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -18,6 +19,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -58,11 +62,17 @@ public class UserRegistrationFormOne extends ActionBarActivity implements OnItem
     /*otp popup xml reff*/
     EditText OTPEdit;
     Button VerifyOTP,Cancel;
+    public static String InputType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_registration_form_one);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            InputType = extras.getString("type");
+        }
 
         UserFName = (EditText) findViewById(R.id.first_name);
         UserLName = (EditText) findViewById(R.id.last_name);
@@ -84,6 +94,15 @@ public class UserRegistrationFormOne extends ActionBarActivity implements OnItem
         Male = (ImageView) findViewById(R.id.male);
         Female = (ImageView) findViewById(R.id.female);
 
+        if(InputType.equals("facebook")){
+            UserFName.setText(LoginActivity.FacebookUserFName);
+            UserLName.setText(LoginActivity.FAcebookUserLname);
+            UserEmail.setText(LoginActivity.email);
+        }else if(InputType.equals("google")){
+
+        }else{
+
+        }
         Male.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("NewApi")
             @Override
@@ -355,9 +374,18 @@ public class UserRegistrationFormOne extends ActionBarActivity implements OnItem
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(UserRegistrationFormOne.this,LoginActivity.class);
-        intent.putExtra("login_type", "user");
-        startActivity(intent);
-        finish();
+        if(InputType.equals("facebook")){
+            FacebookSdk.sdkInitialize(getApplicationContext());
+            LoginManager.getInstance().logOut();
+            Intent intent = new Intent(UserRegistrationFormOne.this,LoginActivity.class);
+            intent.putExtra("login_type", "user");
+            startActivity(intent);
+            finish();
+        }else {
+            Intent intent = new Intent(UserRegistrationFormOne.this, LoginActivity.class);
+            intent.putExtra("login_type", "user");
+            startActivity(intent);
+            finish();
+        }
     }
 }
