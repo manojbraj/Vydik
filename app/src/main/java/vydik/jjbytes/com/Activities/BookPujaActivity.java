@@ -52,7 +52,7 @@ import vydik.jjbytes.com.constants.Constants;
  */
 public class BookPujaActivity extends ActionBarActivity implements OnItemSelectedListener{
     private static final String SWITCH_TAB = null;
-    public static String package_type,strdate;
+    public static String package_type,strdate,newdateupdated;
     LinearLayout WithPackage,WithoutPackage;
     Button SubmitSearch;
     Spinner Location,Languages,Sect;
@@ -198,6 +198,7 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
                         ALmonthOfYear=monthOfYear;
                         ALdayOfMonth=dayOfMonth;
                         strdate = (dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                        newdateupdated = ((monthOfYear + 1) + "/" + dayOfMonth + "/" +year);
                         constants.SDate = strdate;
                         Date.setText(strdate);
                     }
@@ -606,13 +607,15 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
             HttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(constants.SendSearchParameters);
             try{
+
                 multipartEntity.addPart(constants.searchSubmit,new StringBody(constants.submit));
                 multipartEntity.addPart(constants.searchPackage,new StringBody(package_type));
                 multipartEntity.addPart(constants.searchPujaId,new StringBody(constants.SPujaName));
+                multipartEntity.addPart(constants.searchDate,new StringBody(newdateupdated));
                 multipartEntity.addPart(constants.searchSectId,new StringBody(constants.SSectId));
-                multipartEntity.addPart(constants.searchDate,new StringBody(constants.SDate));
                 multipartEntity.addPart(constants.searchLanguage,new StringBody(constants.SLanguageName));
                 multipartEntity.addPart(constants.searchLocation,new StringBody(constants.SLocationName));
+
             }catch (Exception e){
 
             }
@@ -885,6 +888,20 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
                     if (object.has("with_out_price")) {
                         if (object.getString("with_out_price") != null) {
                             int Price = object.getInt("with_out_price");
+                            String ConvertedPrice = Integer.toString(Price);
+                            constants.SearchPriceBooking = ConvertedPrice;
+                            constants.package_price = "Rs." + ConvertedPrice + "/-";
+                            arrayListConstants.PurohithPrice.add("Rs." + ConvertedPrice + "/-");
+                        } else {
+
+                        }
+                    } else {
+
+                    }
+
+                    if (object.has("new_with_price")) {
+                        if (object.getString("new_with_price") != null) {
+                            int Price = object.getInt("new_with_price");
                             String ConvertedPrice = Integer.toString(Price);
                             constants.SearchPriceBooking = ConvertedPrice;
                             constants.package_price = "Rs." + ConvertedPrice + "/-";

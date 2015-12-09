@@ -2,6 +2,7 @@ package vydik.jjbytes.com.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -32,11 +33,12 @@ public class UserProfileActivity extends AppCompatActivity{
     private ArrayList<String> UserId = new ArrayList<String>();
     private ArrayList<String> UserImage = new ArrayList<String>();
 
-    String UFName,ULName,UEmail,UMobile,ULocality,UState,UAddress,UId,UImage;
+    public static String UFName,ULName,UEmail,UMobile,ULocality,UState,UAddress,UId,UImage;
 
     TextView UserName,Email,Phone,Locality,Address;
     Toolbar toolbar;
     LinearLayout BackPress;
+    FloatingActionButton EditProfile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,6 +91,7 @@ public class UserProfileActivity extends AppCompatActivity{
         Phone = (TextView) findViewById(R.id.mobile_number);
         Locality = (TextView) findViewById(R.id.user_locality);
         Address = (TextView) findViewById(R.id.user_address);
+        EditProfile = (FloatingActionButton) findViewById(R.id.fab);
 
         UserName.setText(UFName + " "+ ULName);
         Email.setText(UEmail);
@@ -96,6 +99,13 @@ public class UserProfileActivity extends AppCompatActivity{
         Locality.setText(ULocality);
         Address.setText(UAddress);
 
+        EditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UserProfileActivity.this,UserProfileUpdate.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

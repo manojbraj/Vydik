@@ -43,7 +43,7 @@
                             android:layout_height="30dp"
                             android:layout_weight=".9"
                             android:background="@null"
-                            android:hint="F_name*"
+                            android:hint="First name*"
                             android:inputType="textPersonName"/>
                     </LinearLayout>
                     <View
@@ -68,7 +68,7 @@
                             android:layout_width="0dp"
                             android:layout_height="30dp"
                             android:layout_weight="1"
-                            android:hint="L_name*"
+                            android:hint="Last name*"
                             android:background="@null"
                             android:inputType="textPersonName"/>
                     </LinearLayout>

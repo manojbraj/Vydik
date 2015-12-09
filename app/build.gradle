@@ -47,7 +47,7 @@ dependencies {
     compile 'com.android.support:design:22.2.1'
     compile 'com.google.android.gms:play-services:7.5.0'
     compile project(':facebook')
-    compile project(':libraryMobilePaymentSDK')
+    compile project(':payUMoneysdk')
     compile 'com.android.support:multidex:1.0.1'
     compile 'org.apache.httpcomponents:httpclient:4.5'
     compile "org.apache.httpcomponents:httpmime:4.2.3"

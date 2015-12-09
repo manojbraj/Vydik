@@ -36,7 +36,7 @@ public class PackagePujaDetailActivity extends ActionBarActivity {
 
         PujaPrice.setText(constants.package_price);
         PurohitRating.setText(constants.package_expertise);
-        PurohithName.setText(constants.package_Name);
+        //PurohithName.setText(constants.package_Name);
         PurohithUnivercity.setText(constants.package_university);
         PurohithSect.setText(constants.package_sect);
         PurohithGuruName.setText("");

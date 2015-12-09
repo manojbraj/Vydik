@@ -140,16 +140,16 @@ public class UserRegistrationFinalSignUp extends ActionBarActivity{
             @Override
             public void onClick(View v) {
                 if(constants.UserDOB != null){
-                        if(constants.ImagePath != null) {
+                       /* if(constants.ImagePath != null) {*/
                             if (ReferenceType.getSelectedItem().toString().trim().equals("Reference")) {
                                 ReferenceR = "1";
                                 CheckSpinnerMethod();
                             } else {
                                 CheckSpinnerMethod();
                             }
-                        }else{
+                       /* }else{
                             Toast.makeText(UserRegistrationFinalSignUp.this, "Please upload your profile picture", Toast.LENGTH_LONG).show();
-                        }
+                        }*/
                 }else{
                     Toast.makeText(UserRegistrationFinalSignUp.this,"Please select your date of birth",Toast.LENGTH_LONG).show();
                 }

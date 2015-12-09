@@ -5,7 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="10dp">
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_above="@+id/book_purohit">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 <LinearLayout
     android:id="@+id/layout_one"
     android:layout_width="match_parent"
@@ -67,12 +74,25 @@
     android:background="@drawable/listview_background_stroke"
     android:padding="8dp">
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/note_forbooking"
+        android:textColor="#000"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/note_text"
+        android:textColor="#000"
+        android:textSize="16sp"/>
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/travel_text"
         android:textSize="16sp"
         android:textColor="#000"
-        android:textScaleX="1.1"/>
+        android:textScaleX="1.1"
+        android:layout_marginTop="10dp"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -187,11 +207,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 </LinearLayout>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_alignParentBottom="true">
+</LinearLayout>
+</ScrollView>
+
     <Button
         android:id="@+id/book_purohit"
         android:layout_width="match_parent"
@@ -199,6 +217,6 @@
         android:background="@color/red"
         android:text="Book Purohith"
         android:textColor="#fff"
-        android:textSize="20sp"/>
-</LinearLayout>
+        android:textSize="20sp"
+        android:layout_alignParentBottom="true"/>
 </RelativeLayout>

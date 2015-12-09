@@ -60,7 +60,7 @@ public class CheckoutActivityAddress extends ActionBarActivity {
     private ArrayList<String> UserId = new ArrayList<String>();
     private ArrayList<String> UserImage = new ArrayList<String>();
 
-    String UFName,ULName,UEmail,UMobile,ULocality,UState,UAddress,UId,UImage,UCity;
+    public static String UFName,ULName,UEmail,UMobile,ULocality,UState,UAddress,UId,UImage,UCity;
 
     /*http entity*/
     MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);

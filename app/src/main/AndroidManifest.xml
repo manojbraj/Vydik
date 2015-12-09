@@ -161,12 +161,9 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:name=".UserProfileActivity">
         </activity>
-
+        <activity android:name=".UserProfileUpdate"></activity>
         <!--payment gateway start-->
-        <activity
-            android:name="com.atom.mobilepaymentsdk.PayActivity"
-            android:label="@string/app_name" >
-        </activity>
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
