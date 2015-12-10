@@ -2,6 +2,7 @@ package vydik.jjbytes.com.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -37,23 +38,17 @@ public class UserProfileActivity extends AppCompatActivity{
 
     TextView UserName,Email,Phone,Locality,Address;
     Toolbar toolbar;
+    CollapsingToolbarLayout actionBar;
     LinearLayout BackPress;
     FloatingActionButton EditProfile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.user_profile_layout);
+        setContentView(R.layout.user_layout_new);
 
-        toolbar = (Toolbar) findViewById(R.id.tab_layout);
-        BackPress = (LinearLayout) findViewById(R.id.back_press);
-        BackPress.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(UserProfileActivity.this,MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+        /*toolbar = (Toolbar) findViewById(R.id.tab_layout);
+        actionBar = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+        actionBar.setTitle("User Profile");*/
 
         database = new MainDatabase(this);
         database = database.open();
@@ -102,7 +97,7 @@ public class UserProfileActivity extends AppCompatActivity{
         EditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(UserProfileActivity.this,UserProfileUpdate.class);
+                Intent intent = new Intent(UserProfileActivity.this, UserProfileUpdate.class);
                 startActivity(intent);
             }
         });

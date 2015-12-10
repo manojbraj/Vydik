@@ -25,7 +25,7 @@
             android:id="@+id/pujari_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Purohith Name"
+            android:text="Purohit Name"
             android:textColor="#000"
             android:textStyle="bold"
             android:textSize="24sp"/>
@@ -37,14 +37,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Experties :"
+                android:text="Expertise :"
                 android:textSize="18sp"
                 android:textColor="#000"/>
             <TextView
                 android:id="@+id/experties_level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Experties"
+                android:text="Expertise"
                 android:textSize="18sp"
                 android:textColor="#000"
                 android:layout_marginLeft="10dp"/>

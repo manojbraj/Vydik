@@ -5,9 +5,9 @@
     <string name="with_package">"Package includes the services of a Purohit recommended by Vdik.com along with related Puja Samagri"</string>
     <string name="without_package">"Please select a Purohit meeting your requirement with or without Puja Samagri"</string>
     <string-array name="experties">
+        <item>3</item>
         <item>1</item>
         <item>2</item>
-        <item>3</item>
         <item>4</item>
         <item>5</item>
     </string-array>
@@ -26,7 +26,7 @@
 
     <string-array name="city">
         <item>City</item>
-        <item>Bengalore</item>
+        <item>Bangalore</item>
     </string-array>
 
     <string-array name="schemes">
@@ -39,7 +39,7 @@
     <string-array name="reference_user">
         <item>Reference</item>
         <item>Friend</item>
-        <item>Purohith</item>
+        <item>Purohit</item>
         <item>Advertisement</item>
         <item>Website</item>
         <item>Other</item>

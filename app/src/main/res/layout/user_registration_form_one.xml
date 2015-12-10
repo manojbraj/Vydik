@@ -127,22 +127,45 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:gravity="center">
-                <ImageView
-                    android:id="@+id/male"
+                <LinearLayout
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:background="@drawable/male"/>
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Male"
+                        android:layout_gravity="center"
+                        android:textSize="16sp"/>
+                    <CheckBox
+                        android:id="@+id/male"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"/>
+                </LinearLayout>
                 <View
                     android:layout_width="40dp"
                     android:layout_height="2dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:background="@color/colorPrimary"/>
-                <ImageView
-                    android:id="@+id/female"
-                    android:layout_width="50dp"
+
+                <LinearLayout
+                    android:layout_width="60dp"
                     android:layout_height="50dp"
-                    android:background="@drawable/female"/>
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Female"
+                        android:layout_gravity="center"
+                        android:textSize="16sp"/>
+                    <CheckBox
+                        android:id="@+id/female"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"/>
+                </LinearLayout>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -329,17 +352,21 @@
                         android:id="@+id/user_city"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight=".5"
                         android:entries="@array/city">
                     </Spinner>
 
-                    <Spinner
+                    <TextView
                         android:id="@+id/user_PinCode"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
                         android:layout_marginTop="10dp"
-                        android:layout_weight="1">
-                    </Spinner>
+                        android:layout_weight=".5"
+                        android:gravity="center"
+                        android:textSize="16sp"
+                        android:textColor="#000"
+                        android:layout_marginLeft="10dp">
+                    </TextView>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

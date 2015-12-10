@@ -66,7 +66,7 @@ public class UserRegistrationFinalSignUp extends ActionBarActivity{
     private static final String TAG = MainActivity.class.getSimpleName();
     private Uri fileUri;
 
-    String picturePath;
+    String picturePath   = "no path";
     EditText FriendReffName,FriendReffNumber,PurohithReffName,PurohithReffNumber;
     TextView DateOfBirth, Anniversary,ImageSelected;
     Spinner ReferenceType;
@@ -83,6 +83,8 @@ public class UserRegistrationFinalSignUp extends ActionBarActivity{
 
     /*spinner v string*/
     String ReferenceR = "0";
+
+    int resAge;
 
     /*http entity*/
     MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
@@ -421,8 +423,11 @@ public class UserRegistrationFinalSignUp extends ActionBarActivity{
     private void CheckSpinnerMethod() {
         if(ReferenceR.equals("1")){
             ReferenceR = "0";
-            Toast.makeText(UserRegistrationFinalSignUp.this,"Please Select your Reference type",Toast.LENGTH_LONG).show();
-        }else{
+            Toast.makeText(UserRegistrationFinalSignUp.this,"Please Select Your Reference type",Toast.LENGTH_LONG).show();
+        }else if(resAge < 18){
+            Toast.makeText(UserRegistrationFinalSignUp.this,"Please Select Your Age",Toast.LENGTH_LONG).show();
+        }
+        else{
             if(ReferenceType.getSelectedItem().toString().trim().equals("Friend")){
                 if (validate(new EditText[]{FriendReffName,FriendReffNumber})){
                     constants.URefFName = FriendReffName.getText().toString();
@@ -494,7 +499,14 @@ public class UserRegistrationFinalSignUp extends ActionBarActivity{
                         ALdayOfMonth=dayOfMonth;
                         strdate = (dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
                         constants.UserDOB = strdate;
-                        DateOfBirth.setText(strdate);
+                        int y = year;
+                        int check = c.get(Calendar.YEAR);
+                        resAge = check - y;
+                        if(resAge < 18 ){
+                            Toast.makeText(UserRegistrationFinalSignUp.this,"Your age Should not be less than 18 years",Toast.LENGTH_LONG).show();
+                        }else {
+                            DateOfBirth.setText(strdate);
+                        }
                     }
                 }, ALyear, ALmonthOfYear, ALdayOfMonth);
         dpd.show();
@@ -535,10 +547,13 @@ class FinalRegistrationSubbmit extends AsyncTask<String, Void, String> {
             multipartEntity.addPart(constants.UK18,new StringBody(constants.URefPNumber));
             multipartEntity.addPart("gend", new StringBody(UserRegistrationFormOne.GenderValue));
 
-            File sourcefile = new File(picturePath);
-            FileBody fileBody = new FileBody(sourcefile);
-            multipartEntity.addPart(constants.UK19, fileBody);
-
+            if(picturePath.equals("no path")){
+                multipartEntity.addPart(constants.UK19, new StringBody("no image"));
+            }else {
+                File sourcefile = new File(picturePath);
+                FileBody fileBody = new FileBody(sourcefile);
+                multipartEntity.addPart(constants.UK19, fileBody);
+            }
         }catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }

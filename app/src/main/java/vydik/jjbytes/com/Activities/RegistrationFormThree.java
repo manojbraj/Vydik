@@ -64,13 +64,6 @@ public class RegistrationFormThree extends ActionBarActivity implements OnItemSe
 
         SubmitBankDetails = (Button) findViewById(R.id.pujari_reference);
 
-        RCN = (ImageView) findViewById(R.id.rcn_image);
-        RCP = (ImageView) findViewById(R.id.rcp_image);
-        RCE = (ImageView) findViewById(R.id.rce_image);
-        RPN = (ImageView) findViewById(R.id.rpn_image);
-        RPP = (ImageView) findViewById(R.id.rpp_image);
-        RPE = (ImageView) findViewById(R.id.rpe_image);
-
         ifscCode = (EditText) findViewById(R.id.ifsc_code);
         accountNumber = (EditText) findViewById(R.id.acount_number);
         RefePN = (EditText) findViewById(R.id.ref_p_name);

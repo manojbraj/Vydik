@@ -12,7 +12,7 @@ public class Constants {
     public static String getPoojaList = "http://vydik.com/android/puja_purohit.php";
     public static String submitPujariRegistration = "http://vydik.com/android/final_purohit_registration.php";
     public static String getStateList = "http://vydik.com/state_purohit.php";
-    public static String getCityNames = "http://vydik.com/android/city_purohit.php?state_id=1";
+    public static String getCityNames = "http://vydik.com/android/city_purohit.php?state_id=6";
     public static String getLocalityAndPin = "http://vydik.com/android/location_pur.php?city=9";
     public static String getLanguages = "http://vydik.com/android/purohit_language.php";
     public static String getBankNameAndBranchName = "http://vydik.com/android/bank_detail_purohit.php";
@@ -26,18 +26,18 @@ public class Constants {
     public static String CancelPujaRequestURL = "http://vydik.com/admin_vydik/admin_vydhik_project/android_cancelation_booking.php";
 
     /*constant messages*/
-    public static String getPoojaListProgress = "Accessing pooja list please wait...";
-    public static String regPurohithProgress = "Purohith registration in process please wait...";
+    public static String getPoojaListProgress = "Accessing puja list please wait...";
+    public static String regPurohithProgress = "Purohit registration in process please wait...";
     public static String satecityProgress = "Please wait we are accessing state,city & locality data for you...";
     public static String getingBankDetails = "Please wait accessing bank details...";
     public static String UserRegistrationProgress = "User registration in process please wait...";
     public static String LoginProgress = "Accessing user data for login please wait...";
     public static String LoginPurohitProgress = "Accessing Purohit data for login please wait...";
     public static String SearchProgress = "Accessing data based on search please wait...";
-    public static String PurohithDetails = "Accessing purohith details please wait...";
+    public static String PurohithDetails = "Accessing purohit details please wait...";
     public static String BookingPujaProgress = "Submitting booking details please wait...";
     public static String RequestForReschedule = "Submitting details for Puja Reschedule Please wait...";
-    public static String RequestForCancelation = "Cancelation of puja requst in process please wait...";
+    public static String RequestForCancelation = "Cancellation of puja request in process please wait...";
 
     /*unique constant value for database usage user_id*/
     public static String UserIdData;

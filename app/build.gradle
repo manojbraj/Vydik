@@ -28,7 +28,7 @@ android {
             }
         }
     }
-    repositories{
+    repositories {
         mavenCentral()
     }
 
@@ -42,24 +42,26 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:support-v4:22.0.0'
-    compile 'com.android.support:appcompat-v7:22.2.1'
-    compile 'com.android.support:design:22.2.1'
-    compile 'com.google.android.gms:play-services:7.5.0'
     compile project(':facebook')
     compile project(':payUMoneysdk')
-    compile 'com.android.support:multidex:1.0.1'
-    compile 'org.apache.httpcomponents:httpclient:4.5'
-    compile "org.apache.httpcomponents:httpmime:4.2.3"
-    compile 'com.android.support:recyclerview-v7:22.0.0'
-    compile 'com.luckycatlabs:SunriseSunsetCalculator:1.2'
     compile('com.google.api-client:google-api-client-android:1.20.0') {
         exclude group: 'org.apache.httpcomponents'
     }
     compile('com.google.apis:google-api-services-calendar:v3-rev125-1.20.0') {
         exclude group: 'org.apache.httpcomponents'
     }
+    compile 'com.android.support:recyclerview-v7:22.1.1'
+    compile 'com.android.support:support-v4:22.1.1'
+    compile 'com.android.support:appcompat-v7:22.1.1'
+    compile 'com.android.support:design:22.2.0'
+    compile 'com.google.android.gms:play-services:8.3.0'
+    compile 'com.android.support:multidex:1.0.1'
+    compile 'org.apache.httpcomponents:httpclient:4.5'
+    compile 'org.apache.httpcomponents:httpmime:4.2.3'
+    compile 'com.luckycatlabs:SunriseSunsetCalculator:1.2'
     compile 'com.loopj.android:android-async-http:1.4.9'
-    compile 'com.android.support:cardview-v7:22.0.0'
-    compile 'com.android.support:recyclerview-v7:22.0.0'
+    compile 'com.android.support:cardview-v7:22.1.1'
+    compile 'com.google.android.gms:play-services-ads:8.3.0'
+    compile 'com.google.android.gms:play-services-identity:8.3.0'
+    compile 'com.google.android.gms:play-services-gcm:8.3.0'
 }

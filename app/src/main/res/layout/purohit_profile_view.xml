@@ -21,7 +21,7 @@
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
             app:contentScrim="?attr/colorPrimary"
-            android:background="@drawable/bhajans_background"
+            android:background="@mipmap/android_logo"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"

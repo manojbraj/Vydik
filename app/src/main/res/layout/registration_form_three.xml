@@ -95,15 +95,9 @@
         android:layout_height="wrap_content"
         android:layout_weight=".9"
         android:background="@null"
-        android:hint="Referral Pujari Name"
+        android:hint="Referral Purohit Name"
         android:layout_marginTop="10dp"
         android:inputType="textPersonName"/>
-    <ImageView
-        android:id="@+id/rpn_image"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight=".1"
-        android:background="@android:drawable/ic_menu_add" />
 </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -120,15 +114,9 @@
         android:layout_height="wrap_content"
         android:layout_weight=".9"
         android:background="@null"
-        android:hint="Referral Pujari Number"
+        android:hint="Referral Purohit Number"
         android:layout_marginTop="10dp"
         android:inputType="phone"/>
-    <ImageView
-        android:id="@+id/rpp_image"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight=".1"
-        android:background="@android:drawable/ic_menu_add"/>
 </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -145,15 +133,9 @@
         android:layout_height="wrap_content"
         android:layout_weight=".9"
         android:background="@null"
-        android:hint="Referral Pujari Email"
+        android:hint="Referral Purohit Email"
         android:layout_marginTop="10dp"
         android:inputType="textEmailAddress"/>
-    <ImageView
-        android:id="@+id/rpe_image"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight=".1"
-        android:background="@android:drawable/ic_menu_add"/>
 </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -173,12 +155,6 @@
         android:hint="Referral Client Name"
         android:layout_marginTop="10dp"
         android:inputType="textPersonName"/>
-    <ImageView
-        android:id="@+id/rcn_image"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight=".1"
-        android:background="@android:drawable/ic_menu_add"/>
 </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -198,12 +174,7 @@
         android:hint="Referral Client"
         android:layout_marginTop="10dp"
         android:inputType="phone"/>
-    <ImageView
-        android:id="@+id/rcp_image"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight=".1"
-        android:background="@android:drawable/ic_menu_add"/>
+
 </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -223,12 +194,6 @@
         android:layout_marginTop="10dp"
         android:hint="Referral Client Email"
         android:inputType="textEmailAddress"/>
-    <ImageView
-        android:id="@+id/rce_image"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight=".1"
-        android:background="@android:drawable/ic_menu_add"/>
 </LinearLayout>
     <View
         android:layout_width="match_parent"

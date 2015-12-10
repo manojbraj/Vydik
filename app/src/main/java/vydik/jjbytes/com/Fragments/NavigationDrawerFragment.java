@@ -196,13 +196,13 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
             items.add(new NavigationItem("Notifications", getResources().getDrawable(R.drawable.inbox)));
             items.add(new NavigationItem("Puja Booking", getResources().getDrawable(R.drawable.book_puja)));
             items.add(new NavigationItem("Profile", getResources().getDrawable(R.drawable.nav_profile)));
-            items.add(new NavigationItem("LogOut", getResources().getDrawable(R.drawable.logout)));
+            items.add(new NavigationItem("LogOut", getResources().getDrawable(R.drawable.log_out)));
         }else if(LoginActivity.type_for_login.equals("purohit")){
             items.add(new NavigationItem("Home", getResources().getDrawable(R.drawable.nav_home_icon)));
             items.add(new NavigationItem("Notifications", getResources().getDrawable(R.drawable.inbox)));
             items.add(new NavigationItem("Puja Booking", getResources().getDrawable(R.drawable.book_puja)));
             items.add(new NavigationItem("Profile", getResources().getDrawable(R.drawable.nav_profile)));
-            items.add(new NavigationItem("LogOut", getResources().getDrawable(R.drawable.logout)));
+            items.add(new NavigationItem("LogOut", getResources().getDrawable(R.drawable.log_out)));
         }
         else {
             items.add(new NavigationItem("Home", getResources().getDrawable(R.drawable.nav_home_icon)));
@@ -213,7 +213,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
             items.add(new NavigationItem("Panchanga", getResources().getDrawable(R.drawable.panchang)));
             items.add(new NavigationItem("Booking Details", getResources().getDrawable(R.drawable.book_puja)));
             items.add(new NavigationItem("Profile", getResources().getDrawable(R.drawable.nav_profile)));
-            items.add(new NavigationItem("LogOut", getResources().getDrawable(R.drawable.logout)));
+            items.add(new NavigationItem("LogOut", getResources().getDrawable(R.drawable.log_out)));
         }
         return items;
     }

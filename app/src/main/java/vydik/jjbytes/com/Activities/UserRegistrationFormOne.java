@@ -15,9 +15,11 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.FacebookSdk;
@@ -45,8 +47,9 @@ import vydik.jjbytes.com.constants.Constants;
 public class UserRegistrationFormOne extends ActionBarActivity implements OnItemSelectedListener{
 
     EditText UserFName,UserLName,UserEmail,UserPassword,UserConfirmPassword,UserContactNumber,UserAddress;
-    Spinner UserState,UserCity,UserLocality,UserPinCode;
-    ImageView Male,Female;
+    Spinner UserState,UserCity,UserLocality;
+    TextView UserPinCode;
+    CheckBox Male,Female;
     Button UserNext;
     ArrayAdapter<String> dataAdapterLocality;
     ArrayAdapter<String> dataAdapterPinCode;
@@ -63,6 +66,7 @@ public class UserRegistrationFormOne extends ActionBarActivity implements OnItem
     EditText OTPEdit;
     Button VerifyOTP,Cancel;
     public static String InputType;
+    int pos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,11 +92,11 @@ public class UserRegistrationFormOne extends ActionBarActivity implements OnItem
         UserLocality = (Spinner) findViewById(R.id.user_Locality);
         UserLocality.setOnItemSelectedListener(this);
 
-        UserPinCode = (Spinner) findViewById(R.id.user_PinCode);
+        UserPinCode = (TextView) findViewById(R.id.user_PinCode);
 
         UserNext = (Button) findViewById(R.id.next_one);
-        Male = (ImageView) findViewById(R.id.male);
-        Female = (ImageView) findViewById(R.id.female);
+        Male = (CheckBox) findViewById(R.id.male);
+        Female = (CheckBox) findViewById(R.id.female);
 
         if(InputType.equals("facebook")){
             UserFName.setText(LoginActivity.FacebookUserFName);
@@ -103,7 +107,7 @@ public class UserRegistrationFormOne extends ActionBarActivity implements OnItem
         }else{
 
         }
-        Male.setOnClickListener(new View.OnClickListener() {
+       /* Male.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("NewApi")
             @Override
             public void onClick(View v) {
@@ -121,16 +125,16 @@ public class UserRegistrationFormOne extends ActionBarActivity implements OnItem
                 Female.setBackground(getDrawable(R.drawable.female_selected));
                 Male.setBackground(getDrawable(R.drawable.male));
             }
-        });
+        });*/
 
         ArrayListConstants.LocalityName.add("Locality");
         ArrayListConstants.PinCode.add("Pin");
 
         dataAdapterLocality = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,ArrayListConstants.LocalityName);
-        dataAdapterPinCode = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,ArrayListConstants.PinCode);
+        //dataAdapterPinCode = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,ArrayListConstants.PinCode);
 
         UserLocality.setAdapter(dataAdapterLocality);
-        UserPinCode.setAdapter(dataAdapterPinCode);
+        //UserPinCode.setAdapter(dataAdapterPinCode);
 
         new getLocalityName().execute();
 
@@ -155,12 +159,12 @@ public class UserRegistrationFormOne extends ActionBarActivity implements OnItem
                                                 LocalityR = "3";
                                                 CheckSpinnerMethod();
                                             }else{
-                                                if(UserPinCode.getSelectedItem().toString().trim().equals("Pin")) {
+                                                /*if(UserPinCode.getSelectedItem().toString().trim().equals("Pin")) {
                                                     PinR = "4";
                                                     CheckSpinnerMethod();
-                                                }else{
+                                                }else{*/
                                                     CheckSpinnerMethod();
-                                                }
+                                                //}
                                             }
                                         }
                                     }
@@ -196,12 +200,27 @@ public class UserRegistrationFormOne extends ActionBarActivity implements OnItem
         }else if(PinR.equals("4")){
             PinR = "0";
             Toast.makeText(UserRegistrationFormOne.this,"Please select PinCode",Toast.LENGTH_LONG).show();
-        }else if(GenderValue.equals("null")){
+        }else if(Male.isChecked() == false && Female.isChecked() == false){
             Toast.makeText(UserRegistrationFormOne.this,"Please select your gender",Toast.LENGTH_LONG).show();
-        }else{
+        }else if(Male.isChecked() && Female.isChecked()){
+            Toast.makeText(UserRegistrationFormOne.this,"Please select any one gender",Toast.LENGTH_LONG).show();
+        } else{
+
+            if(Male.isChecked()){
+                Male.setChecked(true);
+                Female.setChecked(false);
+                GenderValue = "Male";
+            }
+
+            if(Female.isChecked()){
+                Female.setChecked(true);
+                Male.setChecked(false);
+                GenderValue = "Female";
+            }
+
             constants.GetState = UserState.getSelectedItem().toString();
             constants.GetCity = UserCity.getSelectedItem().toString();
-            constants.GetPinCode = UserPinCode.getSelectedItem().toString();
+            //constants.GetPinCode = UserPinCode.getSelectedItem().toString();
             constants.UserFName = UserFName.getText().toString();
             constants.UserLName = UserLName.getText().toString();
             constants.UserEmail = UserEmail.getText().toString();
@@ -209,7 +228,11 @@ public class UserRegistrationFormOne extends ActionBarActivity implements OnItem
             constants.UserContact = UserContactNumber.getText().toString();
             constants.UserAddress = UserAddress.getText().toString();
 
-            CallOtpVerifyPopup();
+            //CallOtpVerifyPopup();
+            /*once otp is configured open callotpverfication*/
+            Intent intent = new Intent(UserRegistrationFormOne.this,UserRegistrationFinalSignUp.class);
+            startActivity(intent);
+            finish();
         }
     }
 /*otp verify popup*/
@@ -282,9 +305,20 @@ public class UserRegistrationFormOne extends ActionBarActivity implements OnItem
                 PositionValue = position;
                 for (int i = 1; i < ArrayListConstants.LocalityName.size(); i++) {
                     if (i == PositionValue) {
+                        pos = i;
                         constants.GetLocality = ArrayListConstants.LacalityId.get(i - 1);
+
+                        for(int j=1;j<ArrayListConstants.PinCode.size();j++){
+                            if(j == pos){
+                                String pin = ArrayListConstants.PinCode.get(j);
+                                constants.GetPinCode = pin;
+                                UserPinCode.setText(pin);
+                            }
+                        }
+
                     }
                 }
+
                 break;
         }
     }
@@ -374,6 +408,10 @@ public class UserRegistrationFormOne extends ActionBarActivity implements OnItem
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+
+        ArrayListConstants.LocalityName.clear();
+        ArrayListConstants.PinCode.clear();
+
         if(InputType.equals("facebook")){
             FacebookSdk.sdkInitialize(getApplicationContext());
             LoginManager.getInstance().logOut();

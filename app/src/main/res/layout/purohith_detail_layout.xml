@@ -36,7 +36,6 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight=".75"
-            android:text="Name"
             android:textSize="20sp"
             android:textColor="#000"
             android:layout_marginTop="5dp"/>
