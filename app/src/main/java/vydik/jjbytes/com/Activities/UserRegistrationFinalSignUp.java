@@ -503,7 +503,7 @@ public class UserRegistrationFinalSignUp extends ActionBarActivity{
                         int check = c.get(Calendar.YEAR);
                         resAge = check - y;
                         if(resAge < 18 ){
-                            Toast.makeText(UserRegistrationFinalSignUp.this,"Your age Should not be less than 18 years",Toast.LENGTH_LONG).show();
+                            Toast.makeText(UserRegistrationFinalSignUp.this,"Please select age greater than 18 Years.",Toast.LENGTH_LONG).show();
                         }else {
                             DateOfBirth.setText(strdate);
                         }
@@ -709,12 +709,12 @@ class FinalRegistrationSubbmit extends AsyncTask<String, Void, String> {
 
                 if(jsonObject.has("profile_picture")){
                     if(jsonObject.getString("profile_picture")!= null){
-                        constants.UL10 = jsonObject.getString("profile_picture").toString();
+                        constants.UL10 = "http://vydik.com/"+jsonObject.getString("profile_picture").toString();
                     }else{
-
+                        constants.UL10 = "image";
                     }
                 }else{
-
+                    constants.UL10 = "image";
                 }
             }
            /* JSONObject object = new JSONObject(s);
@@ -756,5 +756,14 @@ class FinalRegistrationSubbmit extends AsyncTask<String, Void, String> {
     protected void onDestroy() {
         super.onDestroy();
         database.close();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(UserRegistrationFinalSignUp.this,LoginActivity.class);
+        intent.putExtra("login_type", "user");
+        startActivity(intent);
+        finish();
     }
 }

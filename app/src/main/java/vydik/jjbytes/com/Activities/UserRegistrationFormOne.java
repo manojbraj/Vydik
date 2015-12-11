@@ -78,6 +78,9 @@ public class UserRegistrationFormOne extends ActionBarActivity implements OnItem
             InputType = extras.getString("type");
         }
 
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        LoginManager.getInstance().logOut();
+
         UserFName = (EditText) findViewById(R.id.first_name);
         UserLName = (EditText) findViewById(R.id.last_name);
         UserEmail = (EditText) findViewById(R.id.email);
@@ -413,8 +416,8 @@ public class UserRegistrationFormOne extends ActionBarActivity implements OnItem
         ArrayListConstants.PinCode.clear();
 
         if(InputType.equals("facebook")){
-            FacebookSdk.sdkInitialize(getApplicationContext());
-            LoginManager.getInstance().logOut();
+            /*FacebookSdk.sdkInitialize(getApplicationContext());
+            LoginManager.getInstance().logOut();*/
             Intent intent = new Intent(UserRegistrationFormOne.this,LoginActivity.class);
             intent.putExtra("login_type", "user");
             startActivity(intent);

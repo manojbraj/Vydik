@@ -64,7 +64,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     TextView dateofDay,monthofYear,daySunrise,daySunset;
     private int ALmonthOfYear, ALdayOfMonth,ALyear;
     /*tiles click text*/
-    TextView BookPuja,Bhajans;
+    TextView BookPuja,Bhajans,PujaAtTemple;
     CheckBox PujaWP,PujaWWP;
     Button PujaAccept,PujaCancel;
     private GoogleApiClient mGoogleApiClient;
@@ -160,6 +160,14 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,BhajansActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        PujaAtTemple = (TextView) findViewById(R.id.puja_temple);
+        PujaAtTemple.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this,"Thank you for your interest in the service Book a Puja @Temple. We are launching this service soon...",Toast.LENGTH_LONG).show();
             }
         });
 
@@ -425,7 +433,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         }else if(position == 7){
             Intent intent = new Intent(MainActivity.this,UserProfileActivity.class);
             startActivity(intent);
-            finish();
+            //finish();
         } else if(position == 8){
             /*log out functionality for facebook g+ and normal sign up or sign in(purohith or user)*/
             if(SplashScreenActivity.LoginType.equals("facebook")){

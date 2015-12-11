@@ -22,8 +22,9 @@ public class Constants {
     public static String PurohithSect = "http://vydik.com/android/purohit_sect.php";
     public static String SendSearchParameters = "http://www.vydik.com/search_pujas.php";
     public static String PurohithDetailUrl = "http://www.vydik.com/pur_info_moblity.php?pur_info=";
-    public static String SendBookingDetails = "http://vydik.com//android_book_puja.php";
+    public static String SendBookingDetails = "http://vydik.com/android_book_puja.php";
     public static String CancelPujaRequestURL = "http://vydik.com/admin_vydik/admin_vydhik_project/android_cancelation_booking.php";
+
 
     /*constant messages*/
     public static String getPoojaListProgress = "Accessing puja list please wait...";

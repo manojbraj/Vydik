@@ -2,9 +2,13 @@ package vydik.jjbytes.com.Fragments;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
@@ -16,8 +20,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,6 +60,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     public static List<NavigationItem> items = new ArrayList<NavigationItem>();
 
     TextView UserName,UserEmail;
+    ImageView ProfileImage;
     MainDatabase database;
     ArrayList<GetUserLoginData> getUserLoginData;
     private ArrayList<String> UserFirstName = new ArrayList<String>();
@@ -90,8 +102,15 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
 
         database.close();
 
+        GetXMLTask task = new GetXMLTask();
+        if(UImage!= "image"){
+            task.execute(new String[] { UImage });
+        }
+
         UserName = (TextView) view.findViewById(R.id.txtUsername);
         UserEmail = (TextView) view.findViewById(R.id.txtUserEmail);
+
+        ProfileImage = (ImageView) view.findViewById(R.id.imgAvatar);
 
         UserName.setText(UFName + " " + ULName);
         UserEmail.setText(UEmail);
@@ -287,5 +306,66 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     public static String readSharedSetting(Context ctx, String settingName, String defaultValue) {
         SharedPreferences sharedPref = ctx.getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
         return sharedPref.getString(settingName, defaultValue);
+    }
+
+    private class GetXMLTask extends AsyncTask<String, Void, Bitmap> {
+
+        @Override
+        protected Bitmap doInBackground(String... urls) {
+            Bitmap map = null;
+            for (String url : urls) {
+                map = downloadImage(url);
+            }
+            return map;
+        }
+
+        // Sets the Bitmap returned by doInBackground
+        @Override
+        protected void onPostExecute(Bitmap result) {
+            if(result == null){
+                Toast.makeText(getActivity(),"No Image Found", Toast.LENGTH_LONG).show();
+            }else {
+                ProfileImage.setImageBitmap(result);
+            }
+        }
+
+        // Creates Bitmap from InputStream and returns it
+        private Bitmap downloadImage(String url) {
+            Bitmap bitmap = null;
+            InputStream stream = null;
+            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+            bmOptions.inSampleSize = 1;
+
+            try {
+                stream = getHttpConnection(url);
+                bitmap = BitmapFactory.
+                        decodeStream(stream, null, bmOptions);
+                stream.close();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            return bitmap;
+        }
+
+        // Makes HttpURLConnection and returns InputStream
+        private InputStream getHttpConnection(String urlString)
+                throws IOException {
+            InputStream stream = null;
+            URL url = new URL(urlString);
+            URLConnection connection = url.openConnection();
+
+            try {
+                HttpURLConnection httpConnection = (HttpURLConnection) connection;
+                httpConnection.setRequestMethod("GET");
+                httpConnection.connect();
+
+                if (httpConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    stream = httpConnection.getInputStream();
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            return stream;
+        }
     }
 }

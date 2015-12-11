@@ -12,7 +12,7 @@
         android:id="@+id/navigationHeader"
         android:paddingTop="24dp">
 
-        <ImageView
+        <vydik.jjbytes.com.view.ImageViewRounded
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:id="@+id/imgAvatar"
@@ -22,6 +22,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
+            android:scaleType="fitXY"
             android:background="@mipmap/android_logo"/>
 
         <LinearLayout

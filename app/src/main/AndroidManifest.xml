@@ -164,8 +164,10 @@
         <activity
             android:name=".UserProfileUpdate">
         </activity>
+        <activity
+            android:name=".PaymentSuccess">
+        </activity>
         <!--payment gateway start-->
-
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />

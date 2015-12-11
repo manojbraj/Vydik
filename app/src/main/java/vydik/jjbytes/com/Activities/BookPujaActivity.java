@@ -791,6 +791,7 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
                     }
                     if (object.has("purohit_id")) {
                         if (object.getString("purohit_id") != null) {
+                            constants.purohith_id = object.getString("purohit_id").toString();
                             arrayListConstants.PurohithId.add(object.getString("purohit_id").toString());
                         } else {
                             arrayListConstants.PurohithId.add("no id");

@@ -1,15 +1,25 @@
 package vydik.jjbytes.com.Activities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 
 import vydik.jjbytes.com.Database.MainDatabase;
@@ -37,6 +47,7 @@ public class UserProfileActivity extends AppCompatActivity{
     public static String UFName,ULName,UEmail,UMobile,ULocality,UState,UAddress,UId,UImage;
 
     TextView UserName,Email,Phone,Locality,Address;
+    ImageView ProfileImage;
     Toolbar toolbar;
     CollapsingToolbarLayout actionBar;
     LinearLayout BackPress;
@@ -80,6 +91,11 @@ public class UserProfileActivity extends AppCompatActivity{
                 UImage = UserImage.get(0).toString();
             }
         }
+        ProfileImage = (ImageView) findViewById(R.id.header);
+        GetXMLTask task = new GetXMLTask();
+        if(UImage!= "image"){
+            task.execute(new String[] { UImage });
+        }
 
         UserName = (TextView) findViewById(R.id.user_name);
         Email = (TextView) findViewById(R.id.user_email);
@@ -103,11 +119,72 @@ public class UserProfileActivity extends AppCompatActivity{
         });
     }
 
+    private class GetXMLTask extends AsyncTask<String, Void, Bitmap> {
+
+        @Override
+        protected Bitmap doInBackground(String... urls) {
+            Bitmap map = null;
+            for (String url : urls) {
+                map = downloadImage(url);
+            }
+            return map;
+        }
+
+        // Sets the Bitmap returned by doInBackground
+        @Override
+        protected void onPostExecute(Bitmap result) {
+            if(result == null){
+                Toast.makeText(UserProfileActivity.this, "No Image Found", Toast.LENGTH_LONG).show();
+            }else {
+                ProfileImage.setImageBitmap(result);
+            }
+        }
+
+        // Creates Bitmap from InputStream and returns it
+        private Bitmap downloadImage(String url) {
+            Bitmap bitmap = null;
+            InputStream stream = null;
+            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+            bmOptions.inSampleSize = 1;
+
+            try {
+                stream = getHttpConnection(url);
+                bitmap = BitmapFactory.
+                        decodeStream(stream, null, bmOptions);
+                stream.close();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+            return bitmap;
+        }
+
+        // Makes HttpURLConnection and returns InputStream
+        private InputStream getHttpConnection(String urlString)
+                throws IOException {
+            InputStream stream = null;
+            URL url = new URL(urlString);
+            URLConnection connection = url.openConnection();
+
+            try {
+                HttpURLConnection httpConnection = (HttpURLConnection) connection;
+                httpConnection.setRequestMethod("GET");
+                httpConnection.connect();
+
+                if (httpConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                    stream = httpConnection.getInputStream();
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            return stream;
+        }
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(UserProfileActivity.this,MainActivity.class);
+        /*Intent intent = new Intent(UserProfileActivity.this,MainActivity.class);
         startActivity(intent);
-        finish();
+        finish();*/
     }
 }

@@ -790,9 +790,9 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
 
                         }
 
-                        if(jsonObject.has("image")){
-                            if(jsonObject.getString("image")!= null){
-                                constants.UL10 = jsonObject.getString("image").toString();
+                        if(jsonObject.has("profile_picture")){
+                            if(jsonObject.getString("profile_picture")!= null){
+                                constants.UL10 = "http://vydik.com/"+jsonObject.getString("profile_picture").toString();
                             }else{
 
                             }

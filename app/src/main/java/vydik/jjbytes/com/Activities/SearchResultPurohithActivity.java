@@ -59,6 +59,7 @@ public class SearchResultPurohithActivity extends ActionBarActivity {
         SearchPurohithdetails.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 constants.purohith_id = arrayListConstants.PurohithId.get(position);
                 PurohithId = arrayListConstants.PurohithId.get(position);
                 PurohithLocation = arrayListConstants.PurohithLocation.get(position);
@@ -67,6 +68,7 @@ public class SearchResultPurohithActivity extends ActionBarActivity {
                 String fName = arrayListConstants.PurohithFirstName.get(position);
                 String lName = arrayListConstants.PurohithLastName.get(position);
                 PurohithName = fName+" "+lName;
+                constants.package_Name = PurohithName;
                 new PurohithDetail().execute();
             }
         });

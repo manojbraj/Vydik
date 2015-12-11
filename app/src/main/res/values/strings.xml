@@ -53,6 +53,8 @@
     <string name="puja_prasadam">* Puja Prasadam will be @ actual cost</string>
     <string name="purohith_availability">* Balance amount should be paid to purohit after puja completion</string>
     <string name="terms"><u>Terms and Condition</u></string>
+    <string name="payment_note">We will revert to you with the confirmation on the Muhurat &amp; Purohit details within 48 hours. Please note that the following incidental costs needs to be paid to the Purohit after the completion of Puja.
+Please note that the following incidental costs needs to be paid to the Purohit after the completion of Puja.</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 

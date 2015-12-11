@@ -1,15 +1,20 @@
 package vydik.jjbytes.com.Activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.payUMoney.sdk.SdkConstants;
+import com.payUMoney.sdk.SdkSession;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -19,13 +24,17 @@ import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import vydik.jjbytes.com.Database.MainDatabase;
 import vydik.jjbytes.com.Models.GetUserLoginData;
@@ -36,9 +45,9 @@ import vydik.jjbytes.com.constants.Constants;
 /**
  * Created by Manoj on 11/3/2015.
  */
-public class CheckoutActivityAddress extends ActionBarActivity {
-    TextInputLayout FirstName,PhoneNumber,UserAddress,UserCity,UserLocation;
-    EditText FName,LName,Phone,Address,City,Locality;
+public class CheckoutActivityAddress extends Activity {
+    TextInputLayout FirstName,PhoneNumber,UserAddress,UserCity,UserLocation,UserEmailPayment;
+    EditText FName,LName,Phone,Address,City,Locality,Email;
     CheckBox TermsCondition;
     Button Confirm;
     ArrayListConstants arrayListConstants;
@@ -64,6 +73,11 @@ public class CheckoutActivityAddress extends ActionBarActivity {
 
     /*http entity*/
     MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
+
+    /*payment gate way hash map don't alter*/
+    HashMap<String, String> params = new HashMap<>();
+    String Amount = "1";
+    String TransactionId = "0000";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,6 +142,11 @@ public class CheckoutActivityAddress extends ActionBarActivity {
             Phone.setText(UMobile);
         }
 
+        UserEmailPayment = (TextInputLayout) findViewById(R.id.EmailLayout);
+        UserEmailPayment.setErrorEnabled(true);
+        Email = (EditText) findViewById(R.id.Email);
+        Email.setError("Required");
+
         UserAddress = (TextInputLayout) findViewById(R.id.address_layout);
         UserAddress.setErrorEnabled(true);
         Address = (EditText) findViewById(R.id.edit_address);
@@ -155,7 +174,7 @@ public class CheckoutActivityAddress extends ActionBarActivity {
         Confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (validate(new EditText[]{FName,Phone,Address,City,Locality})){
+                if (validate(new EditText[]{FName,Phone,Email,Address,City,Locality})){
                     if (Phone.getText().toString().length() == 10) {
                         if (TermsCondition.isChecked() == true) {
 
@@ -214,36 +233,37 @@ public class CheckoutActivityAddress extends ActionBarActivity {
 
         @Override
         protected String doInBackground(String... params) {
+            System.out.println("output of bookings : " + constants.SearchPujaId);
+            System.out.println("output of bookings : " + constants.purohith_id);
+            System.out.println("output of bookings : " + UId);
+            System.out.println("output of bookings : " + BookPujaActivity.newdateupdated);
+            System.out.println("output of bookings : " + constants.SearchPriceBooking);
+            System.out.println("output of bookings : " + ULocality);
+            System.out.println("output of bookings : " + BookPujaActivity.package_type);
+            System.out.println("output of bookings : " + "Karnataka");
+            System.out.println("output of bookings : " + UCity);
+            System.out.println("output of bookings : " + UAddress);
+            System.out.println("output of bookings : " + constants.package_Name);
+            System.out.println("output of bookings : " + UFName+" "+ULName);
+            System.out.println("output of bookings : " + constants.package_sect);
+
             HttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(constants.SendBookingDetails);
             try{
-                System.out.println("user data : "+constants.SearchPujaId);
-                System.out.println("user data : "+constants.purohith_id);
-                System.out.println("user data : "+UId);
-                System.out.println("user data : "+constants.SDate);
-                System.out.println("user data : "+constants.SearchPriceBooking);
-                System.out.println("user data : "+ULocality);
-                System.out.println("user data : "+BookPujaActivity.package_type);
-                System.out.println("user data : "+UState);
-                System.out.println("user data : "+UCity);
-                System.out.println("user data : "+UAddress);
-                System.out.println("user data : "+constants.package_Name);
-                System.out.println("user data : "+UFName + "  " + ULName);
-
                 multipartEntity.addPart(constants.Booking1, new StringBody(constants.SearchPujaId));
                 multipartEntity.addPart(constants.Booking2,new StringBody(constants.purohith_id));
                 multipartEntity.addPart(constants.Booking3,new StringBody(UId));
-                multipartEntity.addPart(constants.Booking4,new StringBody(constants.SDate));
+                multipartEntity.addPart(constants.Booking4,new StringBody(BookPujaActivity.newdateupdated));
                 multipartEntity.addPart(constants.Booking5,new StringBody(constants.SearchPriceBooking));
                 multipartEntity.addPart(constants.Booking6,new StringBody(ULocality));
                 multipartEntity.addPart(constants.Booking7,new StringBody(BookPujaActivity.package_type));
-                multipartEntity.addPart(constants.Booking8,new StringBody(constants.package_sect));
                 multipartEntity.addPart(constants.Booking9,new StringBody("India"));
-                multipartEntity.addPart(constants.Booking10,new StringBody(UState));
+                multipartEntity.addPart(constants.Booking10,new StringBody("Karnataka"));
                 multipartEntity.addPart(constants.Booking11,new StringBody(UCity));
                 multipartEntity.addPart(constants.Booking12,new StringBody(UAddress));
                 multipartEntity.addPart(constants.Booking13,new StringBody(constants.package_Name));
                 multipartEntity.addPart(constants.Booking14,new StringBody(UFName+" "+ULName));
+                multipartEntity.addPart(constants.Booking8,new StringBody(constants.package_sect));
             }catch (Exception e){
 
             }
@@ -293,27 +313,36 @@ public class CheckoutActivityAddress extends ActionBarActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             Utilities.cancelProgressDialog();
-            System.out.println("output of bookings : " + s);
             String Success =" ";
             try {
-                JSONObject object = new JSONObject(s);
-                if(object.has("success")){
-                    if(object.getString("success")!= null){
-                      Success = object.getString("success").toString();
+                JSONArray array = new JSONArray(s);
+                for(int r=0;r<array.length();r++){
+                    JSONObject object = array.getJSONObject(r);
+                    if(object.has("success")){
+                        if(object.getString("success")!= null){
+                            Success = object.getString("success").toString();
+                        }else{
+                            Success = "failed";
+                        }
                     }else{
                         Success = "failed";
                     }
-                }else{
-                    Success = "failed";
-                }
 
+                    if(object.has("rand_value")){
+                        if(object.getString("rand_value")!= null){
+                            TransactionId = object.getString("rand_value").toString();
+                        }else {
+                            TransactionId = "00000";
+                        }
+                    }else {
+                        TransactionId = "00000";
+                    }
+
+                }
                 if(Success.equals("Sucessfully")){
                     /*insert to local db the booked puja if success*/
-                    database.InserBookingDetails(UId,constants.SPujaName,constants.package_Name,constants.SDate,constants.SearchPriceBooking,UAddress,"0");
-                    Toast.makeText(CheckoutActivityAddress.this,"Puja booking successful the vydik team will confirm the availability of purohit in next 48hrs",Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(CheckoutActivityAddress.this,MainActivity.class);
-                    startActivity(intent);
-                    finish();
+                    database.InserBookingDetails(UId, constants.SPujaName, constants.package_Name, constants.SDate, constants.SearchPriceBooking, UAddress, "0");
+
                 }else{
                     Toast.makeText(CheckoutActivityAddress.this,"Failed to book puja please try after some time",Toast.LENGTH_LONG).show();
                 }
@@ -321,7 +350,98 @@ public class CheckoutActivityAddress extends ActionBarActivity {
             }catch (Exception e){
 
             }
+            if(Success.equals("Sucessfully")) {
+                ProceedToPayment();
+            }
         }
+    }
+
+    private void ProceedToPayment() {
+        System.out.println("hashSequence"+TransactionId);
+        System.out.println("hashSequence"+Amount);
+        System.out.println("hashSequence"+FName.getText().toString());
+        System.out.println("hashSequence"+Email.getText().toString());
+        if (Amount.equals("") || (Double.parseDouble(Amount) == 0.0)) {
+            Toast.makeText(getApplicationContext(), "no amount specified", Toast.LENGTH_LONG).show();
+        }else if (Double.parseDouble(Amount) > 1000000.00) {
+            Toast.makeText(CheckoutActivityAddress.this, "Amount exceeding the limit : 1000000.00 ", Toast.LENGTH_LONG).show();
+        }else {
+            if (SdkSession.getInstance(CheckoutActivityAddress.this) == null) {
+                SdkSession.startPaymentProcess(CheckoutActivityAddress.this, params);
+            } else {
+                SdkSession.createNewInstance(CheckoutActivityAddress.this);
+            }
+            String hashSequence = "heauku" + "|" + TransactionId + "|" + Amount + "|" + "purohit_booking" + "|" + FName.getText().toString() + "|"
+                    + Email.getText().toString() + "|" + "" + "|" + "" + "|" + "" + "|" + "" + "|" + "" + "|" + "d13Ety2U";
+            System.out.println("hashSequence" + hashSequence);
+            params.put("key", "heauku");
+            params.put("MerchantId", "5327426");
+            String hash = hashCal(hashSequence);
+            Log.i("hash", hash);
+            params.put("TxnId", TransactionId);
+            params.put("SURL", "https://mobiletest.payumoney.com/mobileapp/payumoney/success.php");
+            params.put("FURL", "https://mobiletest.payumoney.com/mobileapp/payumoney/failure.php");
+            params.put("ProductInfo", "purohit_booking");
+            params.put("firstName", FName.getText().toString());
+            params.put("Email", Email.getText().toString());
+            params.put("Phone", Phone.getText().toString());
+            params.put("Amount", Amount);
+            params.put("hash", hash);
+            params.put("udf1", "");
+            params.put("udf2", "");
+            params.put("udf3", "");
+            params.put("udf4", "");
+            params.put("udf5", "");
+            SdkSession.startPaymentProcess(CheckoutActivityAddress.this, params);
+        }
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == SdkSession.PAYMENT_SUCCESS) {
+            if (resultCode == RESULT_OK) {
+                Log.i("app_activity", "success");
+                Log.i("paymentID", data.getStringExtra("paymentId"));
+                Intent intent = new Intent(CheckoutActivityAddress.this, PaymentSuccess.class);
+                intent.putExtra(SdkConstants.RESULT, "success");
+                intent.putExtra(SdkConstants.PAYMENT_ID, data.getStringExtra("paymentId"));
+                startActivity(intent);
+                finish();
+            }
+
+            if (resultCode == RESULT_CANCELED) {
+                Log.i("app_activity", "failure");
+                if (data != null) {
+                    if (data.getStringExtra(SdkConstants.RESULT).equals("cancel")) {
+
+                    } else {
+                        Intent intent = new Intent(CheckoutActivityAddress.this, PaymentSuccess.class);
+                        intent.putExtra(SdkConstants.RESULT, "failure");
+                        startActivity(intent);
+                        finish();
+                    }
+                }
+            }
+        }
+    }
+
+    public static String hashCal(String str) {
+        byte[] hashseq = str.getBytes();
+        StringBuilder hexString = new StringBuilder();
+        try {
+            MessageDigest algorithm = MessageDigest.getInstance("SHA-512");
+            algorithm.reset();
+            algorithm.update(hashseq);
+            byte messageDigest[] = algorithm.digest();
+            for (byte aMessageDigest : messageDigest) {
+                String hex = Integer.toHexString(0xFF & aMessageDigest);
+                if (hex.length() == 1) {
+                    hexString.append("0");
+                }
+                hexString.append(hex);
+            }
+        } catch (NoSuchAlgorithmException ignored) {
+        }
+        return hexString.toString();
     }
 
     @Override
