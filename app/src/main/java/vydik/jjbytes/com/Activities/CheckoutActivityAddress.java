@@ -45,7 +45,7 @@ import vydik.jjbytes.com.constants.Constants;
 /**
  * Created by Manoj on 11/3/2015.
  */
-public class CheckoutActivityAddress extends Activity {
+public class CheckoutActivityAddress extends ActionBarActivity {
     TextInputLayout FirstName,PhoneNumber,UserAddress,UserCity,UserLocation,UserEmailPayment;
     EditText FName,LName,Phone,Address,City,Locality,Email;
     CheckBox TermsCondition;
