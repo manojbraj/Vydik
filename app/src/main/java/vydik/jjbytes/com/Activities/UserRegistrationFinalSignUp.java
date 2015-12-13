@@ -602,7 +602,6 @@ class FinalRegistrationSubbmit extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         Utilities.cancelProgressDialog();
-        System.out.println("server message" + s);
         try{
             JSONArray array = new JSONArray(s);
             for (int i = 0; i < array.length(); i++) {

@@ -129,7 +129,11 @@ public class SplashScreenActivity extends ActionBarActivity {
 
                 if(loginDetails.size() == 0){
                     GCMLoginType = "new";
-                    CallPopup();
+                    //CallPopup();
+                    Intent intent = new Intent(SplashScreenActivity.this, LoginActivity.class);
+                    intent.putExtra("login_type", "user");
+                    startActivity(intent);
+                    finish();
                 }
                 else{
                     for(int i=0;i<loginDetails.size();i++){

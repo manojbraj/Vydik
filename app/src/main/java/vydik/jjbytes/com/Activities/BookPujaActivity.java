@@ -42,6 +42,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import vydik.jjbytes.com.Extras.ConnectionDetector;
 import vydik.jjbytes.com.Utils.Utilities;
 import vydik.jjbytes.com.constants.ArrayListConstants;
 import vydik.jjbytes.com.constants.Constants;
@@ -83,6 +84,7 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
     int PositionValue;
     private int ALmonthOfYear, ALdayOfMonth,ALyear;
     String FirstName,LastName;
+    Calendar c;
 
     /*http entity*/
     MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
@@ -98,6 +100,16 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
         toolbar = (Toolbar) findViewById(R.id.tab_layout);
         toolbar.setNavigationIcon(R.drawable.back_white_new);
         setSupportActionBar(toolbar);
+
+        PoojaName.clear();
+        PoojaTypeId.clear();
+        PoojaId.clear();
+        LocationName.clear();
+        LangugesName.clear();
+        PurohithSect.clear();
+
+        constants.SPujaName = null;
+        newdateupdated = null;
 
         WithPackage = (LinearLayout) findViewById(R.id.with_package_layout);
         WithoutPackage = (LinearLayout) findViewById(R.id.without_package_layout);
@@ -167,16 +179,16 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
             @Override
             public void onClick(View v) {
                 if(constants.SPujaName != null){
-                    if(Location.getSelectedItem().toString().trim().equals("Location")){
+                   /* if(Location.getSelectedItem().toString().trim().equals("Location")){
                         SLocation = "1";
                         CheckSpinnerMethod();
-                    }else {
+                    }else {*/
                         if(constants.SDate != null){
                             CheckSpinnerMethod();
                         }else{
                             Toast.makeText(BookPujaActivity.this,"Please select your date to perform puja",Toast.LENGTH_LONG).show();
                         }
-                    }
+                    //}
                 }else{
                     Toast.makeText(BookPujaActivity.this,"Please select your puja",Toast.LENGTH_LONG).show();
                 }
@@ -185,7 +197,7 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
     }
 
     private void DatePickerMethod() {
-        final Calendar c = Calendar.getInstance();
+        c = Calendar.getInstance();
         ALyear = c.get(Calendar.YEAR);
         ALmonthOfYear = c.get(Calendar.MONTH);
         ALdayOfMonth = c.get(Calendar.DAY_OF_MONTH);
@@ -208,15 +220,20 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
 
     /*spinner validation*/
     private void CheckSpinnerMethod() {
-        if(SLocation.equals("1")){
+        /*if(SLocation.equals("1")){
             SLocation = "0";
             Toast.makeText(BookPujaActivity.this,"Please select your location",Toast.LENGTH_LONG).show();
-        }else{
-            constants.SLocationName = Location.getSelectedItem().toString();
-            constants.SLanguageName = Languages.getSelectedItem().toString();
+        }else{*/
+            if(ConnectionDetector.isConnectingToInternet(getApplicationContext()))
+            {
+                /*constants.SLocationName = Location.getSelectedItem().toString();
+                constants.SLanguageName = Languages.getSelectedItem().toString();*/
+                new SubmitPujaActivity().execute();
+            }else {
+                Toast.makeText(getApplicationContext(),"No internet connection",Toast.LENGTH_LONG).show();
+            }
 
-            new SubmitPujaActivity().execute();
-        }
+        //}
     }
 
     @Nullable
@@ -913,6 +930,46 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
                     } else {
 
                     }
+
+                    if(package_type.equals("1")){
+
+                        if(object.has("with_price_advance")){
+                            if(object.getString("with_price_advance")!= null){
+                                constants.AdvanceAmount = "Rs."+object.getString("with_price_advance").toString()+"/-";
+                                constants.PayementGatewayAmount = object.getString("with_price_advance").toString();
+                            }else {
+                                constants.AdvanceAmount = "000";
+                            }
+                        }else {
+                            constants.AdvanceAmount = "000";
+                        }
+
+                        if(object.has("with_price_blance")){
+                            if(object.getString("with_price_blance")!= null){
+                                constants.BalanceAmount = "Rs."+object.getString("with_price_blance").toString()+"/-";
+                            }
+                        }
+                    }else {
+                            if(object.has("with_out_price_advance")){
+                                if(object.getString("with_out_price_advance")!= null){
+                                    arrayListConstants.AdvanceAmountList.add(object.getString("with_out_price_advance").toString());
+                                }else {
+                                    arrayListConstants.AdvanceAmountList.add("000");
+                                }
+                            }else {
+                                arrayListConstants.AdvanceAmountList.add("000");
+                            }
+
+                            if(object.has("with_out_price_blance")){
+                                if(object.getString("with_out_price_blance")!= null){
+                                    arrayListConstants.BalanceAmountList.add(object.getString("with_out_price_blance"));
+                                }else {
+                                    arrayListConstants.BalanceAmountList.add("000");
+                                }
+                            }else {
+                                arrayListConstants.BalanceAmountList.add("000");
+                            }
+                    }
                 }
             //}
             }
@@ -922,13 +979,11 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
             catch (Exception e){
 
             }
-            if(package_type.equals("1")){
+            if(package_type.equals("1")) {
                 if(StatusOfPuja.equals("success")){
-                    Toast.makeText(BookPujaActivity.this,FirstName+" "+LastName,Toast.LENGTH_LONG).show();
                     constants.package_Name = FirstName+" "+LastName;
                     Intent intent = new Intent(BookPujaActivity.this,PackagePujaDetailActivity.class);
                     startActivity(intent);
-                    finish();
                 }else {
                     Toast.makeText(BookPujaActivity.this,"No purohit available for the selected details please try with new Thank you",Toast.LENGTH_LONG).show();
                 }
@@ -944,7 +999,6 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
                 }
             }
         }
-
     }
     @Override
     public void onBackPressed() {

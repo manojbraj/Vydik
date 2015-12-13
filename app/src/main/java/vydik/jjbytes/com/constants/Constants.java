@@ -24,7 +24,7 @@ public class Constants {
     public static String PurohithDetailUrl = "http://www.vydik.com/pur_info_moblity.php?pur_info=";
     public static String SendBookingDetails = "http://vydik.com/android_book_puja.php";
     public static String CancelPujaRequestURL = "http://vydik.com/admin_vydik/admin_vydhik_project/android_cancelation_booking.php";
-
+    public static String UserProfileUpdateURL = "http://vydik.com/android_user_profile_upd.php";
 
     /*constant messages*/
     public static String getPoojaListProgress = "Accessing puja list please wait...";
@@ -39,6 +39,7 @@ public class Constants {
     public static String BookingPujaProgress = "Submitting booking details please wait...";
     public static String RequestForReschedule = "Submitting details for Puja Reschedule Please wait...";
     public static String RequestForCancelation = "Cancellation of puja request in process please wait...";
+    public static String UserProfileUpdateProgress = "Updating profile please wait...";
 
     /*unique constant value for database usage user_id*/
     public static String UserIdData;
@@ -85,7 +86,7 @@ public class Constants {
     public static String UL1 = "nl",UL2 = "nl",UL3 = "nl",UL4 = "nl",UL5 = "nl",UL6 = "nl",UL7 = "nl",UL8 = "nl",UL9 = "nl",UL10 = "image";
 
     /*search puja constants*/
-    public static String SPujaName, SLocationName, SLanguageName, SSectId, SDate;
+    public static String SPujaName, SLocationName = "no", SLanguageName = "no", SSectId, SDate;
 
     // Directory name to store captured images and videos
     public static final String IMAGE_DIRECTORY_NAME = "Android File Upload";
@@ -110,4 +111,10 @@ public class Constants {
 
     /*retrieve puja id from search*/
     public static String SearchPujaId,SearchPriceBooking;
+
+    /*payment amount package and no package*/
+    public static String AdvanceAmount,BalanceAmount,PayementGatewayAmount;
+
+    /*user profile update key*/
+    public static String UpdateFName = "first_name",UpdateLName = "last_name",UpdateMobileNo = "mob_no",UpdateLocality="locality",UpdateAddress = "address",UpdateEmail = "emailid";
 }

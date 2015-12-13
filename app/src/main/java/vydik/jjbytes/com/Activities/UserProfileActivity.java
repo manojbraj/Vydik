@@ -23,6 +23,7 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 
 import vydik.jjbytes.com.Database.MainDatabase;
+import vydik.jjbytes.com.Extras.ConnectionDetector;
 import vydik.jjbytes.com.Models.GetUserLoginData;
 
 /**
@@ -92,9 +93,13 @@ public class UserProfileActivity extends AppCompatActivity{
             }
         }
         ProfileImage = (ImageView) findViewById(R.id.header);
-        GetXMLTask task = new GetXMLTask();
-        if(UImage!= "image"){
-            task.execute(new String[] { UImage });
+
+        if(ConnectionDetector.isConnectingToInternet(getApplicationContext()))
+        {
+            GetXMLTask task = new GetXMLTask();
+            if(UImage!= "image"){
+                task.execute(new String[] { UImage });
+            }
         }
 
         UserName = (TextView) findViewById(R.id.user_name);
@@ -115,6 +120,7 @@ public class UserProfileActivity extends AppCompatActivity{
             public void onClick(View v) {
                 Intent intent = new Intent(UserProfileActivity.this, UserProfileUpdate.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

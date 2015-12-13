@@ -37,6 +37,7 @@ import vydik.jjbytes.com.Activities.R;
 import vydik.jjbytes.com.Activities.SplashScreenActivity;
 import vydik.jjbytes.com.Adapters.NavigationDrawerAdapter;
 import vydik.jjbytes.com.Database.MainDatabase;
+import vydik.jjbytes.com.Extras.ConnectionDetector;
 import vydik.jjbytes.com.Interfaces.NavigationDrawerCallbacks;
 import vydik.jjbytes.com.Models.GetUserLoginData;
 import vydik.jjbytes.com.Models.NavigationItem;
@@ -101,10 +102,12 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
         }
 
         database.close();
-
-        GetXMLTask task = new GetXMLTask();
-        if(UImage!= "image"){
-            task.execute(new String[] { UImage });
+        if(ConnectionDetector.isConnectingToInternet(getActivity()))
+        {
+            GetXMLTask task = new GetXMLTask();
+            if(UImage!= "image"){
+                task.execute(new String[] { UImage });
+            }
         }
 
         UserName = (TextView) view.findViewById(R.id.txtUsername);

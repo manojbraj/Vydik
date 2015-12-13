@@ -53,4 +53,8 @@ public class ArrayListConstants {
     public static ArrayList<String> PurohithZone = new ArrayList<String>();
     public static ArrayList<String> PurohithPrice = new ArrayList<String>();
 
+    /*payment gateway array list amount*/
+    public static ArrayList<String> AdvanceAmountList = new ArrayList<String>();
+    public static ArrayList<String> BalanceAmountList = new ArrayList<String>();
+
 }

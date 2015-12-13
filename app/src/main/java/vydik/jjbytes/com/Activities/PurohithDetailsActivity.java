@@ -13,7 +13,7 @@ import vydik.jjbytes.com.constants.Constants;
  * Created by Manoj on 10/31/2015.
  */
 public class PurohithDetailsActivity extends ActionBarActivity{
-    TextView PurohithName,PurohithUnivercity,PurohithSect,PurohithGuruName,PurohithLocation,PujaPrice,Rating;
+    TextView PurohithName,PurohithUnivercity,PurohithSect,PurohithGuruName,PurohithLocation,PujaPrice,Rating,AdvanceAmount,BalanceAmount;
     SearchResultPurohithActivity searchResultPurohithActivity;
     Constants constants;
     Button BookPurohit;
@@ -29,6 +29,8 @@ public class PurohithDetailsActivity extends ActionBarActivity{
         PurohithLocation = (TextView) findViewById(R.id.purohith_location);
         PujaPrice = (TextView) findViewById(R.id.price);
         Rating = (TextView) findViewById(R.id.rating);
+        AdvanceAmount = (TextView) findViewById(R.id.advance_amount);
+        BalanceAmount = (TextView) findViewById(R.id.balance_amount);
 
         BookPurohit = (Button) findViewById(R.id.book_purohit);
 
@@ -39,6 +41,8 @@ public class PurohithDetailsActivity extends ActionBarActivity{
         PurohithSect.setText(constants.Sect);
         PurohithGuruName.setText("");
         PurohithLocation.setText(searchResultPurohithActivity.PurohithLocation);
+        AdvanceAmount.setText(constants.AdvanceAmount);
+        BalanceAmount.setText(constants.BalanceAmount);
 
         BookPurohit.setOnClickListener(new View.OnClickListener() {
             @Override

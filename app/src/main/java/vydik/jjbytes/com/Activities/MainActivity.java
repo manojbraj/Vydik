@@ -44,6 +44,7 @@ import java.util.TimerTask;
 
 import cz.msebera.android.httpclient.Header;
 import vydik.jjbytes.com.Database.MainDatabase;
+import vydik.jjbytes.com.Extras.ConnectionDetector;
 import vydik.jjbytes.com.Fragments.NavigationDrawerFragment;
 import vydik.jjbytes.com.Interfaces.ApplicationConstants;
 import vydik.jjbytes.com.Interfaces.NavigationDrawerCallbacks;
@@ -348,7 +349,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
 
         slidingimage = (ImageView)findViewById(R.id.slider_layout);
-        slidingimage.setImageResource(IMAGE_IDS[currentimageindex%IMAGE_IDS.length]);
+        slidingimage.setImageResource(IMAGE_IDS[currentimageindex % IMAGE_IDS.length]);
 
         currentimageindex++;
         /*remove below commented code for animation*/
@@ -376,17 +377,29 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 }else if(PujaWP.isChecked() == false && PujaWWP.isChecked() == false){
                     Toast.makeText(MainActivity.this,"Please any one type of puja package and proceed",Toast.LENGTH_LONG).show();
                 }else if(PujaWP.isChecked()){
-                    alertD.dismiss();
-                    Intent intent = new Intent(MainActivity.this,BookPujaActivity.class);
-                    intent.putExtra("type","1");
-                    startActivity(intent);
-                    finish();
+                    if(ConnectionDetector.isConnectingToInternet(getApplicationContext()))
+                    {
+                        alertD.dismiss();
+                        Intent intent = new Intent(MainActivity.this,BookPujaActivity.class);
+                        intent.putExtra("type","1");
+                        startActivity(intent);
+                        finish();
+                    }else {
+                        Toast.makeText(getApplicationContext(),"No internet connection",Toast.LENGTH_LONG).show();
+                    }
+
                 }else{
-                    alertD.dismiss();
-                    Intent intent = new Intent(MainActivity.this,BookPujaActivity.class);
-                    intent.putExtra("type","2");
-                    startActivity(intent);
-                    finish();
+                    if(ConnectionDetector.isConnectingToInternet(getApplicationContext()))
+                    {
+                        alertD.dismiss();
+                        Intent intent = new Intent(MainActivity.this,BookPujaActivity.class);
+                        intent.putExtra("type","2");
+                        startActivity(intent);
+                        finish();
+                    }else {
+                        Toast.makeText(getApplicationContext(),"No internet connection",Toast.LENGTH_LONG).show();
+                    }
+
                 }
             }
         });

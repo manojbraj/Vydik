@@ -14,7 +14,7 @@ import vydik.jjbytes.com.constants.Constants;
  * Created by Manoj on 11/2/2015.
  */
 public class PackagePujaDetailActivity extends ActionBarActivity {
-    TextView PurohithName,PurohithUnivercity,PurohithSect,PurohithGuruName,PurohithLocation,PujaPrice,PurohitRating;
+    TextView PurohithName,PurohithUnivercity,PurohithSect,PurohithGuruName,PurohithLocation,PujaPrice,PurohitRating,AdvanceAmount,BalanceAmount;
     ArrayListConstants arrayListConstants;
     Button BookPurohit;
     BookPujaActivity bookPujaActivity;
@@ -31,16 +31,23 @@ public class PackagePujaDetailActivity extends ActionBarActivity {
         PurohithLocation = (TextView) findViewById(R.id.purohith_location);
         PujaPrice = (TextView) findViewById(R.id.price);
         PurohitRating = (TextView) findViewById(R.id.rating);
+        AdvanceAmount = (TextView) findViewById(R.id.advance_amount);
+        BalanceAmount = (TextView) findViewById(R.id.balance_amount);
 
         BookPurohit = (Button) findViewById(R.id.book_purohit);
 
+        if(BookPujaActivity.package_type.equals("1")){
+
+        }
         PujaPrice.setText(constants.package_price);
         PurohitRating.setText(constants.package_expertise);
-        //PurohithName.setText(constants.package_Name);
+        PurohithName.setText(constants.SPujaName);
         PurohithUnivercity.setText(constants.package_university);
         PurohithSect.setText(constants.package_sect);
         PurohithGuruName.setText("");
         PurohithLocation.setText(constants.package_location);
+        AdvanceAmount.setText(constants.AdvanceAmount);
+        BalanceAmount.setText(constants.BalanceAmount);
 
         BookPurohit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,9 +74,9 @@ public class PackagePujaDetailActivity extends ActionBarActivity {
         bookPujaActivity.LocationName.clear();
         bookPujaActivity.LangugesName.clear();
         bookPujaActivity.PurohithSect.clear();
-        Intent intent = new Intent(PackagePujaDetailActivity.this,BookPujaActivity.class);
+        /*Intent intent = new Intent(PackagePujaDetailActivity.this,BookPujaActivity.class);
         intent.putExtra("type",BookPujaActivity.package_type);
         startActivity(intent);
-        finish();
+        finish();*/
     }
 }

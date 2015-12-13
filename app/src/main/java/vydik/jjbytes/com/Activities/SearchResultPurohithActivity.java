@@ -67,6 +67,9 @@ public class SearchResultPurohithActivity extends ActionBarActivity {
                 PurohitExpertLevel = arrayListConstants.PurohithExpertLevel.get(position);
                 String fName = arrayListConstants.PurohithFirstName.get(position);
                 String lName = arrayListConstants.PurohithLastName.get(position);
+                constants.AdvanceAmount = "Rs."+arrayListConstants.AdvanceAmountList.get(position)+"/-";
+                constants.BalanceAmount = "Rs."+arrayListConstants.BalanceAmountList.get(position)+"/-";
+                constants.PayementGatewayAmount = arrayListConstants.AdvanceAmountList.get(position);
                 PurohithName = fName+" "+lName;
                 constants.package_Name = PurohithName;
                 new PurohithDetail().execute();

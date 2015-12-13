@@ -371,7 +371,7 @@ public class CheckoutActivityAddress extends ActionBarActivity {
             } else {
                 SdkSession.createNewInstance(CheckoutActivityAddress.this);
             }
-            String hashSequence = "heauku" + "|" + TransactionId + "|" + Amount + "|" + "purohit_booking" + "|" + FName.getText().toString() + "|"
+            String hashSequence = "heauku" + "|" + TransactionId + "|" + constants.PayementGatewayAmount + "|" + "purohit_booking" + "|" + FName.getText().toString() + "|"
                     + Email.getText().toString() + "|" + "" + "|" + "" + "|" + "" + "|" + "" + "|" + "" + "|" + "d13Ety2U";
             System.out.println("hashSequence" + hashSequence);
             params.put("key", "heauku");
@@ -385,7 +385,7 @@ public class CheckoutActivityAddress extends ActionBarActivity {
             params.put("firstName", FName.getText().toString());
             params.put("Email", Email.getText().toString());
             params.put("Phone", Phone.getText().toString());
-            params.put("Amount", Amount);
+            params.put("Amount", constants.PayementGatewayAmount);
             params.put("hash", hash);
             params.put("udf1", "");
             params.put("udf2", "");

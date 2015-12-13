@@ -353,6 +353,17 @@ public class MainDatabase {
     public int deleteUserData() {
         return db.delete(DATABASE_USER_TABLE, null, null);
     }
+//update quesry
+public void UpdateUserProfile(String _id, String fName, String lName,String Email,String Mobile,String Locality,String Address){
+    ContentValues values = new ContentValues();
+    values.put("first_name", fName);
+    values.put("last_name",lName);
+    values.put("email",Email);
+    values.put("mobile",Mobile);
+    values.put("locality",Locality);
+    values.put("address",Address);
+    db.update(DATABASE_USER_TABLE, values, "_id = " + _id, null);
+}
 
 /*user booking table insertion updating deletion starts from hear */
     //-----------user booking data insertion query------------
