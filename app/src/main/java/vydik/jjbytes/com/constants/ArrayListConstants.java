@@ -56,5 +56,6 @@ public class ArrayListConstants {
     /*payment gateway array list amount*/
     public static ArrayList<String> AdvanceAmountList = new ArrayList<String>();
     public static ArrayList<String> BalanceAmountList = new ArrayList<String>();
+    public static ArrayList<String> PaymentErrorAdvance = new ArrayList<String>();
 
 }

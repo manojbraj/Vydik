@@ -97,7 +97,9 @@ public class UserProfileActivity extends AppCompatActivity{
         if(ConnectionDetector.isConnectingToInternet(getApplicationContext()))
         {
             GetXMLTask task = new GetXMLTask();
-            if(UImage!= "image"){
+            if(UImage.equals("http://vydik.com/user_profile/")){
+
+            }else {
                 task.execute(new String[] { UImage });
             }
         }

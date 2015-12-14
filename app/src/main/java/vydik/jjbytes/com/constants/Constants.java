@@ -113,7 +113,7 @@ public class Constants {
     public static String SearchPujaId,SearchPriceBooking;
 
     /*payment amount package and no package*/
-    public static String AdvanceAmount,BalanceAmount,PayementGatewayAmount;
+    public static String AdvanceAmount,BalanceAmount,PayementGatewayAmount,PaymentErrorAdvance;
 
     /*user profile update key*/
     public static String UpdateFName = "first_name",UpdateLName = "last_name",UpdateMobileNo = "mob_no",UpdateLocality="locality",UpdateAddress = "address",UpdateEmail = "emailid";

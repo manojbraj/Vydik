@@ -105,7 +105,9 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
         if(ConnectionDetector.isConnectingToInternet(getActivity()))
         {
             GetXMLTask task = new GetXMLTask();
-            if(UImage!= "image"){
+            if(UImage.equals("http://vydik.com/user_profile/")){
+
+            }else {
                 task.execute(new String[] { UImage });
             }
         }

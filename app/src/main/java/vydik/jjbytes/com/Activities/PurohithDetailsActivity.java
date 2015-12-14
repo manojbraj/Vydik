@@ -41,7 +41,14 @@ public class PurohithDetailsActivity extends ActionBarActivity{
         PurohithSect.setText(constants.Sect);
         PurohithGuruName.setText("");
         PurohithLocation.setText(searchResultPurohithActivity.PurohithLocation);
-        AdvanceAmount.setText(constants.AdvanceAmount);
+
+        if(constants.AdvanceAmount.equals("000")){
+            AdvanceAmount.setText(constants.package_price);
+            //constants.PayementGatewayAmount = constants.PaymentErrorAdvance;
+        }else {
+            AdvanceAmount.setText(constants.AdvanceAmount);
+        }
+
         BalanceAmount.setText(constants.BalanceAmount);
 
         BookPurohit.setOnClickListener(new View.OnClickListener() {

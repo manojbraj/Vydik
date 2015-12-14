@@ -68,8 +68,15 @@ public class SearchResultPurohithActivity extends ActionBarActivity {
                 String fName = arrayListConstants.PurohithFirstName.get(position);
                 String lName = arrayListConstants.PurohithLastName.get(position);
                 constants.AdvanceAmount = "Rs."+arrayListConstants.AdvanceAmountList.get(position)+"/-";
+                if(constants.AdvanceAmount.equals("Rs.000/-")){
+                    String pay = arrayListConstants.PaymentErrorAdvance.get(position);
+                    constants.AdvanceAmount = "Rs."+pay+"/-";
+                    System.out.println("payment"+pay);
+                    constants.PayementGatewayAmount = pay;
+                }else {
+                    constants.PayementGatewayAmount = arrayListConstants.AdvanceAmountList.get(position);
+                }
                 constants.BalanceAmount = "Rs."+arrayListConstants.BalanceAmountList.get(position)+"/-";
-                constants.PayementGatewayAmount = arrayListConstants.AdvanceAmountList.get(position);
                 PurohithName = fName+" "+lName;
                 constants.package_Name = PurohithName;
                 new PurohithDetail().execute();

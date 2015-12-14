@@ -909,6 +909,7 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
                             String ConvertedPrice = Integer.toString(Price);
                             constants.SearchPriceBooking = ConvertedPrice;
                             constants.package_price = "Rs." + ConvertedPrice + "/-";
+                            arrayListConstants.PaymentErrorAdvance .add(ConvertedPrice);
                             arrayListConstants.PurohithPrice.add("Rs." + ConvertedPrice + "/-");
                         } else {
 
@@ -922,6 +923,7 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
                             int Price = object.getInt("new_with_price");
                             String ConvertedPrice = Integer.toString(Price);
                             constants.SearchPriceBooking = ConvertedPrice;
+                            constants.PaymentErrorAdvance = ConvertedPrice;
                             constants.package_price = "Rs." + ConvertedPrice + "/-";
                             arrayListConstants.PurohithPrice.add("Rs." + ConvertedPrice + "/-");
                         } else {
