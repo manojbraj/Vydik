@@ -155,6 +155,8 @@ public class SearchResultPurohithActivity extends ActionBarActivity {
         arrayListConstants.PurohithLocation.clear();
         arrayListConstants.PurohithPrice.clear();
         arrayListConstants.PurohithPhoto.clear();
+        arrayListConstants.AdvanceAmountList.clear();
+        arrayListConstants.BalanceAmountList.clear();
         bookPujaActivity.PoojaName.clear();
         bookPujaActivity.PoojaTypeId.clear();
         bookPujaActivity.PoojaId.clear();

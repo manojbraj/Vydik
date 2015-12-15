@@ -73,7 +73,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
     ArrayList<GetUserLoginData> getUserLoginData;
     private ArrayList<String> UserId = new ArrayList<String>();
-
+    private ArrayList<String> UserDBMobile = new ArrayList<String>();
+    private ArrayList<String> UserDBID = new ArrayList<String>();
     /*for slider*/
     public int currentimageindex=0;
     Timer timer;
@@ -82,7 +83,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
 
     /*for gcm*/
     Context applicationContext;
-    String PhoneNumber="7873885045",regId = "";
+    String PhoneNumber,regId = "";
     //gcm variable
     GoogleCloudMessaging gcmObj;
     public static final String REG_ID = "regId";
@@ -107,7 +108,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         }else {
             for (int i = 0; i < getUserLoginData.size(); i++) {
                 UserId.add(getUserLoginData.get(i).getUserid());
+                UserDBMobile.add(getUserLoginData.get(i).getMobile());
                 Constants.UserIdData = UserId.get(0).toString();
+                PhoneNumber = UserDBMobile.get(0).toString();
             }
         }
 
@@ -446,7 +449,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         }else if(position == 7){
             Intent intent = new Intent(MainActivity.this,UserProfileActivity.class);
             startActivity(intent);
-            //finish();
+            finish();
         } else if(position == 8){
             /*log out functionality for facebook g+ and normal sign up or sign in(purohith or user)*/
             if(SplashScreenActivity.LoginType.equals("facebook")){

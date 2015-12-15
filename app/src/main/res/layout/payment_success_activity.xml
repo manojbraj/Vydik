@@ -37,21 +37,31 @@
         android:layout_marginTop="5dp"
         android:textSize="16sp"/>
     <TextView
+        android:id="@+id/point_one"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="1. Travel expenses at the actual cost."
+        android:text="* Travel expenses at the actual cost."
         android:textSize="16sp"
         android:layout_marginTop="10dp"/>
     <TextView
+        android:id="@+id/point_two"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="2. The actual cost of Fruits and Flowers as per your requirement."
+        android:text="* The actual cost of Prasadam required for number of people after discussing with the Purohit."
         android:textSize="16sp"
         android:layout_marginTop="10dp"/>
     <TextView
+        android:id="@+id/point_three"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="3. Blance amount shoud be pay to purohit after."
+        android:text="* The actual cost of Fruits and Flowers as per your requirement."
+        android:textSize="16sp"
+        android:layout_marginTop="10dp"/>
+    <TextView
+        android:id="@+id/point_four"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="* The actual cost of Fruits and Flowers as per your requirement."
         android:textSize="16sp"
         android:layout_marginTop="10dp"/>
     </LinearLayout>

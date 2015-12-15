@@ -955,6 +955,7 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
                             if(object.has("with_out_price_advance")){
                                 if(object.getString("with_out_price_advance")!= null){
                                     arrayListConstants.AdvanceAmountList.add(object.getString("with_out_price_advance").toString());
+                                    System.out.println("advance :"+arrayListConstants.AdvanceAmountList);
                                 }else {
                                     arrayListConstants.AdvanceAmountList.add("000");
                                 }

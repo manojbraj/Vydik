@@ -19,6 +19,7 @@ public class PackagePujaDetailActivity extends ActionBarActivity {
     Button BookPurohit;
     BookPujaActivity bookPujaActivity;
     Constants constants;
+    TextView point_two,point_three,point_four;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +34,27 @@ public class PackagePujaDetailActivity extends ActionBarActivity {
         PurohitRating = (TextView) findViewById(R.id.rating);
         AdvanceAmount = (TextView) findViewById(R.id.advance_amount);
         BalanceAmount = (TextView) findViewById(R.id.balance_amount);
+        point_two = (TextView) findViewById(R.id.point_two);
+        point_three = (TextView) findViewById(R.id.point_three);
+        point_four = (TextView) findViewById(R.id.point_four);
+
+        if(BookPujaActivity.package_type.equals("1")){
+            point_two.setVisibility(View.VISIBLE);
+            point_three.setVisibility(View.VISIBLE);
+            if(Constants.BalanceAmount.equals("000")){
+                point_four.setVisibility(View.GONE);
+            }else {
+                point_four.setVisibility(View.VISIBLE);
+            }
+        } else {
+            point_two.setVisibility(View.GONE);
+            point_three.setVisibility(View.GONE);
+            if(Constants.BalanceAmount.equals("000")){
+                point_four.setVisibility(View.GONE);
+            }else {
+                point_four.setVisibility(View.VISIBLE);
+            }
+        }
 
         BookPurohit = (Button) findViewById(R.id.book_purohit);
 
@@ -73,12 +95,12 @@ public class PackagePujaDetailActivity extends ActionBarActivity {
         arrayListConstants.PurohithLocation.clear();
         arrayListConstants.PurohithPrice.clear();
         arrayListConstants.PurohithPhoto.clear();
-        bookPujaActivity.PoojaName.clear();
+       /* bookPujaActivity.PoojaName.clear();
         bookPujaActivity.PoojaTypeId.clear();
         bookPujaActivity.PoojaId.clear();
         bookPujaActivity.LocationName.clear();
         bookPujaActivity.LangugesName.clear();
-        bookPujaActivity.PurohithSect.clear();
+        bookPujaActivity.PurohithSect.clear();*/
         /*Intent intent = new Intent(PackagePujaDetailActivity.this,BookPujaActivity.class);
         intent.putExtra("type",BookPujaActivity.package_type);
         startActivity(intent);

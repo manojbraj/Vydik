@@ -44,7 +44,8 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/circle"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
             <TextView
                 android:id="@+id/rating"
                 android:layout_width="match_parent"
@@ -142,21 +143,35 @@
         android:textScaleX="1.1"
         android:layout_marginTop="10dp"/>
     <TextView
+        android:id="@+id/point_two"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/puja_prasadam"
         android:textColor="#000"
         android:textSize="16sp"
-        android:textScaleX="1.1"/>
+        android:textScaleX="1.1"
+        android:visibility="gone"/>
     <TextView
+        android:id="@+id/point_three"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/fruits_note"
+        android:textColor="#000"
+        android:textSize="16sp"
+        android:textScaleX="1.1"
+        android:visibility="gone"/>
+    <TextView
+        android:id="@+id/point_four"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="@string/purohith_availability"
         android:textSize="16sp"
         android:textColor="#000"
-        android:textScaleX="1.1"/>
+        android:textScaleX="1.1"
+        android:visibility="gone"/>
 </LinearLayout>
 <LinearLayout
     android:id="@+id/layout_three"

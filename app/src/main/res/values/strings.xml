@@ -3,7 +3,7 @@
     <string name="action_settings">Settings</string>
     <string name="app_id">1661856200725191</string>
     <string name="with_package">"Package includes the services of a Purohit recommended by Vdik.com along with related Puja Samagri"</string>
-    <string name="without_package">"Please select a Purohit meeting your requirement with or without Puja Samagri"</string>
+    <string name="without_package">"Please select a Purohit meeting your requirement without Puja Samagri"</string>
     <string-array name="experties">
         <item>3</item>
         <item>1</item>
@@ -50,11 +50,11 @@
     <string name="note_forbooking"><u>Note</u></string>
     <string name="travel_text">* Travel will be at the actual cost</string>
     <string name="note_text">Purohit availability and muhurtam for the day will be confirmed within 48 hours by the Vydik team.Also the following incidental costs needs to be paid to the Purohit after the completion of Puja. </string>
-    <string name="puja_prasadam">* Puja Prasadam will be @ actual cost</string>
+    <string name="puja_prasadam">* The actual cost of Prasadam required for number of people after discussing with the Purohit.</string>
+    <string name="fruits_note">* The actual cost of Fruits and Flowers as per your requirement.</string>
     <string name="purohith_availability">* The balance amount should be paid to Purohit after completion of Puja as Dakshina.</string>
     <string name="terms"><u>Terms and Condition</u></string>
-    <string name="payment_note">We will revert to you with the confirmation on the Muhurat &amp; Purohit details within 48 hours. Please note that the following incidental costs needs to be paid to the Purohit after the completion of Puja.
-Please note that the following incidental costs needs to be paid to the Purohit after the completion of Puja.</string>
+    <string name="payment_note">We will revert to you with the confirmation on the Muhurat &amp; Purohit details within 48 hours. Please note that the following incidental costs needs to be paid to the Purohit after the completion of Puja.</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"
 

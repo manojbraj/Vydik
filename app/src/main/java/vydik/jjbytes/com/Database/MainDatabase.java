@@ -353,7 +353,7 @@ public class MainDatabase {
     public int deleteUserData() {
         return db.delete(DATABASE_USER_TABLE, null, null);
     }
-//update quesry
+//--------------update quesry-------------
 public void UpdateUserProfile(String _id, String fName, String lName,String Email,String Mobile,String Locality,String Address){
     ContentValues values = new ContentValues();
     values.put("first_name", fName);
@@ -362,9 +362,15 @@ public void UpdateUserProfile(String _id, String fName, String lName,String Emai
     values.put("mobile",Mobile);
     values.put("locality",Locality);
     values.put("address",Address);
-    db.update(DATABASE_USER_TABLE, values, "_id = " + _id, null);
+    db.update(DATABASE_USER_TABLE, values, "mobile = " + Mobile, null);
 }
 
+//------------user image path updation------------
+public void UpdateUserProfileImage(String Mobile,String image_path){
+    ContentValues values = new ContentValues();
+    values.put("image",image_path);
+    db.update(DATABASE_USER_TABLE, values, "mobile = " + Mobile, null);
+}
 /*user booking table insertion updating deletion starts from hear */
     //-----------user booking data insertion query------------
     public long InserBookingDetails(String UserId,String pujaname,String purohitname,String date,String price,String address,String cancell_flag){

@@ -17,6 +17,8 @@ public class PurohithDetailsActivity extends ActionBarActivity{
     SearchResultPurohithActivity searchResultPurohithActivity;
     Constants constants;
     Button BookPurohit;
+    TextView point_two,point_three,point_four;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +33,29 @@ public class PurohithDetailsActivity extends ActionBarActivity{
         Rating = (TextView) findViewById(R.id.rating);
         AdvanceAmount = (TextView) findViewById(R.id.advance_amount);
         BalanceAmount = (TextView) findViewById(R.id.balance_amount);
+
+        point_two = (TextView) findViewById(R.id.point_two);
+        point_three = (TextView) findViewById(R.id.point_three);
+        point_four = (TextView) findViewById(R.id.point_four);
+
+        if(BookPujaActivity.package_type.equals("1")){
+            point_two.setVisibility(View.VISIBLE);
+            point_three.setVisibility(View.VISIBLE);
+            if(Constants.BalanceAmount.equals("000")){
+                point_four.setVisibility(View.GONE);
+            }else {
+                point_four.setVisibility(View.VISIBLE);
+            }
+        } else {
+            point_two.setVisibility(View.GONE);
+            point_three.setVisibility(View.GONE);
+            if(Constants.BalanceAmount.equals("000")){
+                point_four.setVisibility(View.GONE);
+            }else {
+                point_four.setVisibility(View.VISIBLE);
+            }
+        }
+
 
         BookPurohit = (Button) findViewById(R.id.book_purohit);
 

@@ -25,6 +25,7 @@ public class Constants {
     public static String SendBookingDetails = "http://vydik.com/android_book_puja.php";
     public static String CancelPujaRequestURL = "http://vydik.com/admin_vydik/admin_vydhik_project/android_cancelation_booking.php";
     public static String UserProfileUpdateURL = "http://vydik.com/android_user_profile_upd.php";
+    public static String UserProfilePickChangeURL = "http://vydik.com/android_edit_userpic.php";
 
     /*constant messages*/
     public static String getPoojaListProgress = "Accessing puja list please wait...";
@@ -40,6 +41,7 @@ public class Constants {
     public static String RequestForReschedule = "Submitting details for Puja Reschedule Please wait...";
     public static String RequestForCancelation = "Cancellation of puja request in process please wait...";
     public static String UserProfileUpdateProgress = "Updating profile please wait...";
+    public static String UserPickUploading = "Updating Profile Pick please wait...";
 
     /*unique constant value for database usage user_id*/
     public static String UserIdData;

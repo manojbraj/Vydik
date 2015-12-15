@@ -191,8 +191,8 @@ public class UserProfileActivity extends AppCompatActivity{
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        /*Intent intent = new Intent(UserProfileActivity.this,MainActivity.class);
+        Intent intent = new Intent(UserProfileActivity.this,MainActivity.class);
         startActivity(intent);
-        finish();*/
+        finish();
     }
 }

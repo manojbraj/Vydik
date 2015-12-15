@@ -178,17 +178,17 @@ public class CheckoutActivityAddress extends ActionBarActivity {
                     if (Phone.getText().toString().length() == 10) {
                         if (TermsCondition.isChecked() == true) {
 
-                            arrayListConstants.PurohithFirstName.clear();
+                            /*arrayListConstants.PurohithFirstName.clear();
                             arrayListConstants.PurohithExpertLevel.clear();
                             arrayListConstants.PurohithLocation.clear();
                             arrayListConstants.PurohithPrice.clear();
-                            arrayListConstants.PurohithPhoto.clear();
-                            bookPujaActivity.PoojaName.clear();
+                            arrayListConstants.PurohithPhoto.clear();*/
+                            /*bookPujaActivity.PoojaName.clear();
                             bookPujaActivity.PoojaTypeId.clear();
                             bookPujaActivity.PoojaId.clear();
                             bookPujaActivity.LocationName.clear();
                             bookPujaActivity.LangugesName.clear();
-                            bookPujaActivity.PurohithSect.clear();
+                            bookPujaActivity.PurohithSect.clear();*/
 
                             ULocality = Locality.getText().toString();
                             UCity = City.getText().toString();
@@ -196,7 +196,7 @@ public class CheckoutActivityAddress extends ActionBarActivity {
                             UFName = FName.getText().toString();
                             ULName = LName.getText().toString();
                             UMobile = Phone.getText().toString();
-
+                            UEmail = Email.getText().toString();
                             /*background process code*/
                             new SubbmitBookingDetails().execute();
 
@@ -264,6 +264,8 @@ public class CheckoutActivityAddress extends ActionBarActivity {
                 multipartEntity.addPart(constants.Booking13,new StringBody(constants.package_Name));
                 multipartEntity.addPart(constants.Booking14,new StringBody(UFName+" "+ULName));
                 multipartEntity.addPart(constants.Booking8,new StringBody(constants.package_sect));
+                multipartEntity.addPart("user_phone",new StringBody(UMobile));
+                multipartEntity.addPart("e_mail",new StringBody(UEmail));
             }catch (Exception e){
 
             }
