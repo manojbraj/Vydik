@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,11 +62,12 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
     String longitude = "12.9667";
     String latitude = "77.5667";
     Location location;
-    String officealSunrise,officealSunset,FinalSunrise,FinalSunSet;
+    public static String officealSunrise,officealSunset,FinalSunrise,FinalSunSet;
     TextView dateofDay,monthofYear,daySunrise,daySunset;
     private int ALmonthOfYear, ALdayOfMonth,ALyear;
     /*tiles click text*/
     TextView BookPuja,Bhajans,PujaAtTemple;
+    LinearLayout ViewPanchang;
     CheckBox PujaWP,PujaWWP;
     Button PujaAccept,PujaCancel;
     private GoogleApiClient mGoogleApiClient;
@@ -175,6 +177,14 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             }
         });
 
+        ViewPanchang = (LinearLayout) findViewById(R.id.panchang_layout);
+        ViewPanchang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,PanchangActivity.class);
+                startActivity(intent);
+            }
+        });
         mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.fragment_drawer);
         mNavigationDrawerFragment.setup(R.id.fragment_drawer, (DrawerLayout) findViewById(R.id.drawer), mToolbar);
 

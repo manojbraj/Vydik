@@ -1,9 +1,33 @@
 package vydik.jjbytes.com.Activities;
 
+import android.app.DatePickerDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.TextView;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.StringBody;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Calendar;
+
+import vydik.jjbytes.com.Utils.Utilities;
+import vydik.jjbytes.com.constants.Constants;
 
 /**
  * Created by user on 12/15/2015.
@@ -12,6 +36,14 @@ public class PanchangActivity extends ActionBarActivity {
 
     TextView SignLord,Sign,NakshatraOne,NakshatraTwo,NakshatraLord,NakshatraCharan,Day,Tithi,Yog,Karan,SunRise,SunSet,SelectedDate;
     Button DateSelector,SubmitDate;
+    private int ALmonthOfYear, ALdayOfMonth,ALyear,ALHour,ALMinutes;
+    String Year,Month,DayCal,Hour,Minutes,SubmitDateMultipart;
+    Constants constants;
+    MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
+
+    /*json decode entity*/
+    String sign_lord,sign,Naksahtra,naksahtra_lord,nakshatra_charan,day,tithi,yog,karan;
+    Calendar calendar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +67,196 @@ public class PanchangActivity extends ActionBarActivity {
         DateSelector = (Button) findViewById(R.id.date_selector);
         SubmitDate = (Button) findViewById(R.id.submit_date);
 
+        calendar = Calendar.getInstance();
+        ALyear = calendar.get(Calendar.YEAR);
+        ALmonthOfYear = calendar.get(Calendar.MONTH);
+        ALdayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+        ALHour = calendar.get(Calendar.HOUR_OF_DAY);
+        ALMinutes = calendar.get(Calendar.MINUTE);
 
+        Year = Integer.toString(ALyear);
+        Month = Integer.toString(ALmonthOfYear+1);
+        DayCal = Integer.toString(ALdayOfMonth);
+        Hour = Integer.toString(ALHour);
+        Minutes = Integer.toString(ALMinutes);
+
+        SubmitDateMultipart = Year + "-" + Month + "-" + DayCal;
+
+        SelectedDate.setText(SubmitDateMultipart);
+
+        DateSelector.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatePickerMethod();
+            }
+        });
+
+        new GetPanchangForDay().execute();
+    }
+
+    private void DatePickerMethod() {
+        calendar = Calendar.getInstance();
+        ALyear = calendar.get(Calendar.YEAR);
+        ALmonthOfYear = calendar.get(Calendar.MONTH);
+        ALdayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog dpd = new DatePickerDialog(this,
+                new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        ALyear=year;
+                        ALmonthOfYear=monthOfYear;
+                        ALdayOfMonth=dayOfMonth;
+                        String strdate = (year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                        SubmitDateMultipart = (year + "-" + (monthOfYear + 1) + "-" + dayOfMonth);
+                        ALHour = calendar.get(Calendar.HOUR_OF_DAY);
+                        ALMinutes = calendar.get(Calendar.MINUTE);
+                        Hour = Integer.toString(ALHour);
+                        Minutes = Integer.toString(ALMinutes);
+                        constants.SDate = strdate;
+                        SelectedDate.setText(strdate);
+                        new GetPanchangForDay().execute();
+                    }
+                }, ALyear, ALmonthOfYear, ALdayOfMonth);
+        dpd.show();
+    }
+
+    private class GetPanchangForDay extends AsyncTask<String,String,String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Utilities.displayProgressDialog(PanchangActivity.this, constants.GettingPanchang, false);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            HttpClient httpClient = new DefaultHttpClient();
+            HttpPost httpPost = new HttpPost(constants.AccessPanchangForDay);
+            System.out.println("out put : "+SubmitDateMultipart);
+            try{
+                multipartEntity.addPart(constants.PDate,new StringBody(SubmitDateMultipart));
+                multipartEntity.addPart(constants.PTime,new StringBody(Hour));
+                multipartEntity.addPart(constants.PMinutes,new StringBody(Minutes));
+                multipartEntity.addPart(constants.PSubmit,new StringBody(constants.PSubmit));
+            }catch (Exception e){
+
+            }
+            try{
+                httpPost.setEntity(multipartEntity);
+                try{
+                    HttpResponse httpResponse = httpClient.execute(httpPost);
+                    InputStream inputStream = httpResponse.getEntity()
+                            .getContent();
+                    InputStreamReader inputStreamReader = new InputStreamReader(
+                            inputStream);
+                    BufferedReader bufferedReader = new BufferedReader(
+                            inputStreamReader);
+                    StringBuilder stringBuilder = new StringBuilder();
+
+                    String bufferedStrChunk = null;
+
+                    while ((bufferedStrChunk = bufferedReader.readLine()) != null) {
+                        stringBuilder.append(bufferedStrChunk);
+                    }
+                    return stringBuilder.toString();
+
+                }catch (ClientProtocolException cpe) {
+                    System.out.println("First Exception caz of HttpResponese :"
+                            + cpe);
+                    cpe.printStackTrace();
+                }catch (IOException ioe) {
+                    System.out.println("Second Exception caz of HttpResponse :"
+                            + ioe);
+                    ioe.printStackTrace();
+                }catch (Exception e){
+
+                }
+            }
+            catch (IndexOutOfBoundsException e) {
+
+            }
+            catch (Exception e){
+
+            }
+            return null;
+        }
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            Utilities.cancelProgressDialog();
+            //System.out.println("out put : "+s);
+            try {
+                JSONObject object = new JSONObject(s);
+
+                if(object.has("sign_lord")){
+                    if(object.getString("sign_lord")!= null){
+                        sign_lord = object.getString("sign_lord").toString();
+                    }
+                }
+
+                if(object.has("sign")){
+                    if(object.getString("sign")!= null){
+                        sign = object.getString("sign").toString();
+                    }
+                }
+
+                if(object.has("Naksahtra")){
+                    if(object.getString("Naksahtra")!= null){
+                        Naksahtra = object.getString("Naksahtra").toString();
+                    }
+                }
+
+                if(object.has("naksahtra_lord")){
+                    if(object.getString("naksahtra_lord")!= null){
+                        naksahtra_lord = object.getString("naksahtra_lord").toString();
+                    }
+                }
+
+                if(object.has("nakshatra_charan")){
+                    if(object.getString("nakshatra_charan")!= null){
+                        nakshatra_charan = object.getString("nakshatra_charan").toString();
+                    }
+                }
+
+                if(object.has("day")){
+                    if(object.getString("day")!= null){
+                        day = object.getString("day").toString();
+                    }
+                }
+
+                if(object.has("tithi")){
+                    if(object.getString("tithi")!= null){
+                        tithi = object.getString("tithi").toString();
+                    }
+                }
+
+                if(object.has("yog")){
+                    if(object.getString("yog")!= null){
+                        yog = object.getString("yog").toString();
+                    }
+                }
+
+                if(object.has("karan")){
+                    if(object.getString("karan")!= null){
+                        karan = object.getString("karan").toString();
+                    }
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+                SignLord.setText(sign_lord);
+                Sign.setText(sign);
+                NakshatraOne.setText(Naksahtra);
+                NakshatraLord.setText(naksahtra_lord);
+                NakshatraCharan.setText(nakshatra_charan);
+                Day.setText(day);
+                Tithi.setText(tithi);
+                Yog.setText(yog);
+                Karan.setText(karan);
+                SunRise.setText(MainActivity.FinalSunrise+" AM");
+                SunSet.setText(MainActivity.FinalSunSet+" PM");
+        }
     }
 }

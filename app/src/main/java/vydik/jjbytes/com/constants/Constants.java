@@ -26,6 +26,7 @@ public class Constants {
     public static String CancelPujaRequestURL = "http://vydik.com/admin_vydik/admin_vydhik_project/android_cancelation_booking.php";
     public static String UserProfileUpdateURL = "http://vydik.com/android_user_profile_upd.php";
     public static String UserProfilePickChangeURL = "http://vydik.com/android_edit_userpic.php";
+    public static String AccessPanchangForDay = "http://vydik.com/vydik_panchang/Vedic-Rishi-Astro-API-PHP-Client-master/android_panchang.php";
 
     /*constant messages*/
     public static String getPoojaListProgress = "Accessing puja list please wait...";
@@ -42,6 +43,7 @@ public class Constants {
     public static String RequestForCancelation = "Cancellation of puja request in process please wait...";
     public static String UserProfileUpdateProgress = "Updating profile please wait...";
     public static String UserPickUploading = "Updating Profile Pick please wait...";
+    public static String GettingPanchang = "Accessing Panchang Please wait...";
 
     /*unique constant value for database usage user_id*/
     public static String UserIdData;
@@ -119,4 +121,7 @@ public class Constants {
 
     /*user profile update key*/
     public static String UpdateFName = "first_name",UpdateLName = "last_name",UpdateMobileNo = "mob_no",UpdateLocality="locality",UpdateAddress = "address",UpdateEmail = "emailid";
+
+    /*panchang constants post method*/
+    public static String PDate = "date",PTime = "time",PMinutes = "min",PSubmit = "panchang_sub";
 }

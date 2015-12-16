@@ -171,6 +171,9 @@
         <activity
             android:name=".PaymentSuccess">
         </activity>
+        <activity
+            android:name=".PanchangActivity">
+        </activity>
         <!--payment gateway start-->
         <meta-data
             android:name="com.google.android.gms.version"

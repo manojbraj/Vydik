@@ -146,6 +146,9 @@ public class CheckoutActivityAddress extends ActionBarActivity {
         UserEmailPayment.setErrorEnabled(true);
         Email = (EditText) findViewById(R.id.Email);
         Email.setError("Required");
+        if(UEmail!= null){
+            Email.setText(UEmail);
+        }
 
         UserAddress = (TextInputLayout) findViewById(R.id.address_layout);
         UserAddress.setErrorEnabled(true);
@@ -159,6 +162,7 @@ public class CheckoutActivityAddress extends ActionBarActivity {
         UserCity.setErrorEnabled(true);
         City = (EditText) findViewById(R.id.edit_city);
         City.setError("Required");
+        City.setText("Bangalore");
 
         UserLocation = (TextInputLayout) findViewById(R.id.locality_layout);
         UserLocation.setErrorEnabled(true);
