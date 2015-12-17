@@ -94,13 +94,17 @@ public class PaymentSuccess extends ActionBarActivity{
             SuccessLayout.setVisibility(View.GONE);
         }
 
-
+        if(RunBackground.equals("complete")){
+            new SubbmitBookingDetails().execute();
+        }
 
         Submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(RunBackground.equals("complete")){
-                    new SubbmitBookingDetails().execute();
+                    Intent intent = new Intent(PaymentSuccess.this,MainActivity.class);
+                    startActivity(intent);
+                    finish();
                 }else {
                     Intent intent = new Intent(PaymentSuccess.this,MainActivity.class);
                     startActivity(intent);
@@ -225,9 +229,9 @@ public class PaymentSuccess extends ActionBarActivity{
                     /*insert to local db the booked puja if success*/
                     database.InserBookingDetails(CheckoutActivityAddress.UId, constants.SPujaName, constants.package_Name, constants.SDate, constants.SearchPriceBooking, CheckoutActivityAddress.UAddress, "0");
                     Toast.makeText(PaymentSuccess.this, "Thank you for booking puja from vydik.com", Toast.LENGTH_LONG).show();
-                    Intent intent = new Intent(PaymentSuccess.this,MainActivity.class);
+                   /* Intent intent = new Intent(PaymentSuccess.this,MainActivity.class);
                     startActivity(intent);
-                    finish();
+                    finish();*/
                 }else{
                     Toast.makeText(PaymentSuccess.this, "Failed to book puja please try after some time", Toast.LENGTH_LONG).show();
                 }

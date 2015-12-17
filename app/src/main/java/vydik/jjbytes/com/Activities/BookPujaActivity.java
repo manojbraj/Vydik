@@ -163,7 +163,13 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 constants.SPujaName = parent.getItemAtPosition(position).toString();
-                constants.SearchPujaId = PoojaId.get(position).toString();
+                for(int i=0;i<PoojaName.size();i++){
+                    String pname = PoojaName.get(i).toString();
+                    if(constants.SPujaName.equals(pname)){
+                        constants.SearchPujaId = PoojaId.get(i).toString();
+                        break;
+                    }
+                }
             }
         });
 

@@ -61,7 +61,7 @@
         android:id="@+id/point_four"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="* The actual cost of Fruits and Flowers as per your requirement."
+        android:text="* The balance amount should be paid to Purohit after completion of Puja as Dakshina."
         android:textSize="16sp"
         android:layout_marginTop="10dp"/>
     </LinearLayout>
