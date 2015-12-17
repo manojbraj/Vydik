@@ -97,9 +97,9 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
             package_type = extras.getString("type");
         }
 
-        toolbar = (Toolbar) findViewById(R.id.tab_layout);
+        /*toolbar = (Toolbar) findViewById(R.id.tab_layout);
         toolbar.setNavigationIcon(R.drawable.back_white_new);
-        setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);*/
 
         PoojaName.clear();
         PoojaTypeId.clear();
@@ -987,6 +987,7 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
                     constants.package_Name = FirstName+" "+LastName;
                     Intent intent = new Intent(BookPujaActivity.this,PackagePujaDetailActivity.class);
                     startActivity(intent);
+                    finish();
                 }else {
                     Toast.makeText(BookPujaActivity.this,"No purohit available for the selected details please try with new Thank you",Toast.LENGTH_LONG).show();
                 }

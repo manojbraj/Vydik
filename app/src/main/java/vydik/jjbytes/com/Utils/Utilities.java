@@ -23,7 +23,6 @@ public class Utilities {
             mProgressDialog.setIndeterminate(true);
             mProgressDialog.show();
             mProgressDialog.setCanceledOnTouchOutside(false);
-            //mProgressDialog.setIndeterminateDrawable(context.getDrawable(R.drawable.loading_animation));
             mProgressDialog.setCancelable(backButtonCancelable);
         }
     }

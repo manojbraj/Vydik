@@ -20,6 +20,7 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -109,8 +110,9 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     private ConnectionResult mConnectionResult;
     private SignInButton btnSignIn;
     private Button btnSignOut, btnRevokeAccess;
-    EditText username,password;
-    Button normalLoginButton,SignUpButton,CreateUser;
+    EditText username,password,UserPhoneNumber;
+    Button normalLoginButton,SignUpButton,CreateUser,SubmitForgotPassword,CancelForgotPassword;
+    TextView ForgotPassword;
     public static String type_for_login = "non";
 
     MainDatabase database;
@@ -267,7 +269,13 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         password.setHintTextColor(getResources().getColor(R.color.white));
         normalLoginButton = (Button) findViewById(R.id.login_button);
         SignUpButton = (Button) findViewById(R.id.create_user);
-
+        ForgotPassword = (TextView) findViewById(R.id.forgot_password);
+        ForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CallForgotPassword();
+            }
+        });
         normalLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -293,7 +301,23 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                 .addOnConnectionFailedListener(this).addApi(Plus.API)
                 .addScope(Plus.SCOPE_PLUS_LOGIN).build();
     }
-/*g+ sign up start*/
+
+    private void CallForgotPassword() {
+        LayoutInflater inflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View PromtView = inflater.inflate(R.layout.forgot_password_popup_one, null);
+        final AlertDialog alertD = new AlertDialog.Builder(this).create();
+        alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        alertD.setCancelable(false);
+
+        UserPhoneNumber = (EditText) PromtView.findViewById(R.id.phone_number);
+        SubmitForgotPassword = (Button) PromtView.findViewById(R.id.submit_phonenumber);
+        CancelForgotPassword = (Button) PromtView.findViewById(R.id.cancel_fp);
+        
+        alertD.setView(PromtView);
+        alertD.show();
+    }
+
+    /*g+ sign up start*/
     protected void onStart() {
         super.onStart();
         mGoogleApiClient.connect();

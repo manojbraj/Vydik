@@ -101,9 +101,9 @@ public class PackagePujaDetailActivity extends ActionBarActivity {
         bookPujaActivity.LocationName.clear();
         bookPujaActivity.LangugesName.clear();
         bookPujaActivity.PurohithSect.clear();*/
-        /*Intent intent = new Intent(PackagePujaDetailActivity.this,BookPujaActivity.class);
+        Intent intent = new Intent(PackagePujaDetailActivity.this,BookPujaActivity.class);
         intent.putExtra("type",BookPujaActivity.package_type);
         startActivity(intent);
-        finish();*/
+        finish();
     }
 }

@@ -127,11 +127,7 @@
         </activity>
         <activity
             android:label="PujaDetails"
-            android:name=".PackagePujaDetailActivity"
-            android:parentActivityName=".BookPujaActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".BookPujaActivity" />
+            android:name=".PackagePujaDetailActivity">
         </activity>
         <activity
             android:name=".CheckoutActivityAddress"

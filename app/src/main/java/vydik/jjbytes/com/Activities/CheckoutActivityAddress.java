@@ -16,14 +16,17 @@ import android.widget.Toast;
 import com.payUMoney.sdk.SdkConstants;
 import com.payUMoney.sdk.SdkSession;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -78,7 +81,9 @@ public class CheckoutActivityAddress extends ActionBarActivity {
     HashMap<String, String> params = new HashMap<>();
     String Amount = "1";
     String TransactionId = "0000";
-
+    Object content;
+    private static String TokenType = "Bearer";
+    HttpClient client = new DefaultHttpClient();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -202,8 +207,9 @@ public class CheckoutActivityAddress extends ActionBarActivity {
                             UMobile = Phone.getText().toString();
                             UEmail = Email.getText().toString();
                             /*background process code*/
-                            new SubbmitBookingDetails().execute();
+                            //new SubbmitBookingDetails().execute();
 
+                            new GetOrderId().execute();
                         } else {
                             Toast.makeText(CheckoutActivityAddress.this, "Please accept the terms and condition", Toast.LENGTH_LONG).show();
                         }
@@ -228,6 +234,52 @@ public class CheckoutActivityAddress extends ActionBarActivity {
         return true;
     }
 
+    private class GetOrderId extends AsyncTask<String, String, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Utilities.displayProgressDialog(CheckoutActivityAddress.this, "please wait..", false);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String url = "http://www.vydik.com/android/android_bank_token.php";
+            HttpGet httpget = new HttpGet(url);
+            content = null;
+            try{
+                HttpResponse response;
+                response = client.execute(httpget);
+                HttpEntity entity = response.getEntity();
+                content = EntityUtils.toString(entity);
+                System.out.println("order id: "+content.toString());
+
+                JSONArray array = new JSONArray(content.toString());
+                for(int i=0;i<array.length();i++){
+                    JSONObject object = array.getJSONObject(i);
+                    if(object.has("rand_value")){
+                        if(object.getString("rand_value")!= null){
+                            TransactionId = object.getString("rand_value").toString();
+                        }else {
+                            TransactionId = "00000";
+                        }
+                    }else {
+                        TransactionId = "00000";
+                    }
+                }
+
+            }catch (Exception e){
+
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            Utilities.cancelProgressDialog();
+            ProceedToPayment();
+        }
+    }
     private class SubbmitBookingDetails extends AsyncTask<String,String,String> {
         @Override
         protected void onPreExecute() {
@@ -237,20 +289,22 @@ public class CheckoutActivityAddress extends ActionBarActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            System.out.println("output of bookings : " + constants.SearchPujaId);
+            /*System.out.println("output of bookings : " + constants.SearchPujaId);
             System.out.println("output of bookings : " + constants.purohith_id);
             System.out.println("output of bookings : " + UId);
             System.out.println("output of bookings : " + BookPujaActivity.newdateupdated);
             System.out.println("output of bookings : " + constants.SearchPriceBooking);
             System.out.println("output of bookings : " + ULocality);
             System.out.println("output of bookings : " + BookPujaActivity.package_type);
-            System.out.println("output of bookings : " + "Karnataka");
             System.out.println("output of bookings : " + UCity);
             System.out.println("output of bookings : " + UAddress);
             System.out.println("output of bookings : " + constants.package_Name);
             System.out.println("output of bookings : " + UFName+" "+ULName);
             System.out.println("output of bookings : " + constants.package_sect);
-
+            System.out.println("output of bookings : " + UMobile);
+            System.out.println("output of bookings : " + UEmail);
+            System.out.println("output of bookings : " + constants.PayementGatewayAmount);
+*/
             HttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(constants.SendBookingDetails);
             try{
@@ -270,6 +324,8 @@ public class CheckoutActivityAddress extends ActionBarActivity {
                 multipartEntity.addPart(constants.Booking8,new StringBody(constants.package_sect));
                 multipartEntity.addPart("user_phone",new StringBody(UMobile));
                 multipartEntity.addPart("e_mail",new StringBody(UEmail));
+                multipartEntity.addPart("puja_adv_price",new StringBody(constants.PayementGatewayAmount));
+                multipartEntity.addPart("booking_status",new StringBody("1"));
             }catch (Exception e){
 
             }

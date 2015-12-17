@@ -9,24 +9,25 @@ import java.security.PublicKey;
  */
 public class Constants {
     /*url list*/
-    public static String getPoojaList = "http://vydik.com/android/puja_purohit.php";
-    public static String submitPujariRegistration = "http://vydik.com/android/final_purohit_registration.php";
-    public static String getStateList = "http://vydik.com/state_purohit.php";
-    public static String getCityNames = "http://vydik.com/android/city_purohit.php?state_id=6";
-    public static String getLocalityAndPin = "http://vydik.com/android/location_pur.php?city=9";
-    public static String getLanguages = "http://vydik.com/android/purohit_language.php";
-    public static String getBankNameAndBranchName = "http://vydik.com/android/bank_detail_purohit.php";
-    public static String SubmitUserRegistration = "http://vydik.com/android_user_reg.php";
-    public static String LoginUrl = "http://vydik.com/android_user_reg.php";
-    public static String PurohitLogin = "http://vydik.com/android/login.php";
-    public static String PurohithSect = "http://vydik.com/android/purohit_sect.php";
+    public static String getPoojaList = "http://www.vydik.com/android/puja_purohit.php";
+    public static String submitPujariRegistration = "http://www.vydik.com/android/final_purohit_registration.php";
+    public static String getStateList = "http://www.vydik.com/state_purohit.php";
+    public static String getCityNames = "http://www.vydik.com/android/city_purohit.php?state_id=6";
+    public static String getLocalityAndPin = "http://www.vydik.com/android/location_pur.php?city=9";
+    public static String getLanguages = "http://www.vydik.com/android/purohit_language.php";
+    public static String getBankNameAndBranchName = "http://www.vydik.com/android/bank_detail_purohit.php";
+    public static String SubmitUserRegistration = "http://www.vydik.com/android_user_reg.php";
+    public static String LoginUrl = "http://www.vydik.com/android_user_reg.php";
+    public static String PurohitLogin = "http://www.vydik.com/android/login.php";
+    public static String PurohithSect = "http://www.vydik.com/android/purohit_sect.php";
     public static String SendSearchParameters = "http://www.vydik.com/search_pujas.php";
     public static String PurohithDetailUrl = "http://www.vydik.com/pur_info_moblity.php?pur_info=";
-    public static String SendBookingDetails = "http://vydik.com/android_book_puja.php";
-    public static String CancelPujaRequestURL = "http://vydik.com/admin_vydik/admin_vydhik_project/android_cancelation_booking.php";
-    public static String UserProfileUpdateURL = "http://vydik.com/android_user_profile_upd.php";
-    public static String UserProfilePickChangeURL = "http://vydik.com/android_edit_userpic.php";
-    public static String AccessPanchangForDay = "http://vydik.com/vydik_panchang/Vedic-Rishi-Astro-API-PHP-Client-master/android_panchang.php";
+    public static String SendBookingDetails = "http://www.vydik.com/android_book_puja.php";
+    public static String CancelPujaRequestURL = "http://www.vydik.com/admin_vydik/admin_vydhik_project/android_cancelation_booking.php";
+    public static String UserProfileUpdateURL = "http://www.vydik.com/android_user_profile_upd.php";
+    public static String UserProfilePickChangeURL = "http://www.vydik.com/android_edit_userpic.php";
+    public static String AccessPanchangForDay = "http://www.vydik.com/vydik_panchang/Vedic-Rishi-Astro-API-PHP-Client-master/android_panchang.php";
+    public static String GenerateRandomNumber ="http://www.vydik.com/android/android_bank_token.php";
 
     /*constant messages*/
     public static String getPoojaListProgress = "Accessing puja list please wait...";

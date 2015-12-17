@@ -87,4 +87,17 @@
                 android:gravity="center"/>
         </LinearLayout>
     </LinearLayout>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="bottom">
+    <Button
+        android:id="@+id/Submit_button"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="OK"
+        android:background="@color/colorPrimary"/>
+</LinearLayout>
+
 </LinearLayout>
