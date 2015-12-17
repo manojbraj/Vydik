@@ -28,7 +28,9 @@ public class Constants {
     public static String UserProfilePickChangeURL = "http://www.vydik.com/android_edit_userpic.php";
     public static String AccessPanchangForDay = "http://www.vydik.com/vydik_panchang/Vedic-Rishi-Astro-API-PHP-Client-master/android_panchang.php";
     public static String GenerateRandomNumber ="http://www.vydik.com/android/android_bank_token.php";
-
+    /*get request*/
+    public static String RequestOTPUrl = "http://www.vydik.com/android_user_otp.php?phoneno=";
+    public static String UpdateForgotPassword = "http://www.vydik.com/android_fgt_pwd_chk.php?phoneno=";
     /*constant messages*/
     public static String getPoojaListProgress = "Accessing puja list please wait...";
     public static String regPurohithProgress = "Purohit registration in process please wait...";

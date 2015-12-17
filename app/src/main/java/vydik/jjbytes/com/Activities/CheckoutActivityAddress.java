@@ -82,7 +82,6 @@ public class CheckoutActivityAddress extends ActionBarActivity {
     String Amount = "1";
     String TransactionId = "0000";
     Object content;
-    private static String TokenType = "Bearer";
     HttpClient client = new DefaultHttpClient();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -243,7 +242,7 @@ public class CheckoutActivityAddress extends ActionBarActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            String url = "http://www.vydik.com/android/android_bank_token.php";
+            String url = constants.GenerateRandomNumber;
             HttpGet httpget = new HttpGet(url);
             content = null;
             try{
@@ -251,8 +250,7 @@ public class CheckoutActivityAddress extends ActionBarActivity {
                 response = client.execute(httpget);
                 HttpEntity entity = response.getEntity();
                 content = EntityUtils.toString(entity);
-                System.out.println("order id: "+content.toString());
-
+                /*System.out.println("order id: "+content.toString());*/
                 JSONArray array = new JSONArray(content.toString());
                 for(int i=0;i<array.length();i++){
                     JSONObject object = array.getJSONObject(i);

@@ -55,14 +55,17 @@ import com.google.android.gms.plus.Plus;
 import com.google.android.gms.plus.model.people.Person;
 import com.google.api.client.googleapis.auth.clientlogin.ClientLogin;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -110,12 +113,15 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     private ConnectionResult mConnectionResult;
     private SignInButton btnSignIn;
     private Button btnSignOut, btnRevokeAccess;
-    EditText username,password,UserPhoneNumber;
+    EditText username,password,UserPhoneNumber,OTPVERIFY,FPassword,FConformPassword;
     Button normalLoginButton,SignUpButton,CreateUser,SubmitForgotPassword,CancelForgotPassword;
     TextView ForgotPassword;
     public static String type_for_login = "non";
 
     MainDatabase database;
+    Object content;
+    HttpClient client = new DefaultHttpClient();
+    String ForgotPasswordUserNumber,ReceivedOTP,EditOtp,EditPassword,EditConfirmPassword;
 
     /*facebook variable inetialization*/
     CallbackManager callbackManager;
@@ -312,11 +318,160 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         UserPhoneNumber = (EditText) PromtView.findViewById(R.id.phone_number);
         SubmitForgotPassword = (Button) PromtView.findViewById(R.id.submit_phonenumber);
         CancelForgotPassword = (Button) PromtView.findViewById(R.id.cancel_fp);
-        
+        SubmitForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (validate(new EditText[] { UserPhoneNumber})) {
+                    if (UserPhoneNumber.getText().toString().length() == 10) {
+                        ForgotPasswordUserNumber = UserPhoneNumber.getText().toString();
+                        alertD.cancel();
+                        new CallOtpGenerateURL().execute();
+                    }else{
+                        Toast.makeText(LoginActivity.this, "Please make sure the entered mobile number is valid", Toast.LENGTH_LONG).show();
+                    }
+                }else {
+                    Toast.makeText(LoginActivity.this,"please enter your number to proceed...",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        CancelForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertD.cancel();
+            }
+        });
         alertD.setView(PromtView);
         alertD.show();
     }
 
+    /*otp background*/
+    private class CallOtpGenerateURL extends AsyncTask<String, String, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Utilities.displayProgressDialog(LoginActivity.this, "Requesting OTP Please wait...", false);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            HttpGet httpget = new HttpGet(constants.RequestOTPUrl+ForgotPasswordUserNumber);
+            content = null;
+            try{
+                HttpResponse response;
+                response = client.execute(httpget);
+                HttpEntity entity = response.getEntity();
+                content = EntityUtils.toString(entity);
+                System.out.println("output otp "+content.toString());
+
+                JSONObject object = new JSONObject(content.toString());
+                if(object.has("otp")){
+                    if(object.getString("otp")!= null){
+                        ReceivedOTP = object.getString("otp").toString();
+                    }
+                }
+            }catch (Exception e){
+
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            Utilities.cancelProgressDialog();
+            CallOtpVeriyPopup();
+        }
+    }
+
+    private void CallOtpVeriyPopup(){
+        LayoutInflater inflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View PromtView = inflater.inflate(R.layout.forgot_password_popup_two, null);
+        final AlertDialog alertD = new AlertDialog.Builder(this).create();
+        alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        alertD.setCancelable(false);
+        OTPVERIFY = (EditText) PromtView.findViewById(R.id.otp_number);
+        FPassword = (EditText) PromtView.findViewById(R.id.password);
+        FConformPassword = (EditText) PromtView.findViewById(R.id.confirm_password);
+        SubmitForgotPassword = (Button) PromtView.findViewById(R.id.submit_phonenumber);
+        CancelForgotPassword = (Button) PromtView.findViewById(R.id.cancel_fp);
+        SubmitForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (validate(new EditText[] { OTPVERIFY,FPassword,FConformPassword})) {
+                    EditOtp = OTPVERIFY.getText().toString();
+                    if(ReceivedOTP.equals(EditOtp)) {
+                        if (FPassword.getText().toString().length() >= 6) {
+                            if (FPassword.getText().toString()
+                                    .equals(FConformPassword.getText().toString())) {
+                                    EditPassword = FPassword.getText().toString();
+                                    EditConfirmPassword = FConformPassword.getText().toString();
+                                    alertD.cancel();
+                                new CallSubmitFasswordPassword().execute();
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Please make sure your password matches", Toast.LENGTH_LONG).show();
+                            }
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Please make sure your password is greater than 6 characters", Toast.LENGTH_LONG).show();
+                        }
+                    }else {
+                        Toast.makeText(LoginActivity.this, "OTP not matching, Please enter a valid otp sent to your number...", Toast.LENGTH_LONG).show();
+                    }
+                }else {
+                    Toast.makeText(LoginActivity.this,"please enter the above mandatory fiends to continue...",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        CancelForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertD.cancel();
+            }
+        });
+        alertD.setView(PromtView);
+        alertD.show();
+    }
+
+    /*send forgot password data to server*/
+    private class CallSubmitFasswordPassword extends AsyncTask<String, String, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Utilities.displayProgressDialog(LoginActivity.this, "Please wait this may take few minutes...", false);
+        }
+        @Override
+        protected String doInBackground(String... params) {
+            HttpGet httpget = new HttpGet(constants.UpdateForgotPassword+ForgotPasswordUserNumber+"&otp="+EditOtp+"&pwd="+EditPassword);
+            content = null;
+            try{
+                HttpResponse response;
+                response = client.execute(httpget);
+                HttpEntity entity = response.getEntity();
+                content = EntityUtils.toString(entity);
+                System.out.println("output otp "+content.toString());
+
+                JSONObject object = new JSONObject(content.toString());
+                if(object.has("sucess")){
+                    if(object.getString("sucess")!= null){
+                        ReceivedOTP = object.getString("sucess").toString();
+                    }
+                }
+            }catch (Exception e){
+
+            }
+            return null;
+        }
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            Utilities.cancelProgressDialog();
+            if(ReceivedOTP.equals("sucess")){
+                Toast.makeText(LoginActivity.this, "Password change successful...", Toast.LENGTH_LONG).show();
+            }else {
+                Toast.makeText(LoginActivity.this, "Failed to change password...", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
     /*g+ sign up start*/
     protected void onStart() {
         super.onStart();
