@@ -157,12 +157,12 @@ public class SearchResultPurohithActivity extends ActionBarActivity {
         arrayListConstants.PurohithPhoto.clear();
         arrayListConstants.AdvanceAmountList.clear();
         arrayListConstants.BalanceAmountList.clear();
-        bookPujaActivity.PoojaName.clear();
+        /*bookPujaActivity.PoojaName.clear();
         bookPujaActivity.PoojaTypeId.clear();
         bookPujaActivity.PoojaId.clear();
         bookPujaActivity.LocationName.clear();
         bookPujaActivity.LangugesName.clear();
-        bookPujaActivity.PurohithSect.clear();
+        bookPujaActivity.PurohithSect.clear();*/
         Intent intent = new Intent(SearchResultPurohithActivity.this, BookPujaActivity.class);
         intent.putExtra("type",BookPujaActivity.package_type);
         startActivity(intent);

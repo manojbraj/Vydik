@@ -13,7 +13,7 @@ import vydik.jjbytes.com.constants.Constants;
  * Created by Manoj on 10/31/2015.
  */
 public class PurohithDetailsActivity extends ActionBarActivity{
-    TextView PurohithName,PurohithUnivercity,PurohithSect,PurohithGuruName,PurohithLocation,PujaPrice,Rating,AdvanceAmount,BalanceAmount;
+    TextView PurohithName,PurohithUnivercity,PurohithSect,PurohithGuruName,PurohithLocation,PujaPrice,Rating,AdvanceAmount,BalanceAmount,AdvanceText,BalanceText;
     SearchResultPurohithActivity searchResultPurohithActivity;
     Constants constants;
     Button BookPurohit;
@@ -33,6 +33,8 @@ public class PurohithDetailsActivity extends ActionBarActivity{
         Rating = (TextView) findViewById(R.id.rating);
         AdvanceAmount = (TextView) findViewById(R.id.advance_amount);
         BalanceAmount = (TextView) findViewById(R.id.balance_amount);
+        AdvanceText = (TextView) findViewById(R.id.advance_text);
+        BalanceText = (TextView) findViewById(R.id.balance_text);
 
         point_two = (TextView) findViewById(R.id.point_two);
         point_three = (TextView) findViewById(R.id.point_three);
@@ -49,8 +51,11 @@ public class PurohithDetailsActivity extends ActionBarActivity{
         } else {
             point_two.setVisibility(View.GONE);
             point_three.setVisibility(View.GONE);
-            if(Constants.BalanceAmount.equals("000")){
+            if(Constants.BalanceAmount.equals("Rs.000/-")){
                 point_four.setVisibility(View.GONE);
+                BalanceText.setVisibility(View.GONE);
+                BalanceAmount.setVisibility(View.GONE);
+                AdvanceText.setText("Puja Price");
             }else {
                 point_four.setVisibility(View.VISIBLE);
             }

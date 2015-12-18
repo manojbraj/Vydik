@@ -40,7 +40,7 @@
         android:id="@+id/point_one"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="* Travel expenses at the actual cost."
+        android:text="* Travel expenses at actual cost."
         android:textSize="16sp"
         android:layout_marginTop="10dp"/>
     <TextView

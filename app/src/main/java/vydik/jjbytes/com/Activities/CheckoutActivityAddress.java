@@ -8,12 +8,14 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.payUMoney.sdk.SdkConstants;
@@ -53,6 +55,7 @@ import vydik.jjbytes.com.constants.Constants;
  */
 public class CheckoutActivityAddress extends ActionBarActivity implements AdapterView.OnItemSelectedListener {
     TextInputLayout FirstName,PhoneNumber,UserAddress,UserCity,UserLocation,UserEmailPayment;
+    TextView ViewTermsAndCondition;
     EditText FName,LName,Phone,Address,City,Locality,Email;
     CheckBox TermsCondition;
     Button Confirm;
@@ -88,6 +91,7 @@ public class CheckoutActivityAddress extends ActionBarActivity implements Adapte
     String TransactionId = "0000";
     Object content;
     HttpClient client = new DefaultHttpClient();
+    WebView TermsConditionView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,6 +133,16 @@ public class CheckoutActivityAddress extends ActionBarActivity implements Adapte
             InputType = extras.getString("type");
         }
 
+        ViewTermsAndCondition = (TextView) findViewById(R.id.terms_condition);
+        ViewTermsAndCondition.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TermsConditionView = (WebView) findViewById(R.id.terms_condition_web);
+                TermsConditionView.getSettings().setJavaScriptEnabled(true);
+                String pdf = "http://www.vydik.com/User_Terms_and_Conditions_Booking%20time.pdf";
+                TermsConditionView.loadUrl("http://drive.google.com/viewerng/viewer?embedded=true&url=" + pdf);
+            }
+        });
         FirstName = (TextInputLayout) findViewById(R.id.fNameLayout);
         FirstName.setErrorEnabled(true);
         FName = (EditText) findViewById(R.id.fName);
@@ -185,7 +199,10 @@ public class CheckoutActivityAddress extends ActionBarActivity implements Adapte
 
         UserLocalitySpinner = (Spinner) findViewById(R.id.user_Locality);
         UserLocalitySpinner.setOnItemSelectedListener(this);
-        System.out.println("array list data"+BookPujaActivity.LocationName);
+        System.out.println("array list data" + BookPujaActivity.LocationName);
+        if(ULocality != null){
+            BookPujaActivity.LocationName.add(0, ULocality);
+        }
         dataAdapterLocality = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,BookPujaActivity.LocationName);
         UserLocalitySpinner.setAdapter(dataAdapterLocality);
 

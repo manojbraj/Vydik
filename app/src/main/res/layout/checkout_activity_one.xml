@@ -167,6 +167,11 @@
     android:textSize="16sp"/>
 </LinearLayout>
 </ScrollView>
+    <WebView
+        android:id="@+id/terms_condition_web"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </WebView>
     <Button
         android:id="@+id/continue_button"
         android:layout_width="match_parent"

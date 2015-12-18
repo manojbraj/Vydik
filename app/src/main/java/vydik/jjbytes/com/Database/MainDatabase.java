@@ -109,7 +109,7 @@ public class MainDatabase {
     private static class DatabaseHelper extends SQLiteOpenHelper {
         DatabaseHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
-            exportDB();
+            //exportDB();
         }
 
         @Override

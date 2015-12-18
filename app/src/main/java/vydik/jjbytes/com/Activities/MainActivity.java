@@ -50,6 +50,7 @@ import vydik.jjbytes.com.Fragments.NavigationDrawerFragment;
 import vydik.jjbytes.com.Interfaces.ApplicationConstants;
 import vydik.jjbytes.com.Interfaces.NavigationDrawerCallbacks;
 import vydik.jjbytes.com.Models.GetUserLoginData;
+import vydik.jjbytes.com.constants.ConfigFile;
 import vydik.jjbytes.com.constants.Constants;
 
 /**
@@ -505,6 +506,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             mNavigationDrawerFragment.closeDrawer();
         else
             super.onBackPressed();
+        ConfigFile.BackgroundProcessCount = "0";
     }
 
     @Override

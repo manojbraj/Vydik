@@ -16,6 +16,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,6 +46,7 @@ import java.util.Calendar;
 import vydik.jjbytes.com.Extras.ConnectionDetector;
 import vydik.jjbytes.com.Utils.Utilities;
 import vydik.jjbytes.com.constants.ArrayListConstants;
+import vydik.jjbytes.com.constants.ConfigFile;
 import vydik.jjbytes.com.constants.Constants;
 
 
@@ -85,6 +87,7 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
     private int ALmonthOfYear, ALdayOfMonth,ALyear;
     String FirstName,LastName;
     Calendar c;
+    RadioButton WithPackageRadio,WithoutPackageRadio;
 
     /*http entity*/
     MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
@@ -101,18 +104,20 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
         toolbar.setNavigationIcon(R.drawable.back_white_new);
         setSupportActionBar(toolbar);*/
 
-        PoojaName.clear();
+        /*PoojaName.clear();
         PoojaTypeId.clear();
         PoojaId.clear();
         LocationName.clear();
         LangugesName.clear();
-        PurohithSect.clear();
+        PurohithSect.clear();*/
 
         constants.SPujaName = null;
         newdateupdated = null;
 
         WithPackage = (LinearLayout) findViewById(R.id.with_package_layout);
         WithoutPackage = (LinearLayout) findViewById(R.id.without_package_layout);
+        WithPackageRadio = (RadioButton) findViewById(R.id.radioButton);
+        WithoutPackageRadio = (RadioButton) findViewById(R.id.radioButton2);
 
         if(package_type.equals("1")){
             WithPackage.setVisibility(View.VISIBLE);
@@ -153,11 +158,13 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
         Sect.setAdapter(dataAdapterSect);
 
         /*call for background process to get all puja list*/
-        new GetAllPoojaList().execute();
-        new getLocalityName().execute();
-        new getLanguages().execute();
-        new getAllSect().execute();
-
+        if(ConfigFile.BackgroundProcessCount.equals("0")){
+            ConfigFile.BackgroundProcessCount = "1";
+            new GetAllPoojaList().execute();
+            new getLocalityName().execute();
+            new getLanguages().execute();
+            new getAllSect().execute();
+        }
         /*select listener for add item*/
         PujaName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -262,12 +269,34 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
                         constants.SSectId = PurohithSectId.get(i-1);
                     }
                 }
+                break;
+            case R.id.radioButton:
+                if(WithPackageRadio.isChecked()){
+                    WithPackage.setVisibility(View.VISIBLE);
+                }
+                break;
+            case R.id.radioButton2:
+                if(WithoutPackageRadio.isChecked()){
+                    WithoutPackage.setVisibility(View.VISIBLE);
+                }
+                break;
         }
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
+        switch (parent.getId()){
+            case R.id.radioButton:
+                if(WithPackageRadio.isChecked()){
+                    WithPackage.setVisibility(View.VISIBLE);
+                }
+                break;
+            case R.id.radioButton2:
+                if(WithoutPackageRadio.isChecked()){
+                    WithoutPackage.setVisibility(View.VISIBLE);
+                }
+                break;
+        }
     }
 
     private class GetAllPoojaList extends AsyncTask<String,String,String> {
@@ -1013,12 +1042,13 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        PoojaName.clear();
+        /*PoojaName.clear();
         PoojaTypeId.clear();
         PoojaId.clear();
         LocationName.clear();
         LangugesName.clear();
         PurohithSect.clear();
+        ConfigFile.BackgroundProcessCount = "0";*/
         Intent intent = new Intent(BookPujaActivity.this, MainActivity.class);
         startActivity(intent);
         finish();

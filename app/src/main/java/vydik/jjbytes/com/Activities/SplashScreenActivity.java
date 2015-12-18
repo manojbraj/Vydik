@@ -206,4 +206,8 @@ public class SplashScreenActivity extends ActionBarActivity {
         super.onDestroy();
         database.close();
     }
+
+    @Override
+    public void onBackPressed() {
+    }
 }

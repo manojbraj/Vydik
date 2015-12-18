@@ -5,4 +5,5 @@ package vydik.jjbytes.com.constants;
  */
 public class ConfigFile {
    public static String URL = "http://cheapcallingphoneapp.co.uk/vydik/android/";
+   public static String BackgroundProcessCount = "0";
 }

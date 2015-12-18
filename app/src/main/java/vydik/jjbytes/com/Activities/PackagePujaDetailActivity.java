@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import vydik.jjbytes.com.constants.ArrayListConstants;
@@ -20,6 +21,7 @@ public class PackagePujaDetailActivity extends ActionBarActivity {
     BookPujaActivity bookPujaActivity;
     Constants constants;
     TextView point_two,point_three,point_four;
+    LinearLayout LayoutPurohitDetail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,11 +41,15 @@ public class PackagePujaDetailActivity extends ActionBarActivity {
         point_four = (TextView) findViewById(R.id.point_four);
         AdvanceText = (TextView) findViewById(R.id.advance_text);
         BalanceText = (TextView) findViewById(R.id.balance_text);
+        LayoutPurohitDetail = (LinearLayout) findViewById(R.id.layout_three);
+
+        LayoutPurohitDetail.setVisibility(View.GONE);
 
         if(BookPujaActivity.package_type.equals("1")){
             point_two.setVisibility(View.VISIBLE);
             point_three.setVisibility(View.VISIBLE);
-            if(Constants.BalanceAmount.equals("000")){
+            System.out.println("balance" + Constants.BalanceAmount);
+            if(Constants.BalanceAmount.equals("Rs.000/-")){
                 point_four.setVisibility(View.GONE);
                 BalanceText.setVisibility(View.GONE);
                 BalanceAmount.setVisibility(View.GONE);
@@ -63,9 +69,9 @@ public class PackagePujaDetailActivity extends ActionBarActivity {
 
         BookPurohit = (Button) findViewById(R.id.book_purohit);
 
-        if(BookPujaActivity.package_type.equals("1")){
+        /*if(BookPujaActivity.package_type.equals("1")){
 
-        }
+        }*/
         PujaPrice.setText(constants.package_price);
         PurohitRating.setText(constants.package_expertise);
         PurohithName.setText(constants.SPujaName);
