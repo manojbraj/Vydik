@@ -14,7 +14,7 @@ import vydik.jjbytes.com.constants.Constants;
  * Created by Manoj on 11/2/2015.
  */
 public class PackagePujaDetailActivity extends ActionBarActivity {
-    TextView PurohithName,PurohithUnivercity,PurohithSect,PurohithGuruName,PurohithLocation,PujaPrice,PurohitRating,AdvanceAmount,BalanceAmount;
+    TextView PurohithName,PurohithUnivercity,PurohithSect,PurohithGuruName,PurohithLocation,PujaPrice,PurohitRating,AdvanceAmount,BalanceAmount,AdvanceText,BalanceText;
     ArrayListConstants arrayListConstants;
     Button BookPurohit;
     BookPujaActivity bookPujaActivity;
@@ -37,12 +37,17 @@ public class PackagePujaDetailActivity extends ActionBarActivity {
         point_two = (TextView) findViewById(R.id.point_two);
         point_three = (TextView) findViewById(R.id.point_three);
         point_four = (TextView) findViewById(R.id.point_four);
+        AdvanceText = (TextView) findViewById(R.id.advance_text);
+        BalanceText = (TextView) findViewById(R.id.balance_text);
 
         if(BookPujaActivity.package_type.equals("1")){
             point_two.setVisibility(View.VISIBLE);
             point_three.setVisibility(View.VISIBLE);
             if(Constants.BalanceAmount.equals("000")){
                 point_four.setVisibility(View.GONE);
+                BalanceText.setVisibility(View.GONE);
+                BalanceAmount.setVisibility(View.GONE);
+                AdvanceText.setText("Puja Price");
             }else {
                 point_four.setVisibility(View.VISIBLE);
             }
@@ -65,9 +70,9 @@ public class PackagePujaDetailActivity extends ActionBarActivity {
         PurohitRating.setText(constants.package_expertise);
         PurohithName.setText(constants.SPujaName);
         PurohithUnivercity.setText(constants.package_university);
-        PurohithSect.setText(constants.package_sect);
+        //PurohithSect.setText(constants.package_sect);
         PurohithGuruName.setText("");
-        PurohithLocation.setText(constants.package_location);
+        //PurohithLocation.setText(constants.package_location);
         if(constants.AdvanceAmount.equals("000")){
             AdvanceAmount.setText(constants.package_price);
             constants.PayementGatewayAmount = constants.PaymentErrorAdvance;

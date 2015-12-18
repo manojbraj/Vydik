@@ -8,9 +8,12 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.payUMoney.sdk.SdkConstants;
@@ -48,13 +51,15 @@ import vydik.jjbytes.com.constants.Constants;
 /**
  * Created by Manoj on 11/3/2015.
  */
-public class CheckoutActivityAddress extends ActionBarActivity {
+public class CheckoutActivityAddress extends ActionBarActivity implements AdapterView.OnItemSelectedListener {
     TextInputLayout FirstName,PhoneNumber,UserAddress,UserCity,UserLocation,UserEmailPayment;
     EditText FName,LName,Phone,Address,City,Locality,Email;
     CheckBox TermsCondition;
     Button Confirm;
     ArrayListConstants arrayListConstants;
-    String InputType;
+    String InputType,LocalityStatus = "0";
+    Spinner UserLocalitySpinner;
+    ArrayAdapter<String> dataAdapterLocality;
 
     Constants constants;
     BookPujaActivity bookPujaActivity;
@@ -127,7 +132,7 @@ public class CheckoutActivityAddress extends ActionBarActivity {
         FirstName = (TextInputLayout) findViewById(R.id.fNameLayout);
         FirstName.setErrorEnabled(true);
         FName = (EditText) findViewById(R.id.fName);
-        FName.setError("Required");
+        //FName.setError("Required");
         if(UFName!= null){
             FName.setText(UFName);
         }
@@ -139,9 +144,9 @@ public class CheckoutActivityAddress extends ActionBarActivity {
 
         PhoneNumber = (TextInputLayout) findViewById(R.id.PhoneLayout);
         PhoneNumber.setErrorEnabled(true);
-        PhoneNumber.setError("Please Enter your Phone Number");
+        //PhoneNumber.setError("Please Enter your Phone Number");
         Phone = (EditText) findViewById(R.id.PhoneNumber);
-        Phone.setError("Required");
+        //Phone.setError("Required");
         if(UMobile!= null){
             Phone.setText(UMobile);
         }
@@ -149,7 +154,7 @@ public class CheckoutActivityAddress extends ActionBarActivity {
         UserEmailPayment = (TextInputLayout) findViewById(R.id.EmailLayout);
         UserEmailPayment.setErrorEnabled(true);
         Email = (EditText) findViewById(R.id.Email);
-        Email.setError("Required");
+        //Email.setError("Required");
         if(UEmail!= null){
             Email.setText(UEmail);
         }
@@ -157,7 +162,7 @@ public class CheckoutActivityAddress extends ActionBarActivity {
         UserAddress = (TextInputLayout) findViewById(R.id.address_layout);
         UserAddress.setErrorEnabled(true);
         Address = (EditText) findViewById(R.id.edit_address);
-        Address.setError("Required");
+        //Address.setError("Required");
         if(UAddress!= null){
             Address.setText(UAddress);
         }
@@ -165,16 +170,24 @@ public class CheckoutActivityAddress extends ActionBarActivity {
         UserCity = (TextInputLayout) findViewById(R.id.city_layout);
         UserCity.setErrorEnabled(true);
         City = (EditText) findViewById(R.id.edit_city);
-        City.setError("Required");
+        //City.setError("Required");
         City.setText("Bangalore");
+        City.setFocusable(false);
+        City.setClickable(true);
 
         UserLocation = (TextInputLayout) findViewById(R.id.locality_layout);
         UserLocation.setErrorEnabled(true);
         Locality = (EditText) findViewById(R.id.edit_locality);
-        Locality.setError("Required");
+        //Locality.setError("Required");
         if(ULocality != null){
             Locality.setText(ULocality);
         }
+
+        UserLocalitySpinner = (Spinner) findViewById(R.id.user_Locality);
+        UserLocalitySpinner.setOnItemSelectedListener(this);
+        System.out.println("array list data"+BookPujaActivity.LocationName);
+        dataAdapterLocality = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,BookPujaActivity.LocationName);
+        UserLocalitySpinner.setAdapter(dataAdapterLocality);
 
         TermsCondition = (CheckBox) findViewById(R.id.terms_condition_check);
 
@@ -182,7 +195,7 @@ public class CheckoutActivityAddress extends ActionBarActivity {
         Confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (validate(new EditText[]{FName,Phone,Email,Address,City,Locality})){
+                if (validate(new EditText[]{FName,Phone,Email,Address,City})){
                     if (Phone.getText().toString().length() == 10) {
                         if (TermsCondition.isChecked() == true) {
 
@@ -198,7 +211,7 @@ public class CheckoutActivityAddress extends ActionBarActivity {
                             bookPujaActivity.LangugesName.clear();
                             bookPujaActivity.PurohithSect.clear();*/
 
-                            ULocality = Locality.getText().toString();
+                            //ULocality = Locality.getText().toString();
                             UCity = City.getText().toString();
                             UAddress = Address.getText().toString();
                             UFName = FName.getText().toString();
@@ -207,8 +220,13 @@ public class CheckoutActivityAddress extends ActionBarActivity {
                             UEmail = Email.getText().toString();
                             /*background process code*/
                             //new SubbmitBookingDetails().execute();
-
-                            new GetOrderId().execute();
+                            if(UserLocalitySpinner.getSelectedItem().toString().trim().equals("Location")){
+                                LocalityStatus = "1";
+                                CheckSpinnerMethod();
+                                /**/
+                            }else {
+                                CheckSpinnerMethod();
+                            }
                         } else {
                             Toast.makeText(CheckoutActivityAddress.this, "Please accept the terms and condition", Toast.LENGTH_LONG).show();
                         }
@@ -222,6 +240,15 @@ public class CheckoutActivityAddress extends ActionBarActivity {
         });
     }
 
+    private void CheckSpinnerMethod() {
+        if(LocalityStatus.equals("1")){
+            LocalityStatus = "0";
+            Toast.makeText(CheckoutActivityAddress.this,"please select your location",Toast.LENGTH_LONG).show();
+        }else {
+            new GetOrderId().execute();
+        }
+    }
+
     /*edit text box validator*/
     private boolean validate(EditText[] fields){
         for(int i=0; i<fields.length; i++){
@@ -231,6 +258,26 @@ public class CheckoutActivityAddress extends ActionBarActivity {
             }
         }
         return true;
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        switch (parent.getId()) {
+            case R.id.user_Locality:
+               int PositionValue = position;
+                for (int i = 1; i < BookPujaActivity.LocationName.size(); i++) {
+                    if (i == PositionValue) {
+                        int pos = i;
+                        ULocality = BookPujaActivity.LocationName.get(i);
+                    }
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 
     private class GetOrderId extends AsyncTask<String, String, String> {

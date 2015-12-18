@@ -108,7 +108,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
             if(UImage.equals("http://vydik.com/user_profile/")){
 
             }else {
-                task.execute(new String[] { UImage });
+                //task.execute(new String[] { UImage });
             }
         }
 

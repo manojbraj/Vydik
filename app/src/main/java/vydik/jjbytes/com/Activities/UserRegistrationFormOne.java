@@ -231,6 +231,9 @@ public class UserRegistrationFormOne extends ActionBarActivity implements OnItem
             constants.UserContact = UserContactNumber.getText().toString();
             constants.UserAddress = UserAddress.getText().toString();
 
+            System.out.println("sate"+constants.GetState);
+            System.out.println("city"+constants.GetCity );
+            System.out.println("locality"+constants.GetLocality);
             //CallOtpVerifyPopup();
             /*once otp is configured open callotpverfication*/
             Intent intent = new Intent(UserRegistrationFormOne.this,UserRegistrationFinalSignUp.class);
@@ -309,7 +312,7 @@ public class UserRegistrationFormOne extends ActionBarActivity implements OnItem
                 for (int i = 1; i < ArrayListConstants.LocalityName.size(); i++) {
                     if (i == PositionValue) {
                         pos = i;
-                        constants.GetLocality = ArrayListConstants.LacalityId.get(i - 1);
+                        constants.GetLocality = ArrayListConstants.LocalityName.get(i);
 
                         for(int j=1;j<ArrayListConstants.PinCode.size();j++){
                             if(j == pos){

@@ -126,6 +126,8 @@
             android:name=".PurohithDetailsActivity">
         </activity>
         <activity
+            android:icon="@mipmap/android_logo"
+            android:theme="@style/AppTheme"
             android:label="PujaDetails"
             android:name=".PackagePujaDetailActivity">
         </activity>

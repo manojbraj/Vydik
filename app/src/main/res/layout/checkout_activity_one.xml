@@ -123,7 +123,8 @@
         android:id="@+id/locality_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:visibility="gone">
         <EditText
             android:id="@+id/edit_locality"
             android:layout_width="match_parent"
@@ -136,6 +137,20 @@
             android:layout_height="1dp"
             android:background="@drawable/orange_rectangle_button"/>
     </android.support.design.widget.TextInputLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Choose location"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"/>
+    <Spinner
+        android:id="@+id/user_Locality"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/orange_rectangle_button"/>
 <CheckBox
     android:id="@+id/terms_condition_check"
     android:layout_width="match_parent"

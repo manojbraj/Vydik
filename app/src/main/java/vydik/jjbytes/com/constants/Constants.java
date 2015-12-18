@@ -31,22 +31,23 @@ public class Constants {
     /*get request*/
     public static String RequestOTPUrl = "http://www.vydik.com/android_user_otp.php?phoneno=";
     public static String UpdateForgotPassword = "http://www.vydik.com/android_fgt_pwd_chk.php?phoneno=";
+
     /*constant messages*/
-    public static String getPoojaListProgress = "Accessing puja list please wait...";
-    public static String regPurohithProgress = "Purohit registration in process please wait...";
-    public static String satecityProgress = "Please wait we are accessing state,city & locality data for you...";
-    public static String getingBankDetails = "Please wait accessing bank details...";
-    public static String UserRegistrationProgress = "User registration in process please wait...";
-    public static String LoginProgress = "Accessing user data for login please wait...";
-    public static String LoginPurohitProgress = "Accessing Purohit data for login please wait...";
-    public static String SearchProgress = "Accessing data based on search please wait...";
-    public static String PurohithDetails = "Accessing purohit details please wait...";
-    public static String BookingPujaProgress = "Submitting booking details please wait...";
-    public static String RequestForReschedule = "Submitting details for Puja Reschedule Please wait...";
-    public static String RequestForCancelation = "Cancellation of puja request in process please wait...";
-    public static String UserProfileUpdateProgress = "Updating profile please wait...";
-    public static String UserPickUploading = "Updating Profile Pick please wait...";
-    public static String GettingPanchang = "Accessing Panchang Please wait...";
+    public static String getPoojaListProgress = "Accessing Puja list, please wait...";
+    public static String regPurohithProgress = "Purohit registration in process, please wait...";
+    public static String satecityProgress = "Please wait while we are accessing state,city & locality data for you...";
+    public static String getingBankDetails = "Please wait while we are accessing Bank details...";
+    public static String UserRegistrationProgress = "User registration in process, please wait...";
+    public static String LoginProgress = "Accessing user data for login, please wait...";
+    public static String LoginPurohitProgress = "Accessing Purohit data for login, please wait...";
+    public static String SearchProgress = "Accessing data based on search, please wait...";
+    public static String PurohithDetails = "Accessing purohit details, please wait...";
+    public static String BookingPujaProgress = "Submitting booking details, please wait...";
+    public static String RequestForReschedule = "Submitting details for rescheduling the Puja, Please wait...";
+    public static String RequestForCancelation = "Cancellation of Puja request in process, please wait...";
+    public static String UserProfileUpdateProgress = "Updating Profile, please wait...";
+    public static String UserPickUploading = "Updating Profile picture, please wait...";
+    public static String GettingPanchang = "Accessing Panchanga, please wait...";
 
     /*unique constant value for database usage user_id*/
     public static String UserIdData;
@@ -80,7 +81,7 @@ public class Constants {
 
     /*user regisration key value pair*/
     public static String UK1 = "submit", UK2 = "firstname", UK3 = "lastname", UK4 = "email", UK5 = "pass", UK6 = "city", UK7 = "state",
-            UK8 = "location", UK9 = "zip_code", UK10 = "dob", UK11 = "aniversry", UK12 = "get_to_know", UK13 = "phone", UK14 = "Address", UK15 = "friend_email",
+            UK8 = "usr_location", UK9 = "zip_code", UK10 = "dob", UK11 = "aniversry", UK12 = "get_to_know", UK13 = "phone", UK14 = "Address", UK15 = "friend_email",
             UK16 = "friend_phoneno", UK17 = "purohit_email", UK18 = "purohit_phoneno",UK19 = "image";
 
     /*login key for user*/
@@ -120,7 +121,7 @@ public class Constants {
     public static String SearchPujaId,SearchPriceBooking;
 
     /*payment amount package and no package*/
-    public static String AdvanceAmount,BalanceAmount,PayementGatewayAmount,PaymentErrorAdvance;
+    public static String AdvanceAmount,BalanceAmount="000",PayementGatewayAmount,PaymentErrorAdvance;
 
     /*user profile update key*/
     public static String UpdateFName = "first_name",UpdateLName = "last_name",UpdateMobileNo = "mob_no",UpdateLocality="locality",UpdateAddress = "address",UpdateEmail = "emailid";

@@ -527,6 +527,7 @@ class FinalRegistrationSubbmit extends AsyncTask<String, Void, String> {
         HttpClient httpClient = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost(constants.SubmitUserRegistration);
         try{
+
             multipartEntity.addPart(constants.UK1,new StringBody(constants.submit));
             multipartEntity.addPart(constants.UK2,new StringBody(constants.UserFName));
             multipartEntity.addPart(constants.UK3,new StringBody(constants.UserLName));
