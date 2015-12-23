@@ -14,6 +14,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -55,7 +56,7 @@ import vydik.jjbytes.com.constants.Constants;
  */
 public class BookPujaActivity extends ActionBarActivity implements OnItemSelectedListener{
     private static final String SWITCH_TAB = null;
-    public static String package_type,strdate,newdateupdated;
+    public static String package_type = "1",strdate,newdateupdated;
     LinearLayout WithPackage,WithoutPackage;
     Button SubmitSearch;
     Spinner Location,Languages,Sect;
@@ -67,6 +68,7 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
     String StatusOfPuja="false";
     Object content;
     HttpClient client = new DefaultHttpClient();
+    CheckBox CheckWithPackage,CheckWithoutPackage;
 
     /*pooja array list*/
     public static ArrayList<String> PoojaName = new ArrayList<String>();
@@ -95,10 +97,10 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.book_puja_activity);
-        Bundle extras = getIntent().getExtras();
+       /* Bundle extras = getIntent().getExtras();
         if (extras != null) {
             package_type = extras.getString("type");
-        }
+        }*/
 
         /*toolbar = (Toolbar) findViewById(R.id.tab_layout);
         toolbar.setNavigationIcon(R.drawable.back_white_new);
@@ -116,14 +118,45 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
 
         WithPackage = (LinearLayout) findViewById(R.id.with_package_layout);
         WithoutPackage = (LinearLayout) findViewById(R.id.without_package_layout);
-        WithPackageRadio = (RadioButton) findViewById(R.id.radioButton);
-        WithoutPackageRadio = (RadioButton) findViewById(R.id.radioButton2);
+        CheckWithPackage = (CheckBox) findViewById(R.id.with_check_package);
+        CheckWithoutPackage = (CheckBox) findViewById(R.id.without_check_package);
 
-        if(package_type.equals("1")){
+        if(CheckWithPackage.isChecked()){
+            WithoutPackage.setVisibility(View.GONE);
+            WithPackage.setVisibility(View.VISIBLE);
+        }
+        CheckWithPackage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(CheckWithPackage.isChecked()){
+                    package_type = "1";
+                    CheckWithPackage.setChecked(true);
+                    CheckWithoutPackage.setEnabled(true);
+                    CheckWithoutPackage.setChecked(false);
+                    WithoutPackage.setVisibility(View.GONE);
+                    WithPackage.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        CheckWithoutPackage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(CheckWithoutPackage.isChecked()){
+                    package_type = "2";
+                    CheckWithoutPackage.setChecked(true);
+                    CheckWithPackage.setEnabled(true);
+                    CheckWithPackage.setChecked(false);
+                    WithPackage.setVisibility(View.GONE);
+                    WithoutPackage.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        /*if(package_type.equals("1")){
             WithPackage.setVisibility(View.VISIBLE);
         }else{
             WithoutPackage.setVisibility(View.VISIBLE);
-        }
+        }*/
 
         SubmitSearch = (Button) findViewById(R.id.submit_search);
         Location = (Spinner) findViewById(R.id.location_list);
@@ -196,7 +229,7 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
                         SLocation = "1";
                         CheckSpinnerMethod();
                     }else {*/
-                        if(constants.SDate != null){
+                        if(newdateupdated != null){
                             CheckSpinnerMethod();
                         }else{
                             Toast.makeText(BookPujaActivity.this,"Please select your date to perform puja",Toast.LENGTH_LONG).show();
@@ -270,33 +303,12 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
                     }
                 }
                 break;
-            case R.id.radioButton:
-                if(WithPackageRadio.isChecked()){
-                    WithPackage.setVisibility(View.VISIBLE);
-                }
-                break;
-            case R.id.radioButton2:
-                if(WithoutPackageRadio.isChecked()){
-                    WithoutPackage.setVisibility(View.VISIBLE);
-                }
-                break;
         }
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-        switch (parent.getId()){
-            case R.id.radioButton:
-                if(WithPackageRadio.isChecked()){
-                    WithPackage.setVisibility(View.VISIBLE);
-                }
-                break;
-            case R.id.radioButton2:
-                if(WithoutPackageRadio.isChecked()){
-                    WithoutPackage.setVisibility(View.VISIBLE);
-                }
-                break;
-        }
+
     }
 
     private class GetAllPoojaList extends AsyncTask<String,String,String> {
@@ -656,6 +668,7 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
 
         @Override
         protected String doInBackground(String... params) {
+            System.out.println("date value :"+newdateupdated);
             HttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(constants.SendSearchParameters);
             try{
@@ -865,7 +878,7 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
 
                     if (object.has("first_name")) {
                         if (object.getString("first_name") != null) {
-                            arrayListConstants.PurohithFirstName.add(object.getString("first_name").toString());
+                            arrayListConstants.PurohithFirstName.add(object.getString("first_name").toString() + " " + object.getString("last_name").toString());
                             FirstName = object.getString("first_name").toString();
                         } else {
                             arrayListConstants.PurohithFirstName.add("no first name");
@@ -917,10 +930,10 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
                         arrayListConstants.PurohithSchem.add("no schems");
                     }
 
-                    if (object.has("photo_uploaded")) {
+                    if (object.has("puja_photo")) {
                         if (object.getString("photo_uploaded") != null) {
-                            arrayListConstants.PurohithPhoto.add(object.getString("photo_uploaded").toString());
-                            constants.package_image = object.getString("photo_uploaded").toString();
+                            arrayListConstants.PurohithPhoto.add("http://www.vydik.com/"+object.getString("puja_photo").toString());
+                            constants.package_image = object.getString("puja_photo").toString();
                         } else {
                             arrayListConstants.PurohithPhoto.add("");
                         }

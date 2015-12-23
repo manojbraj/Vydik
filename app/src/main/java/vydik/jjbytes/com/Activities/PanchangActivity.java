@@ -34,7 +34,7 @@ import vydik.jjbytes.com.constants.Constants;
  */
 public class PanchangActivity extends ActionBarActivity {
 
-    TextView SignLord,Sign,NakshatraOne,NakshatraTwo,NakshatraLord,NakshatraCharan,Day,Tithi,Yog,Karan,SunRise,SunSet,SelectedDate;
+    TextView SignLord,Sign,NakshatraOne,NakshatraTwo,NakshatraLord,NakshatraCharan,Day,Tithi,Yog,Karan,SunRise,SunSet,SelectedDate,Ykala,Gkala,Rkala,Amurta;
     Button DateSelector,SubmitDate;
     private int ALmonthOfYear, ALdayOfMonth,ALyear,ALHour,ALMinutes;
     String Year,Month,DayCal,Hour,Minutes,SubmitDateMultipart;
@@ -42,7 +42,7 @@ public class PanchangActivity extends ActionBarActivity {
     MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
 
     /*json decode entity*/
-    String sign_lord,sign,Naksahtra,naksahtra_lord,nakshatra_charan,day,tithi,yog,karan;
+    String sign_lord,sign,Naksahtra,naksahtra_lord,nakshatra_charan,day,tithi,yog,karan,Yamaghanta,Gulikala,Rahukala,abhijit_murat;
     Calendar calendar;
 
     @Override
@@ -63,6 +63,10 @@ public class PanchangActivity extends ActionBarActivity {
         SunRise = (TextView) findViewById(R.id.sunrise);
         SunSet = (TextView) findViewById(R.id.sunset);
         SelectedDate = (TextView) findViewById(R.id.date_selected);
+        Ykala = (TextView) findViewById(R.id.yemaganta_kala);
+        Gkala = (TextView) findViewById(R.id.guli_kala);
+        Rkala = (TextView) findViewById(R.id.rahu_kala);
+        Amurta = (TextView) findViewById(R.id.abhijit_murat);
 
         DateSelector = (Button) findViewById(R.id.date_selector);
         SubmitDate = (Button) findViewById(R.id.submit_date);
@@ -242,6 +246,34 @@ public class PanchangActivity extends ActionBarActivity {
                     }
                 }
 
+                JSONObject object1 = object.getJSONObject("Yamaghanta");
+                if(object1.has("start")){
+                    if(object1.getString("start")!= null){
+                        Yamaghanta = "Start time :"+object1.getString("start").toString() + " End time :" +object1.getString("end").toString() ;
+                    }
+                }
+
+                JSONObject object2 = object.getJSONObject("guliKaal");
+                if(object2.has("start")){
+                    if(object2.getString("start")!= null){
+                        Gulikala = "Start time :"+object2.getString("start").toString() + " End time :" +object2.getString("end").toString();
+                    }
+                }
+
+                JSONObject object3 = object.getJSONObject("rahukal");
+                if(object3.has("start")){
+                    if(object3.getString("start")!= null){
+                        Rahukala = "Start time :"+object3.getString("start").toString() + " End time :" +object3.getString("end").toString();
+                    }
+                }
+
+                JSONObject object4 = object.getJSONObject("abhijit_murat");
+                if(object4.has("start")){
+                    if(object4.getString("start")!= null){
+                        abhijit_murat = "Start time :"+object4.getString("start").toString() + " End time :" +object4.getString("end").toString();
+                    }
+                }
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -257,6 +289,10 @@ public class PanchangActivity extends ActionBarActivity {
                 Karan.setText(karan);
                 SunRise.setText(MainActivity.FinalSunrise+" AM");
                 SunSet.setText(MainActivity.FinalSunSet+" PM");
+                Ykala.setText(Yamaghanta);
+                Gkala.setText(Gulikala);
+                Rkala.setText(Rahukala);
+                Amurta.setText(abhijit_murat);
         }
     }
 }

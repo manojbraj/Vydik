@@ -9,31 +9,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:visibility="gone">
-        <RadioGroup
-            android:id="@+id/radio_group"
-            android:layout_width="match_parent"
+        android:orientation="horizontal">
+        <CheckBox
+            android:id="@+id/with_check_package"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="10dp">
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:text="With Package"
-                android:id="@+id/radioButton"
-                android:checked="true"
-                android:textSize="16dp" />
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="20dp"
-                android:text="Without Package"
-                android:id="@+id/radioButton2"
-                android:checked="false"
-                android:textSize="16dp"
-                android:layout_weight="0.13"
-                android:layout_marginTop="5dp"/>
-        </RadioGroup>
+            android:layout_weight=".5"
+            android:text="With Package"
+            android:checked="true"/>
+        <CheckBox
+            android:id="@+id/without_check_package"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".5"
+            android:text="Without Package"/>
     </LinearLayout>
     <!--puja drop down-->
     <LinearLayout

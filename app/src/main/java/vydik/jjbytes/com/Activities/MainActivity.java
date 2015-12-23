@@ -157,7 +157,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         BookPuja.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CallPackageChoosePopup();
+                Intent intent = new Intent(MainActivity.this,BookPujaActivity.class);
+                startActivity(intent);
+                finish();
+                //CallPackageChoosePopup();
             }
         });
 

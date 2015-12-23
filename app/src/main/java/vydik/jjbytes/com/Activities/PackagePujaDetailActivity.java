@@ -49,7 +49,7 @@ public class PackagePujaDetailActivity extends ActionBarActivity {
             point_two.setVisibility(View.VISIBLE);
             point_three.setVisibility(View.VISIBLE);
             System.out.println("balance" + Constants.BalanceAmount);
-            if(Constants.BalanceAmount.equals("Rs.000/-")){
+            if(Constants.BalanceAmount.equals("000")){
                 point_four.setVisibility(View.GONE);
                 BalanceText.setVisibility(View.GONE);
                 BalanceAmount.setVisibility(View.GONE);
@@ -69,9 +69,6 @@ public class PackagePujaDetailActivity extends ActionBarActivity {
 
         BookPurohit = (Button) findViewById(R.id.book_purohit);
 
-        /*if(BookPujaActivity.package_type.equals("1")){
-
-        }*/
         PujaPrice.setText(constants.package_price);
         PurohitRating.setText(constants.package_expertise);
         PurohithName.setText(constants.SPujaName);
@@ -106,6 +103,8 @@ public class PackagePujaDetailActivity extends ActionBarActivity {
         arrayListConstants.PurohithLocation.clear();
         arrayListConstants.PurohithPrice.clear();
         arrayListConstants.PurohithPhoto.clear();
+        BookPujaActivity.package_type = "1";
+        BookPujaActivity.newdateupdated ="";
        /* bookPujaActivity.PoojaName.clear();
         bookPujaActivity.PoojaTypeId.clear();
         bookPujaActivity.PoojaId.clear();

@@ -68,16 +68,19 @@ public class SearchResultPurohithActivity extends ActionBarActivity {
                 String fName = arrayListConstants.PurohithFirstName.get(position);
                 String lName = arrayListConstants.PurohithLastName.get(position);
                 constants.AdvanceAmount = "Rs."+arrayListConstants.AdvanceAmountList.get(position)+"/-";
+                System.out.println("amount advance :"+constants.AdvanceAmount);
                 if(constants.AdvanceAmount.equals("Rs.000/-")){
-                    String pay = arrayListConstants.PaymentErrorAdvance.get(position);
-                    constants.AdvanceAmount = "Rs."+pay+"/-";
-                    System.out.println("payment"+pay);
-                    constants.PayementGatewayAmount = pay;
+                    constants.AdvanceAmount = arrayListConstants.PurohithPrice.get(position);
+                    constants.PayementGatewayAmount = arrayListConstants.PaymentErrorAdvance.get(position);
+                    System.out.println("payment 2"+constants.PayementGatewayAmount);
                 }else {
+                    constants.AdvanceAmount = "Rs."+arrayListConstants.AdvanceAmountList.get(position)+"/-";
                     constants.PayementGatewayAmount = arrayListConstants.AdvanceAmountList.get(position);
+                    System.out.println("payment 1"+constants.PayementGatewayAmount);
                 }
                 constants.BalanceAmount = "Rs."+arrayListConstants.BalanceAmountList.get(position)+"/-";
-                PurohithName = fName+" "+lName;
+
+                PurohithName = fName;
                 constants.package_Name = PurohithName;
                 new PurohithDetail().execute();
             }
@@ -157,6 +160,9 @@ public class SearchResultPurohithActivity extends ActionBarActivity {
         arrayListConstants.PurohithPhoto.clear();
         arrayListConstants.AdvanceAmountList.clear();
         arrayListConstants.BalanceAmountList.clear();
+        arrayListConstants.PaymentErrorAdvance.clear();
+        BookPujaActivity.package_type = "1";
+        BookPujaActivity.newdateupdated ="";
         /*bookPujaActivity.PoojaName.clear();
         bookPujaActivity.PoojaTypeId.clear();
         bookPujaActivity.PoojaId.clear();
