@@ -28,8 +28,8 @@ import vydik.jjbytes.com.constants.Constants;
 /**
  * Created by Manoj on 10/20/2015.
  */
-public class SearchResultPurohithActivity extends ActionBarActivity {
-    TextView SearchPujaName;
+public class  SearchResultPurohithActivity extends ActionBarActivity {
+    TextView SearchPujaName,ServerErrorMessage;
     ListView SearchPurohithdetails;
     ArrayListConstants arrayListConstants;
     BookPujaActivity bookPujaActivity;
@@ -47,7 +47,13 @@ public class SearchResultPurohithActivity extends ActionBarActivity {
         SearchPujaName = (TextView) findViewById(R.id.search_puja_name);
         SearchPujaName.setText(constants.SPujaName);
         SearchPurohithdetails = (ListView) findViewById(R.id.purohith_list);
+        ServerErrorMessage = (TextView) findViewById(R.id.error_message);
 
+        if(constants.SearchMessage.equals("null")){
+
+        }else {
+            ServerErrorMessage.setText(constants.SearchMessage);
+        }
         LoadListView(arrayListConstants.PurohithFirstName,arrayListConstants.PurohithExpertLevel,arrayListConstants.PurohithLocation,
                 arrayListConstants.PurohithPrice,arrayListConstants.PurohithPhoto);
     }
@@ -163,6 +169,7 @@ public class SearchResultPurohithActivity extends ActionBarActivity {
         arrayListConstants.PaymentErrorAdvance.clear();
         BookPujaActivity.package_type = "1";
         BookPujaActivity.newdateupdated ="";
+        constants.BalanceAmount="000";
         /*bookPujaActivity.PoojaName.clear();
         bookPujaActivity.PoojaTypeId.clear();
         bookPujaActivity.PoojaId.clear();

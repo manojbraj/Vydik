@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import vydik.jjbytes.com.constants.ArrayListConstants;
 import vydik.jjbytes.com.constants.Constants;
 
@@ -15,7 +17,8 @@ import vydik.jjbytes.com.constants.Constants;
  * Created by Manoj on 11/2/2015.
  */
 public class PackagePujaDetailActivity extends ActionBarActivity {
-    TextView PurohithName,PurohithUnivercity,PurohithSect,PurohithGuruName,PurohithLocation,PujaPrice,PurohitRating,AdvanceAmount,BalanceAmount,AdvanceText,BalanceText;
+    TextView PurohithName,PurohithUnivercity,PurohithSect,PurohithGuruName,PurohithLocation,PujaPrice,PurohitRating,AdvanceAmount
+            ,BalanceAmount,AdvanceText,BalanceText,PujaDescription,ServerErrorMessage;
     ArrayListConstants arrayListConstants;
     Button BookPurohit;
     BookPujaActivity bookPujaActivity;
@@ -41,6 +44,14 @@ public class PackagePujaDetailActivity extends ActionBarActivity {
         point_four = (TextView) findViewById(R.id.point_four);
         AdvanceText = (TextView) findViewById(R.id.advance_text);
         BalanceText = (TextView) findViewById(R.id.balance_text);
+        PujaDescription = (TextView) findViewById(R.id.puja_details);
+        ServerErrorMessage = (TextView) findViewById(R.id.error_message);
+
+        if(constants.SearchMessage.equals("null")){
+
+        }else {
+            ServerErrorMessage.setText(constants.SearchMessage);
+        }
         LayoutPurohitDetail = (LinearLayout) findViewById(R.id.layout_three);
 
         LayoutPurohitDetail.setVisibility(View.GONE);
@@ -73,6 +84,7 @@ public class PackagePujaDetailActivity extends ActionBarActivity {
         PurohitRating.setText(constants.package_expertise);
         PurohithName.setText(constants.SPujaName);
         PurohithUnivercity.setText(constants.package_university);
+        PujaDescription.setText(constants.PujaDescription);
         //PurohithSect.setText(constants.package_sect);
         PurohithGuruName.setText("");
         //PurohithLocation.setText(constants.package_location);
@@ -105,6 +117,8 @@ public class PackagePujaDetailActivity extends ActionBarActivity {
         arrayListConstants.PurohithPhoto.clear();
         BookPujaActivity.package_type = "1";
         BookPujaActivity.newdateupdated ="";
+        constants.SearchMessage = "null";
+        constants.BalanceAmount="000";
        /* bookPujaActivity.PoojaName.clear();
         bookPujaActivity.PoojaTypeId.clear();
         bookPujaActivity.PoojaId.clear();

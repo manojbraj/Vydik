@@ -98,6 +98,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             R.drawable.main_screen_banner
     };
 
+    ImageView logoAction;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -147,7 +148,8 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         mToolbar = (Toolbar) findViewById(R.id.toolbar_actionbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
+        logoAction = (ImageView) mToolbar.findViewById(R.id.logo_action);
+        logoAction.setVisibility(View.GONE);
         dateofDay = (TextView) findViewById(R.id.date);
         monthofYear = (TextView) findViewById(R.id.month);
         daySunrise = (TextView) findViewById(R.id.sunrise);

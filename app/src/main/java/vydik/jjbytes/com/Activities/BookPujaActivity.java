@@ -272,8 +272,16 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
         }else{*/
             if(ConnectionDetector.isConnectingToInternet(getApplicationContext()))
             {
-                /*constants.SLocationName = Location.getSelectedItem().toString();
-                constants.SLanguageName = Languages.getSelectedItem().toString();*/
+                constants.SLocationName = Location.getSelectedItem().toString();
+                constants.SLanguageName = Languages.getSelectedItem().toString();
+
+                if(constants.SLocationName.equals("Location")){
+                    constants.SLocationName = "null";
+                }
+
+                if(constants.SLanguageName.equals("Languages")){
+                    constants.SLanguageName= "null";
+                }
                 new SubmitPujaActivity().execute();
             }else {
                 Toast.makeText(getApplicationContext(),"No internet connection",Toast.LENGTH_LONG).show();
@@ -299,7 +307,7 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
                 PositionValue = position;
                 for(int i =1;i<PurohithSect.size();i++){
                     if(i==PositionValue){
-                        constants.SSectId = PurohithSectId.get(i-1);
+                        constants.SSectId = PurohithSect.get(i);
                     }
                 }
                 break;
@@ -668,9 +676,12 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
 
         @Override
         protected String doInBackground(String... params) {
-            System.out.println("date value :"+newdateupdated);
+            System.out.println("date value :" + newdateupdated);
             HttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(constants.SendSearchParameters);
+           /* System.out.println("constants.SSectId :" + constants.SSectId);
+            System.out.println("constants.SLanguageName :" + constants.SLanguageName);
+            System.out.println("constants.SLocationName :" + constants.SLocationName);*/
             try{
 
                 multipartEntity.addPart(constants.searchSubmit,new StringBody(constants.submit));
@@ -979,6 +990,22 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
                         }
                     } else {
 
+                    }
+
+                    if(object.has("msg")){
+                        if(object.getString("msg")!= null){
+                            constants.SearchMessage = "Note : "+object.getString("msg");
+                        }else {
+                            constants.SearchMessage = "null";
+                        }
+                    }else {
+                        constants.SearchMessage = "null";
+                    }
+
+                    if(object.has("puja_description")){
+                        if(object.getString("puja_description")!= null){
+                            constants.PujaDescription = object.getString("puja_description").toString();
+                        }
                     }
 
                     if(package_type.equals("1")){

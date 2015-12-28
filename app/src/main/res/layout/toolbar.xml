@@ -9,11 +9,20 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/logo_action"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@mipmap/android_logo"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="5dp"/>
     <TextView
         android:id="@+id/tool_bar_name"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_toRightOf="@+id/logo_action"
         android:text="Vydik"
+        android:layout_marginLeft="5dp"
         android:textColor="#fff"
         android:textSize="20sp"
         android:textStyle="bold"

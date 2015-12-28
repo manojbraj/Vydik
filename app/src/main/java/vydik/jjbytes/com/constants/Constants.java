@@ -94,7 +94,7 @@ public class Constants {
     public static String UL1 = "nl",UL2 = "nl",UL3 = "nl",UL4 = "nl",UL5 = "nl",UL6 = "nl",UL7 = "nl",UL8 = "nl",UL9 = "nl",UL10 = "image";
 
     /*search puja constants*/
-    public static String SPujaName, SLocationName = "no", SLanguageName = "no", SSectId, SDate;
+    public static String SPujaName, SLocationName = "null", SLanguageName = "null", SSectId ="null", SDate;
 
     // Directory name to store captured images and videos
     public static final String IMAGE_DIRECTORY_NAME = "Android File Upload";
@@ -118,7 +118,7 @@ public class Constants {
     Booking12 = "Address",Booking13 = "purohit_name",Booking14 = "user_name";
 
     /*retrieve puja id from search*/
-    public static String SearchPujaId,SearchPriceBooking;
+    public static String SearchPujaId,SearchPriceBooking,PujaDescription,SearchMessage="null";
 
     /*payment amount package and no package*/
     public static String AdvanceAmount,BalanceAmount="000",PayementGatewayAmount,PaymentErrorAdvance;
