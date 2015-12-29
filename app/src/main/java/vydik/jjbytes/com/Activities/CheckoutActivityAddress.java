@@ -202,7 +202,6 @@ public class CheckoutActivityAddress extends ActionBarActivity implements Adapte
         System.out.println("array list data" + BookPujaActivity.LocationName);
         if(ULocality != null){
             if(constants.LocationAppend.equals("0")){
-                constants.LocationAppend = "1";
                 BookPujaActivity.LocationName.add(0, ULocality);
             }
         }
@@ -553,6 +552,8 @@ public class CheckoutActivityAddress extends ActionBarActivity implements Adapte
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        constants.LocationAppend = "0";
+        BookPujaActivity.LocationName.remove(0);
         if(InputType.equals("with")) {
             Intent intent = new Intent(CheckoutActivityAddress.this, PackagePujaDetailActivity.class);
             startActivity(intent);

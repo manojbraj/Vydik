@@ -151,20 +151,20 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_above="@+id/submit_search"
-                android:visibility="gone">
+                >
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="WITH PACKAGE"
-                    android:textSize="24sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
-                    android:layout_marginTop="20sp"
+                    android:layout_marginTop="5sp"
                     android:layout_marginLeft="20sp"
                     android:textColor="#000"/>
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="60dp"
                     android:gravity="center"
                     android:layout_marginLeft="20sp"
                     android:layout_marginRight="20sp"
@@ -181,7 +181,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_above="@+id/submit_search">
+                android:layout_above="@+id/submit_search"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="match_parent"
