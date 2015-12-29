@@ -60,7 +60,7 @@ public class CheckoutActivityAddress extends ActionBarActivity implements Adapte
     CheckBox TermsCondition;
     Button Confirm;
     ArrayListConstants arrayListConstants;
-    String InputType,LocalityStatus = "0";
+    String InputType,LocalityStatus = "0",LocationAppend = "0";
     Spinner UserLocalitySpinner;
     ArrayAdapter<String> dataAdapterLocality;
 
@@ -201,7 +201,10 @@ public class CheckoutActivityAddress extends ActionBarActivity implements Adapte
         UserLocalitySpinner.setOnItemSelectedListener(this);
         System.out.println("array list data" + BookPujaActivity.LocationName);
         if(ULocality != null){
-            BookPujaActivity.LocationName.add(0, ULocality);
+            if(constants.LocationAppend.equals("0")){
+                constants.LocationAppend = "1";
+                BookPujaActivity.LocationName.add(0, ULocality);
+            }
         }
         dataAdapterLocality = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line,BookPujaActivity.LocationName);
         UserLocalitySpinner.setAdapter(dataAdapterLocality);
@@ -215,18 +218,6 @@ public class CheckoutActivityAddress extends ActionBarActivity implements Adapte
                 if (validate(new EditText[]{FName,Phone,Email,Address,City})){
                     if (Phone.getText().toString().length() == 10) {
                         if (TermsCondition.isChecked() == true) {
-
-                            /*arrayListConstants.PurohithFirstName.clear();
-                            arrayListConstants.PurohithExpertLevel.clear();
-                            arrayListConstants.PurohithLocation.clear();
-                            arrayListConstants.PurohithPrice.clear();
-                            arrayListConstants.PurohithPhoto.clear();*/
-                            /*bookPujaActivity.PoojaName.clear();
-                            bookPujaActivity.PoojaTypeId.clear();
-                            bookPujaActivity.PoojaId.clear();
-                            bookPujaActivity.LocationName.clear();
-                            bookPujaActivity.LangugesName.clear();
-                            bookPujaActivity.PurohithSect.clear();*/
 
                             //ULocality = Locality.getText().toString();
                             UCity = City.getText().toString();
@@ -351,22 +342,7 @@ public class CheckoutActivityAddress extends ActionBarActivity implements Adapte
 
         @Override
         protected String doInBackground(String... params) {
-            /*System.out.println("output of bookings : " + constants.SearchPujaId);
-            System.out.println("output of bookings : " + constants.purohith_id);
-            System.out.println("output of bookings : " + UId);
-            System.out.println("output of bookings : " + BookPujaActivity.newdateupdated);
-            System.out.println("output of bookings : " + constants.SearchPriceBooking);
-            System.out.println("output of bookings : " + ULocality);
-            System.out.println("output of bookings : " + BookPujaActivity.package_type);
-            System.out.println("output of bookings : " + UCity);
-            System.out.println("output of bookings : " + UAddress);
-            System.out.println("output of bookings : " + constants.package_Name);
-            System.out.println("output of bookings : " + UFName+" "+ULName);
-            System.out.println("output of bookings : " + constants.package_sect);
-            System.out.println("output of bookings : " + UMobile);
-            System.out.println("output of bookings : " + UEmail);
-            System.out.println("output of bookings : " + constants.PayementGatewayAmount);
-*/
+
             HttpClient httpClient = new DefaultHttpClient();
             HttpPost httpPost = new HttpPost(constants.SendBookingDetails);
             try{

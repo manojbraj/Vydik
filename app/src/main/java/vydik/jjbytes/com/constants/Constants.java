@@ -128,4 +128,7 @@ public class Constants {
 
     /*panchang constants post method*/
     public static String PDate = "date",PTime = "time",PMinutes = "min",PSubmit = "panchang_sub";
+
+    /*areya append*/
+    public static String LocationAppend = "0";
 }
