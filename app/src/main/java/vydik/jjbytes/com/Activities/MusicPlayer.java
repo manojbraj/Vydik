@@ -64,19 +64,19 @@ public class MusicPlayer extends ActionBarActivity{
 
         if(TrackName.equals("ganeshaAsta")){
             tx3.setText("Shri Ganeshaashtakam.mp3");
-            mediaPlayer = MediaPlayer.create(this, R.raw.ganeshaastakam);
+            //mediaPlayer = MediaPlayer.create(this, R.raw.ganeshaastakam);
         }else if(TrackName.equals("ganeshaNama")){
             tx3.setText("Shri GaneshNamanam.mp3");
-            mediaPlayer = MediaPlayer.create(this, R.raw.ganeshnamana);
+            //mediaPlayer = MediaPlayer.create(this, R.raw.ganeshnamana);
         }else if(TrackName.equals("chandrachoodeya")){
             tx3.setText("Bhavaya Chandra Choodaya.mp3");
-            mediaPlayer = MediaPlayer.create(this, R.raw.bhavayachandra);
+            //mediaPlayer = MediaPlayer.create(this, R.raw.bhavayachandra);
         }else if(TrackName.equals("lakshmi")){
             tx3.setText("LakshmiAshtakam.mp3");
-            mediaPlayer = MediaPlayer.create(this, R.raw.lakshmiastakamya);
+            //mediaPlayer = MediaPlayer.create(this, R.raw.lakshmiastakamya);
         }else if(TrackName.equals("swarupeeya")){
             tx3.setText("Slokamomkaara Swaroopaaya.mp3");
-            mediaPlayer = MediaPlayer.create(this, R.raw.swarupeeya);
+            //mediaPlayer = MediaPlayer.create(this, R.raw.swarupeeya);
         }else{
 
         }
