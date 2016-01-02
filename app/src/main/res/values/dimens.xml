@@ -8,4 +8,8 @@
     <integer name="splash_rotation_duration">1200</integer>
     <integer name="splash_duration">1200</integer>
     <dimen name="navigation_drawer_width">300dp</dimen>
+    <dimen name="row_height">72dp</dimen>
+    <dimen name="image_padding">4dp</dimen>
+    <dimen name="image_size">48dp</dimen>
+    <dimen name="activity_vertical_inner_margin">56dp</dimen>
 </resources>

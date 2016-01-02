@@ -159,9 +159,13 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         BookPuja.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,BookPujaActivity.class);
-                startActivity(intent);
-                finish();
+                if(ConnectionDetector.isConnectingToInternet(getApplicationContext())) {
+                    Intent intent = new Intent(MainActivity.this, BookPujaActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else {
+                    Toast.makeText(getApplicationContext(),"No internet connection",Toast.LENGTH_LONG).show();
+                }
                 //CallPackageChoosePopup();
             }
         });
@@ -170,8 +174,12 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         Bhajans.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,BhajansActivity.class);
-                startActivity(intent);
+                if(ConnectionDetector.isConnectingToInternet(getApplicationContext())) {
+                    Intent intent = new Intent(MainActivity.this, OnlineMusicPlayerMain.class);
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(getApplicationContext(),"No internet connection",Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -187,8 +195,12 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
         ViewPanchang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,PanchangActivity.class);
-                startActivity(intent);
+                if(ConnectionDetector.isConnectingToInternet(getApplicationContext())) {
+                    Intent intent = new Intent(MainActivity.this, PanchangActivity.class);
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(getApplicationContext(),"No internet connection",Toast.LENGTH_LONG).show();
+                }
             }
         });
         mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager().findFragmentById(R.id.fragment_drawer);
