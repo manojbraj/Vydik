@@ -463,14 +463,25 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             Intent intent = new Intent(MainActivity.this,InboxActivity.class);
             startActivity(intent);
         }else if(position == 2){
-            CallPackageChoosePopup();
+            if(ConnectionDetector.isConnectingToInternet(getApplicationContext())) {
+                Intent intent = new Intent(MainActivity.this, BookPujaActivity.class);
+                startActivity(intent);
+                finish();
+            }else {
+                Toast.makeText(getApplicationContext(),"No internet connection",Toast.LENGTH_LONG).show();
+            }
         }else if(position == 3){
             Intent intent = new Intent(MainActivity.this,BhajansActivity.class);
             startActivity(intent);
         }else if(position == 4){
-
+            Toast.makeText(MainActivity.this,"Thank you for your interest in the service Book a Puja @Temple. We are launching this service soon...",Toast.LENGTH_LONG).show();
         }else if(position == 5){
-
+            if(ConnectionDetector.isConnectingToInternet(getApplicationContext())) {
+                Intent intent = new Intent(MainActivity.this, PanchangActivity.class);
+                startActivity(intent);
+            }else {
+                Toast.makeText(getApplicationContext(),"No internet connection",Toast.LENGTH_LONG).show();
+            }
         }else if(position == 6){
             Intent intent = new Intent(MainActivity.this,UserBookingList.class);
             startActivity(intent);
