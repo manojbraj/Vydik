@@ -471,7 +471,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
                 Toast.makeText(getApplicationContext(),"No internet connection",Toast.LENGTH_LONG).show();
             }
         }else if(position == 3){
-            Intent intent = new Intent(MainActivity.this,BhajansActivity.class);
+            Intent intent = new Intent(MainActivity.this,OnlineMusicPlayerMain.class);
             startActivity(intent);
         }else if(position == 4){
             Toast.makeText(MainActivity.this,"Thank you for your interest in the service Book a Puja @Temple. We are launching this service soon...",Toast.LENGTH_LONG).show();
