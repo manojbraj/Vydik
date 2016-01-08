@@ -45,9 +45,7 @@ public class SCTrackAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
         Track track = getItem(position);
-
         ViewHolder holder;
         if (convertView == null) {
             convertView = LayoutInflater.from(mContext).inflate(R.layout.track_list_row, parent, false);

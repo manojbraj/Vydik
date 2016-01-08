@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -26,6 +27,7 @@ import vydik.jjbytes.com.Adapters.SCTrackAdapter;
 import vydik.jjbytes.com.Interfaces.SCService;
 import vydik.jjbytes.com.Models.Track;
 import vydik.jjbytes.com.Utils.SoundCloud;
+import vydik.jjbytes.com.Utils.Utilities;
 import vydik.jjbytes.com.constants.Config;
 
 /**
@@ -90,7 +92,7 @@ public class OnlineMusicPlayerMain extends Activity {
                 }
 
                 try {
-                    System.out.println("getStreamURL :"+track.getStreamURL());
+                    System.out.println("getStreamURL :" + track.getStreamURL());
                     mMediaPlayer.setDataSource(track.getStreamURL());
                     mMediaPlayer.prepareAsync();
                 } catch (IOException e) {
@@ -101,16 +103,24 @@ public class OnlineMusicPlayerMain extends Activity {
             }
         });
 
+        CallSoundCloud();
+
+    }
+
+    private void CallSoundCloud() {
+        Utilities.displayProgressDialog(OnlineMusicPlayerMain.this, "loading music, Please wait...", false);
         SCService scService = SoundCloud.getService();
         scService.getRecentTracks(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()), new Callback<List<Track>>() {
             @Override
             public void success(List<Track> tracks, Response response) {
+                Utilities.cancelProgressDialog();
                 loadTracks(tracks);
             }
 
             @Override
             public void failure(RetrofitError error) {
-                Log.d(TAG, "Error: " + error);
+                Utilities.cancelProgressDialog();
+                Toast.makeText(OnlineMusicPlayerMain.this,"Failed to get songs, something went wrong please try after some time",Toast.LENGTH_LONG).show();
             }
         });
     }

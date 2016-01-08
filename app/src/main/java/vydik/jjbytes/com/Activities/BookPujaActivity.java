@@ -16,6 +16,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -90,13 +91,21 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
     String FirstName,LastName;
     Calendar c;
     RadioButton WithPackageRadio,WithoutPackageRadio;
-
+    ImageView location_image;
+    TextView location_text;
     /*http entity*/
     MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.book_puja_activity);
+
+        toolbar = (Toolbar) findViewById(R.id.tab_layout);
+        location_image = (ImageView) toolbar.findViewById(R.id.location);
+        location_text = (TextView) toolbar.findViewById(R.id.location_text);
+
+        location_image.setVisibility(View.VISIBLE);
+        location_text.setVisibility(View.VISIBLE);
        /* Bundle extras = getIntent().getExtras();
         if (extras != null) {
             package_type = extras.getString("type");

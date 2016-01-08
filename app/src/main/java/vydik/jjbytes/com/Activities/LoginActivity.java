@@ -139,6 +139,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     AccessTokenTracker accessTokenTracker;
     ProfileTracker profileTracker;
     Constants constants;
+    String ErrorServer;
     MultipartEntity multipartEntity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE);
 
     @Override
@@ -978,6 +979,16 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                         }else{
 
                         }
+
+                        if(jsonObject.has("msg")){
+                            if(jsonObject.getString("msg")!= null){
+                                ErrorServer = jsonObject.getString("msg").toString();
+                            }else {
+                                ErrorServer = "success";
+                            }
+                        }else {
+                            ErrorServer = "success";
+                        }
                     }
                 }
             }catch (Exception e){
@@ -992,8 +1003,11 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                             constants.UL7,constants.UL8,constants.UL10);
                     String logType = "user",type = "normal";
                     CallMainMethod(logType,type);
-                }else{
-                    Toast.makeText(LoginActivity.this, "Something went wrong please try after some time", Toast.LENGTH_LONG).show();
+                }else if(ErrorServer.equals("Incorrect User Or Password")){
+                    Toast.makeText(LoginActivity.this, "Incorrect User ID Or Password", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(LoginActivity.this, "User doesn't exist please register...", Toast.LENGTH_LONG).show();
                 }
             }else {
                 if (FailureMobileResult.equals("Enter correct Phone no")) {

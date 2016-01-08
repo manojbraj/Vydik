@@ -36,6 +36,26 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="5dp"
         android:visibility="gone"/>
+    <ImageView
+        android:id="@+id/location"
+        android:layout_width="15dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:background="@mipmap/location_bg"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:visibility="gone"/>
+    <TextView
+        android:id="@+id/location_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bangalore"
+        android:layout_below="@+id/location"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:visibility="gone"/>
     <TextView
         android:id="@+id/submit_text"
         android:layout_width="wrap_content"
