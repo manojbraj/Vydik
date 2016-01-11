@@ -7,5 +7,8 @@
     android:textSize="16sp"
     android:gravity="left|center"
     android:textColor="#000"
-    android:textStyle="bold">
+    android:textStyle="bold"
+    android:paddingLeft="10dp"
+    android:layout_marginLeft="10dp"
+    android:text="hello">
 </TextView>

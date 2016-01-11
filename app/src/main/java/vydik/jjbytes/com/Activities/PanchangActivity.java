@@ -188,7 +188,7 @@ public class PanchangActivity extends ActionBarActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             Utilities.cancelProgressDialog();
-            //System.out.println("out put : "+s);
+            System.out.println("out put panchanga: "+s);
             try {
                 JSONObject object = new JSONObject(s);
 

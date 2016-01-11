@@ -183,10 +183,11 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
 
         /*add first element to array list*/
         //PoojaName.add("Puja");
-        LocationName.add("Location");
-        LangugesName.add("Languages");
-        PurohithSect.add("Sect");
-
+        if(ConfigFile.BackgroundProcessCount.equals("0")){
+            LocationName.add("Location");
+            LangugesName.add("Languages");
+            PurohithSect.add("Sect");
+        }
         /*create a data adapter and pars the array list value*/
         //dataAdapterPuja = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, PoojaName);
         dataAdapterLocation = new ArrayAdapter<String>(this,R.layout.spinner_custom_layout,LocationName);

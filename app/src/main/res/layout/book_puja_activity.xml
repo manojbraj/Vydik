@@ -47,6 +47,7 @@
             android:gravity="left"
             android:layout_marginLeft="10dp"
             android:hint="Puja"
+            android:paddingLeft="10dp"
             android:inputType="textAutoComplete"/>
     </LinearLayout>
     <!--location drop down-->
@@ -132,7 +133,8 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:gravity="left|center"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginLeft="10dp"
+            android:paddingLeft="10dp"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
