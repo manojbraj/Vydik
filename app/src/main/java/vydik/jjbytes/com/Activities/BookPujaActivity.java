@@ -1,6 +1,8 @@
 package vydik.jjbytes.com.Activities;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -8,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -63,7 +66,7 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
     Spinner Location,Languages,Sect;
     String SLocation = "0",SLanguage = "0",SSect = "0";
     AutoCompleteTextView PujaName;
-    TextView Date;
+    TextView Date,CityPopupList;
     Constants constants;
     ArrayListConstants arrayListConstants;
     String StatusOfPuja="false";
@@ -106,6 +109,13 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
 
         location_image.setVisibility(View.VISIBLE);
         location_text.setVisibility(View.VISIBLE);
+
+        location_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CallLocationPopupToolbar();
+            }
+        });
        /* Bundle extras = getIntent().getExtras();
         if (extras != null) {
             package_type = extras.getString("type");
@@ -250,6 +260,23 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
                 }
             }
         });
+    }
+
+    private void CallLocationPopupToolbar() {
+        LayoutInflater inflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View PromtView = inflater.inflate(R.layout.city_popup, null);
+        final AlertDialog alertD = new AlertDialog.Builder(this).create();
+        alertD.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        alertD.setCancelable(false);
+        CityPopupList = (TextView) PromtView.findViewById(R.id.city_text);
+        CityPopupList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertD.dismiss();
+            }
+        });
+        alertD.setView(PromtView);
+        alertD.show();
     }
 
     private void DatePickerMethod() {
