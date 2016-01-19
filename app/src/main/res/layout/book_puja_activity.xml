@@ -50,6 +50,26 @@
             android:paddingLeft="10dp"
             android:inputType="textAutoComplete"/>
     </LinearLayout>
+    <!--city drop down-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/yellow_curver_icon">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:background="@drawable/search_location_round"/>
+        <Spinner
+            android:id="@+id/city_list"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"/>
+    </LinearLayout>
     <!--location drop down-->
     <LinearLayout
         android:layout_width="match_parent"
@@ -152,8 +172,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
-                android:layout_above="@+id/submit_search"
-                >
+                android:layout_above="@+id/submit_search">
 
                 <TextView
                     android:layout_width="match_parent"

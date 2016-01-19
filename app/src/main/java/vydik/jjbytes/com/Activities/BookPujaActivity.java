@@ -63,7 +63,7 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
     public static String package_type = "1",strdate,newdateupdated;
     LinearLayout WithPackage,WithoutPackage;
     Button SubmitSearch;
-    Spinner Location,Languages,Sect;
+    Spinner Location,Languages,Sect,CitySpin;
     String SLocation = "0",SLanguage = "0",SSect = "0";
     AutoCompleteTextView PujaName;
     TextView Date,CityPopupList;
@@ -82,11 +82,13 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
     public static ArrayList<String> LangugesName = new ArrayList<String>();
     public static ArrayList<String> PurohithSect = new ArrayList<String>();
     public static ArrayList<String> PurohithSectId = new ArrayList<String>();
+    public static ArrayList<String> CityName = new ArrayList<String>();
 
     ArrayAdapter<String> dataAdapterPuja;
     ArrayAdapter<String> dataAdapterLocation;
     ArrayAdapter<String> dataAdapterLanguages;
     ArrayAdapter<String> dataAdapterSect;
+    ArrayAdapter<String> dataAdapterCity;
 
     Toolbar toolbar;
     int PositionValue;
@@ -107,8 +109,8 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
         location_image = (ImageView) toolbar.findViewById(R.id.location);
         location_text = (TextView) toolbar.findViewById(R.id.location_text);
 
-        location_image.setVisibility(View.VISIBLE);
-        location_text.setVisibility(View.VISIBLE);
+        location_image.setVisibility(View.GONE);
+        location_text.setVisibility(View.GONE);
 
         location_image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,6 +182,7 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
         SubmitSearch = (Button) findViewById(R.id.submit_search);
         Location = (Spinner) findViewById(R.id.location_list);
         Languages = (Spinner) findViewById(R.id.languages);
+        CitySpin = (Spinner) findViewById(R.id.city_list);
         Date = (TextView) findViewById(R.id.date_of_puja);
 
         Sect = (Spinner) findViewById(R.id.sect);
@@ -197,18 +200,21 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
             LocationName.add("Location");
             LangugesName.add("Languages");
             PurohithSect.add("Sect");
+            CityName.add("Bangalore");
         }
         /*create a data adapter and pars the array list value*/
         //dataAdapterPuja = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, PoojaName);
         dataAdapterLocation = new ArrayAdapter<String>(this,R.layout.spinner_custom_layout,LocationName);
         dataAdapterLanguages = new ArrayAdapter<String>(this,R.layout.spinner_custom_layout,LangugesName);
         dataAdapterSect = new ArrayAdapter<String>(this,R.layout.spinner_custom_layout,PurohithSect);
+        dataAdapterCity = new ArrayAdapter<String>(this,R.layout.spinner_custom_layout,CityName);
 
         /*send the values to drop down*/
         //PujaName.setAdapter(dataAdapterPuja);
         Location.setAdapter(dataAdapterLocation);
         Languages.setAdapter(dataAdapterLanguages);
         Sect.setAdapter(dataAdapterSect);
+        CitySpin.setAdapter(dataAdapterCity);
 
         /*call for background process to get all puja list*/
         if(ConfigFile.BackgroundProcessCount.equals("0")){
@@ -245,16 +251,16 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
             @Override
             public void onClick(View v) {
                 if(constants.SPujaName != null){
-                   /* if(Location.getSelectedItem().toString().trim().equals("Location")){
+                   if(Languages.getSelectedItem().toString().trim().equals("Languages")){
                         SLocation = "1";
                         CheckSpinnerMethod();
-                    }else {*/
+                    }else {
                         if(newdateupdated != null){
                             CheckSpinnerMethod();
                         }else{
                             Toast.makeText(BookPujaActivity.this,"Please select your date to perform puja",Toast.LENGTH_LONG).show();
                         }
-                    //}
+                    }
                 }else{
                     Toast.makeText(BookPujaActivity.this,"Please select your puja",Toast.LENGTH_LONG).show();
                 }
@@ -303,10 +309,10 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
 
     /*spinner validation*/
     private void CheckSpinnerMethod() {
-        /*if(SLocation.equals("1")){
+        if(SLocation.equals("1")){
             SLocation = "0";
-            Toast.makeText(BookPujaActivity.this,"Please select your location",Toast.LENGTH_LONG).show();
-        }else{*/
+            Toast.makeText(BookPujaActivity.this,"Please select your Language",Toast.LENGTH_LONG).show();
+        }else{
             if(ConnectionDetector.isConnectingToInternet(getApplicationContext()))
             {
                 constants.SLocationName = Location.getSelectedItem().toString();
@@ -324,7 +330,7 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
                 Toast.makeText(getApplicationContext(),"No internet connection",Toast.LENGTH_LONG).show();
             }
 
-        //}
+        }
     }
 
     @Nullable
