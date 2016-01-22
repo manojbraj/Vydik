@@ -177,20 +177,12 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="WITH PACKAGE"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="5sp"
-                    android:layout_marginLeft="20sp"
-                    android:textColor="#000"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
                     android:gravity="center"
-                    android:layout_marginLeft="20sp"
                     android:layout_marginRight="20sp"
                     android:text="@string/with_package"
-                    android:textColor="#000"/>
+                    android:textColor="#000"
+                    android:textStyle="bold"
+                    android:layout_marginTop="5dp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -208,20 +200,12 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="WITHOUT PACKAGE"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="5sp"
-                    android:layout_marginLeft="20sp"
-                    android:textColor="#000"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
                     android:gravity="center"
-                    android:layout_marginLeft="20sp"
                     android:layout_marginRight="20sp"
                     android:text="@string/without_package"
-                    android:textColor="#000" />
+                    android:textColor="#000"
+                    android:textStyle="bold"
+                    android:layout_marginTop="5dp"/>
             </LinearLayout>
             <Button
                 android:id="@+id/submit_search"
