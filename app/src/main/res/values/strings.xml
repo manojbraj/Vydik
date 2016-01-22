@@ -2,8 +2,8 @@
     <string name="app_name">Vydik</string>
     <string name="action_settings">Settings</string>
     <string name="app_id">1661856200725191</string>
-    <string name="with_package">"Purohit With Puja Samagri"</string>
-    <string name="without_package">"Purohit without Puja Samagri"</string>
+    <string name="with_package">"Vydik recommended Purohit with Samagri"</string>
+    <string name="without_package">"Purohit only without Samagri"</string>
     <string-array name="experties">
         <item>3</item>
         <item>1</item>
