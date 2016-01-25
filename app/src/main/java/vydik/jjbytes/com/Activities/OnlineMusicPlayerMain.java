@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +42,7 @@ public class OnlineMusicPlayerMain extends Activity {
     private ImageView mSelectedTrackImage;
     private MediaPlayer mMediaPlayer;
     private ImageView mPlayerControl;
+    LinearLayout LoaderLayout;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +64,8 @@ public class OnlineMusicPlayerMain extends Activity {
             }
         });
 
+        LoaderLayout = (LinearLayout) findViewById(R.id.loader_layout);
+
         mListItems = new ArrayList<Track>();
         ListView listView = (ListView)findViewById(R.id.track_list_view);
         mAdapter = new SCTrackAdapter(this, mListItems);
@@ -81,8 +85,8 @@ public class OnlineMusicPlayerMain extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                LoaderLayout.setVisibility(View.VISIBLE);
                 Track track = mListItems.get(position);
-
                 mSelectedTrackTitle.setText(track.getTitle());
                 Picasso.with(OnlineMusicPlayerMain.this).load(track.getArtworkURL()).into(mSelectedTrackImage);
 
@@ -93,6 +97,7 @@ public class OnlineMusicPlayerMain extends Activity {
 
                 try {
                     System.out.println("getStreamURL :" + track.getStreamURL());
+                    LoaderLayout.setVisibility(View.GONE);
                     mMediaPlayer.setDataSource(track.getStreamURL());
                     mMediaPlayer.prepareAsync();
                 } catch (IOException e) {

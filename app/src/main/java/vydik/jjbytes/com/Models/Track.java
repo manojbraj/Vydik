@@ -29,7 +29,7 @@ public class Track {
     }
 
     public String getStreamURL() {
-        return "http://www.vydik.com/admin_vydik/admin_vydik_project/audio/"+mStreamURL;
+        return "http://www.vydik.com/admin_vydik/admin_vydik_project/audio/hims/"+mStreamURL;
     }
 
     public String getArtworkURL() {

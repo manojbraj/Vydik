@@ -110,7 +110,8 @@
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_marginRight="5dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:visibility="gone"/>
     <Button
         android:id="@+id/btn_sign_out"
         android:layout_width="fill_parent"
@@ -130,7 +131,8 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_weight="1"
-        android:layout_marginLeft="5dp"/>
+        android:layout_marginLeft="5dp"
+        android:visibility="gone"/>
 </LinearLayout>
 
 <Button
