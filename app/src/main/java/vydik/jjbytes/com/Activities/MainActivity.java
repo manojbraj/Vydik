@@ -486,9 +486,13 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerC
             Intent intent = new Intent(MainActivity.this,UserBookingList.class);
             startActivity(intent);
         }else if(position == 7){
-            Intent intent = new Intent(MainActivity.this,UserProfileActivity.class);
-            startActivity(intent);
-            finish();
+            if(getUserLoginData.size() == 0){
+                Toast.makeText(getApplicationContext(),"User logged in as Guest",Toast.LENGTH_LONG).show();
+            }else {
+                Intent intent = new Intent(MainActivity.this,UserProfileActivity.class);
+                startActivity(intent);
+                finish();
+            }
         } else if(position == 8){
             /*log out functionality for facebook g+ and normal sign up or sign in(purohith or user)*/
             if(SplashScreenActivity.LoginType.equals("facebook")){

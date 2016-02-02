@@ -785,120 +785,6 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
             Utilities.cancelProgressDialog();
             System.out.println("out put of search" + s);
             try {
-               /* if (package_type.equals("3")) {
-                    JSONObject object = new JSONObject(s);
-                    if (object.has("purohit_id")) {
-                        if (object.getString("purohit_id") != null) {
-                            arrayListConstants.PurohithId.add(object.getString("purohit_id").toString());
-                            constants.purohith_id = object.getString("purohit_id").toString();
-                        } else {
-                            arrayListConstants.PurohithId.add("");
-                        }
-                    } else {
-                        arrayListConstants.PurohithId.add("");
-                    }
-
-                    if (object.has("location")) {
-                        if (object.getString("location") != null) {
-                            arrayListConstants.PurohithLocation.add(object.getString("location").toString());
-                            constants.package_location = object.getString("location").toString();
-                        } else {
-                            arrayListConstants.PurohithLocation.add("no location");
-                        }
-                    } else {
-                        arrayListConstants.PurohithLocation.add("no location");
-                    }
-
-                    if (object.has("first_name")) {
-                        if (object.getString("first_name") != null) {
-                            arrayListConstants.PurohithFirstName.add(object.getString("first_name").toString());
-                            FirstName = object.getString("first_name").toString();
-                        } else {
-                            arrayListConstants.PurohithFirstName.add("no first name");
-                        }
-                    } else {
-                        arrayListConstants.PurohithFirstName.add("no first name");
-                    }
-
-                    if (object.has("last_name")) {
-                        if (object.getString("last_name") != null) {
-                            arrayListConstants.PurohithLastName.add(object.getString("last_name").toString());
-                            LastName = object.getString("last_name").toString();
-                        } else {
-                            arrayListConstants.PurohithLastName.add("np last name");
-                        }
-                    } else {
-                        arrayListConstants.PurohithLastName.add("np last name");
-                    }
-
-                    if (object.has("sect")) {
-                        if (object.getString("sect") != null) {
-                            arrayListConstants.PurohithSectId.add(object.getString("sect").toString());
-                            constants.package_sect = object.getString("sect").toString();
-                        } else {
-                            arrayListConstants.PurohithSectId.add("no sect id");
-                        }
-                    } else {
-                        arrayListConstants.PurohithSectId.add("no sect id");
-                    }
-
-                    if (object.has("expert_level")) {
-                        if (object.getString("expert_level") != null) {
-                            arrayListConstants.PurohithExpertLevel.add(object.getString("expert_level").toString());
-                            constants.package_expertise = object.getString("expert_level").toString();
-                        } else {
-                            arrayListConstants.PurohithExpertLevel.add("no expert level");
-                        }
-                    } else {
-                        arrayListConstants.PurohithExpertLevel.add("no expert level");
-                    }
-
-                    if (object.has("schems")) {
-                        if (object.getString("schems") != null) {
-                            arrayListConstants.PurohithSchem.add(object.getString("schems").toString());
-                        } else {
-                            arrayListConstants.PurohithSchem.add("no schems");
-                        }
-                    } else {
-                        arrayListConstants.PurohithSchem.add("no schems");
-                    }
-
-                    if (object.has("photo_uploaded")) {
-                        if (object.getString("photo_uploaded") != null) {
-                            arrayListConstants.PurohithPhoto.add(object.getString("photo_uploaded").toString());
-                            constants.package_image = object.getString("photo_uploaded").toString();
-                        } else {
-                            arrayListConstants.PurohithPhoto.add("");
-                        }
-                    } else {
-                        arrayListConstants.PurohithPhoto.add("");
-                    }
-
-                    if (object.has("zone")) {
-                        if (object.getString("zone") != null) {
-                            arrayListConstants.PurohithZone.add(object.getString("zone").toString());
-                        } else {
-                            arrayListConstants.PurohithZone.add("no zone");
-                        }
-                    } else {
-                        arrayListConstants.PurohithZone.add("no zone");
-                    }
-
-                    if (object.has("new_with_price")) {
-                        if (object.getString("new_with_price") != null) {
-                            int Price = object.getInt("new_with_price");
-                            String ConvertedPrice = Integer.toString(Price);
-                            constants.package_price = "Rs." + ConvertedPrice + "/-";
-
-                            constants.SearchPriceBooking = ConvertedPrice;
-                            arrayListConstants.PurohithPrice.add("Rs." + ConvertedPrice + "/-");
-                        } else {
-
-                        }
-                    } else {
-
-                    }
-                } else {*/
                     JSONArray array = new JSONArray(s);
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject object = array.getJSONObject(i);
@@ -1092,7 +978,6 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
                             }
                     }
                 }
-            //}
             }
             catch (JSONException e){
 

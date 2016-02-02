@@ -131,4 +131,7 @@ public class Constants {
 
     /*areya append*/
     public static String LocationAppend = "0";
+
+    /*login check*/
+    public static String LoginFrom = "no login";
 }

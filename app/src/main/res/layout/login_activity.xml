@@ -80,13 +80,28 @@
     android:orientation="vertical"
     android:gravity="center"
     android:layout_marginTop="20dp">
-    <Button
-        android:id="@+id/login_button"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:background="@drawable/yellow_curver_icon"
-        android:text="Log in"
-        android:textColor="#fff"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+        <Button
+            android:id="@+id/login_skip"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:background="@drawable/yellow_curver_icon"
+            android:text="Skip"
+            android:textColor="#fff"
+            android:layout_margin="5dp"/>
+        <Button
+            android:id="@+id/login_button"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:background="@drawable/yellow_curver_icon"
+            android:text="Log in"
+            android:textColor="#fff"
+            android:layout_margin="5dp"/>
+    </LinearLayout>
     <TextView
         android:id="@+id/forgot_password"
         android:layout_width="wrap_content"

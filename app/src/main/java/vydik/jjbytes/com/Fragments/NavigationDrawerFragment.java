@@ -68,7 +68,7 @@ public class NavigationDrawerFragment extends Fragment implements NavigationDraw
     private ArrayList<String> UserLastName= new ArrayList<String>();
     private ArrayList<String> UserEmailAddress = new ArrayList<String>();
     private ArrayList<String> UserImage = new ArrayList<String>();
-    String UFName,ULName,UEmail,UImage;
+    String UFName=" ",ULName =" ",UEmail = " ",UImage = "no url";
 
     @Nullable
     @Override

@@ -114,7 +114,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     private SignInButton btnSignIn;
     private Button btnSignOut, btnRevokeAccess;
     EditText username,password,UserPhoneNumber,OTPVERIFY,FPassword,FConformPassword;
-    Button normalLoginButton,SignUpButton,CreateUser,SubmitForgotPassword,CancelForgotPassword;
+    Button normalLoginButton,SignUpButton,CreateUser,SubmitForgotPassword,CancelForgotPassword,SkipLogin;
     TextView ForgotPassword;
     public static String type_for_login = "non";
 
@@ -239,7 +239,6 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         loginButton = (LoginButton) findViewById(R.id.fb_login_button);
         loginButton.setReadPermissions(Arrays.asList("email"));
         //loginButton.setReadPermissions(Arrays.asList("name"));
-
         //loginButton.setBackgroundResource(R.drawable.facebook_icon);
         loginButton.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
         loginButton.setAlpha(0);
@@ -275,8 +274,10 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         password = (EditText) findViewById(R.id.password);
         password.setHintTextColor(getResources().getColor(R.color.white));
         normalLoginButton = (Button) findViewById(R.id.login_button);
+        SkipLogin = (Button) findViewById(R.id.login_skip);
         SignUpButton = (Button) findViewById(R.id.create_user);
         ForgotPassword = (TextView) findViewById(R.id.forgot_password);
+
         ForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -289,6 +290,17 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
               LoginValidationMethod();
             }
         });
+
+        SkipLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SplashScreenActivity.GCMLoginType = "user";
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         if(type_for_login.equals("purohit")){
             btnSignIn.setVisibility(View.GONE);
             loginButton.setVisibility(View.GONE);
@@ -639,9 +651,21 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     private void CallMainMethod(String logType,String type) {
         if(logType.equals("user")){
             if(type.equals("normal")){
-                Intent intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
-                finish();
+                if(constants.LoginFrom.equals("PackagePuja")){
+                    Intent intent = new Intent(this,CheckoutActivityAddress.class);
+                    intent.putExtra("type","with");
+                    startActivity(intent);
+                    finish();
+                }else if(constants.LoginFrom.equals("WithoutPackagePuja")){
+                    Intent intent = new Intent(this, CheckoutActivityAddress.class);
+                    intent.putExtra("type","without");
+                    startActivity(intent);
+                    finish();
+                }else {
+                    Intent intent = new Intent(this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                }
             }else {
                 Intent intent = new Intent(this, UserRegistrationFormOne.class);
                 intent.putExtra("type", type);

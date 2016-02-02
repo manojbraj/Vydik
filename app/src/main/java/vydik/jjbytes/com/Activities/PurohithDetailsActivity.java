@@ -7,6 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
+import vydik.jjbytes.com.Database.MainDatabase;
+import vydik.jjbytes.com.Models.GetUserLoginData;
 import vydik.jjbytes.com.constants.Constants;
 
 /**
@@ -19,10 +23,17 @@ public class PurohithDetailsActivity extends ActionBarActivity{
     Button BookPurohit;
     TextView point_two,point_three,point_four;
 
+    MainDatabase database;
+    ArrayList<GetUserLoginData> getUserLoginData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.purohith_detail_layout);
+
+        database = new MainDatabase(this);
+        database = database.open();
+        getUserLoginData = database.getUserLoginDetails();
 
         PurohithName = (TextView) findViewById(R.id.purohith_name);
         PurohithUnivercity = (TextView) findViewById(R.id.purohith_univercity);
@@ -84,10 +95,19 @@ public class PurohithDetailsActivity extends ActionBarActivity{
         BookPurohit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PurohithDetailsActivity.this, CheckoutActivityAddress.class);
-                intent.putExtra("type","without");
-                startActivity(intent);
-                finish();
+                if(getUserLoginData.size() == 0){
+                    SplashScreenActivity.GCMLoginType = "new";
+                    constants.LoginFrom = "WithoutPackagePuja";
+                    Intent intent = new Intent(PurohithDetailsActivity.this, LoginActivity.class);
+                    intent.putExtra("login_type", "user");
+                    startActivity(intent);
+                    finish();
+                }else {
+                    Intent intent = new Intent(PurohithDetailsActivity.this, CheckoutActivityAddress.class);
+                    intent.putExtra("type","without");
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
     }

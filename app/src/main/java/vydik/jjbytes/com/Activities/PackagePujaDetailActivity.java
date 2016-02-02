@@ -10,6 +10,10 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
+
+import vydik.jjbytes.com.Database.MainDatabase;
+import vydik.jjbytes.com.Models.GetUserLoginData;
 import vydik.jjbytes.com.constants.ArrayListConstants;
 import vydik.jjbytes.com.constants.Constants;
 
@@ -25,10 +29,17 @@ public class PackagePujaDetailActivity extends ActionBarActivity {
     Constants constants;
     TextView point_two,point_three,point_four;
     LinearLayout LayoutPurohitDetail;
+    MainDatabase database;
+    ArrayList<GetUserLoginData> getUserLoginData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.purohith_detail_layout);
+
+        database = new MainDatabase(this);
+        database = database.open();
+        getUserLoginData = database.getUserLoginDetails();
 
         PurohithName = (TextView) findViewById(R.id.purohith_name);
         PurohithUnivercity = (TextView) findViewById(R.id.purohith_univercity);
@@ -99,10 +110,19 @@ public class PackagePujaDetailActivity extends ActionBarActivity {
         BookPurohit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PackagePujaDetailActivity.this,CheckoutActivityAddress.class);
-                intent.putExtra("type","with");
-                startActivity(intent);
-                finish();
+                if(getUserLoginData.size() == 0){
+                    SplashScreenActivity.GCMLoginType = "new";
+                    constants.LoginFrom = "PackagePuja";
+                    Intent intent = new Intent(PackagePujaDetailActivity.this, LoginActivity.class);
+                    intent.putExtra("login_type", "user");
+                    startActivity(intent);
+                    finish();
+                }else {
+                    Intent intent = new Intent(PackagePujaDetailActivity.this,CheckoutActivityAddress.class);
+                    intent.putExtra("type","with");
+                    startActivity(intent);
+                    finish();
+                }
             }
         });
     }
