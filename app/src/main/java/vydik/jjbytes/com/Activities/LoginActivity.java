@@ -652,11 +652,13 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         if(logType.equals("user")){
             if(type.equals("normal")){
                 if(constants.LoginFrom.equals("PackagePuja")){
+                    constants.LoginFrom = "new one";
                     Intent intent = new Intent(this,CheckoutActivityAddress.class);
                     intent.putExtra("type","with");
                     startActivity(intent);
                     finish();
                 }else if(constants.LoginFrom.equals("WithoutPackagePuja")){
+                    constants.LoginFrom = "new one";
                     Intent intent = new Intent(this, CheckoutActivityAddress.class);
                     intent.putExtra("type","without");
                     startActivity(intent);

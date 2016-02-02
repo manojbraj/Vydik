@@ -717,8 +717,6 @@ class FinalRegistrationSubbmit extends AsyncTask<String, Void, String> {
                     constants.UL10 = "image";
                 }
             }
-           /* JSONObject object = new JSONObject(s);
-            String result = object.getString("success").toString();*/
             String Image = "add image hear";
             if(UserSuccess.equals("Sucessfully")){
                 if(UserRegistrationFormOne.InputType.equals("facebook")){
@@ -736,12 +734,32 @@ class FinalRegistrationSubbmit extends AsyncTask<String, Void, String> {
                     startActivity(intent);
                     finish();
                 }else {
-                    database.insertLogin(constants.UserFName, Image, "user");
-                    database.InserUserLoginData(constants.UL1, constants.UL2, constants.UL3, constants.UL4, constants.UL5, constants.UL6,
-                            constants.UL7, constants.UL8, constants.UL10);
-                    Intent intent = new Intent(UserRegistrationFinalSignUp.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
+                    if(constants.LoginFrom.equals("PackagePuja")){
+                        constants.LoginFrom = "new one";
+                        database.insertLogin(constants.UserFName, Image, "user");
+                        database.InserUserLoginData(constants.UL1, constants.UL2, constants.UL3, constants.UL4, constants.UL5, constants.UL6,
+                                constants.UL7, constants.UL8, constants.UL10);
+                        Intent intent = new Intent(UserRegistrationFinalSignUp.this,CheckoutActivityAddress.class);
+                        intent.putExtra("type","with");
+                        startActivity(intent);
+                        finish();
+                    }else if(constants.LoginFrom.equals("WithoutPackagePuja")){
+                        constants.LoginFrom = "new one";
+                        database.insertLogin(constants.UserFName, Image, "user");
+                        database.InserUserLoginData(constants.UL1, constants.UL2, constants.UL3, constants.UL4, constants.UL5, constants.UL6,
+                                constants.UL7, constants.UL8, constants.UL10);
+                        Intent intent = new Intent(UserRegistrationFinalSignUp.this, CheckoutActivityAddress.class);
+                        intent.putExtra("type","without");
+                        startActivity(intent);
+                        finish();
+                    }else {
+                        database.insertLogin(constants.UserFName, Image, "user");
+                        database.InserUserLoginData(constants.UL1, constants.UL2, constants.UL3, constants.UL4, constants.UL5, constants.UL6,
+                                constants.UL7, constants.UL8, constants.UL10);
+                        Intent intent = new Intent(UserRegistrationFinalSignUp.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
                 }
             }else{
                 Toast.makeText(UserRegistrationFinalSignUp.this,"Something went wrong please try after some time",Toast.LENGTH_LONG).show();
