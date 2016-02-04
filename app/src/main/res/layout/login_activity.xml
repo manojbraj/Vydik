@@ -118,8 +118,7 @@
     android:layout_marginTop="20dp"
     android:layout_marginRight="10dp"
     android:layout_marginLeft="10dp"
-    android:gravity="center"
-    android:visibility="gone">
+    android:gravity="center">
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/btn_sign_in"
@@ -147,8 +146,7 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         android:layout_weight="1"
-        android:layout_marginLeft="5dp"
-        android:visibility="gone"/>
+        android:layout_marginLeft="5dp"/>
 </LinearLayout>
 
 <Button

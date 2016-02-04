@@ -24,6 +24,11 @@ import android.widget.Toast;
 
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.plus.People;
+import com.google.android.gms.plus.Plus;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -44,13 +49,16 @@ import vydik.jjbytes.com.constants.Constants;
 /**
  * Created by manoj on 10/17/2015.
  */
-public class UserRegistrationFormOne extends ActionBarActivity implements OnItemSelectedListener{
+public class UserRegistrationFormOne extends ActionBarActivity implements OnItemSelectedListener,GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, ResultCallback<People.LoadPeopleResult> {
 
     EditText UserFName,UserLName,UserEmail,UserPassword,UserConfirmPassword,UserContactNumber,UserAddress;
     Spinner UserState,UserCity,UserLocality;
     TextView UserPinCode;
     CheckBox Male,Female;
     Button UserNext;
+    private GoogleApiClient mGoogleApiClient;
+    boolean mSignInClicked;
+
     ArrayAdapter<String> dataAdapterLocality;
     ArrayAdapter<String> dataAdapterPinCode;
     Constants constants;
@@ -106,7 +114,8 @@ public class UserRegistrationFormOne extends ActionBarActivity implements OnItem
             UserLName.setText(LoginActivity.FAcebookUserLname);
             UserEmail.setText(LoginActivity.email);
         }else if(InputType.equals("google")){
-
+            UserFName.setText(LoginActivity.personName);
+            UserEmail.setText(LoginActivity.email);
         }else{
 
         }
@@ -334,6 +343,31 @@ public class UserRegistrationFormOne extends ActionBarActivity implements OnItem
 
     }
 
+    @Override
+    public void onConnected(Bundle bundle) {
+        // TODO Auto-generated method stub
+        mSignInClicked = false;
+
+        // updateUI(true);
+        Plus.PeopleApi.loadVisible(mGoogleApiClient, null).setResultCallback(UserRegistrationFormOne.this);
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        // TODO Auto-generated method stub
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public void onResult(People.LoadPeopleResult loadPeopleResult) {
+
+    }
+
     /*get locality and pin*/
     private class getLocalityName extends AsyncTask<String, String, String> {
 
@@ -419,9 +453,12 @@ public class UserRegistrationFormOne extends ActionBarActivity implements OnItem
         ArrayListConstants.PinCode.clear();
 
         if(InputType.equals("facebook")){
-            /*FacebookSdk.sdkInitialize(getApplicationContext());
-            LoginManager.getInstance().logOut();*/
             Intent intent = new Intent(UserRegistrationFormOne.this,LoginActivity.class);
+            intent.putExtra("login_type", "user");
+            startActivity(intent);
+            finish();
+        }else if(InputType.equals("google")){
+            Intent intent = new Intent(UserRegistrationFormOne.this, LoginActivity.class);
             intent.putExtra("login_type", "user");
             startActivity(intent);
             finish();

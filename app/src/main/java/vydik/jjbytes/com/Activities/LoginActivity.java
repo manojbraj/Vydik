@@ -543,8 +543,6 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     @Override
     public void onConnected(Bundle arg0) {
         mSignInClicked = false;
-        Toast.makeText(this, "User is connected!", Toast.LENGTH_LONG).show();
-
         // Get user's information
         getProfileInformation();
 
@@ -631,12 +629,19 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
                 personPhotoUrl = currentPerson.getImage().getUrl();
                 String personGooglePlusProfile = currentPerson.getUrl();
                 email = Plus.AccountApi.getAccountName(mGoogleApiClient);
-                Log.e(TAG, "Name: " + personName + ", plusProfile: "
+
+                /*Log.e(TAG, "Name: " + personName + ", plusProfile: "
                         + personGooglePlusProfile + ", email: " + email
-                        + ", Image: " + personPhotoUrl);
+                        + ", Image: " + personPhotoUrl);*/
+
                 String Type = "google";
                 //database.insertLogin(personName, personPhotoUrl, Type);
                 String logType = "user",type = "google";
+                if (mGoogleApiClient.isConnected()) {
+                    Plus.AccountApi.clearDefaultAccount(mGoogleApiClient);
+                    mGoogleApiClient.disconnect();
+                }
+
                 CallMainMethod(logType,type);
 
             } else {
