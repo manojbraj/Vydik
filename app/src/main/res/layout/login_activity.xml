@@ -90,7 +90,7 @@
             android:layout_width="150dp"
             android:layout_height="50dp"
             android:background="@drawable/yellow_curver_icon"
-            android:text="Skip"
+            android:text="Guest Login"
             android:textColor="#fff"
             android:layout_margin="5dp"/>
         <Button
