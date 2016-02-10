@@ -1,6 +1,7 @@
 package vydik.jjbytes.com.Activities;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +44,7 @@ public class OnlineMusicPlayerMain extends Activity {
     private ImageView mSelectedTrackImage;
     private MediaPlayer mMediaPlayer;
     private ImageView mPlayerControl;
+    private ProgressBar ProgressLoader;
     LinearLayout LoaderLayout;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -74,6 +77,7 @@ public class OnlineMusicPlayerMain extends Activity {
         mSelectedTrackTitle = (TextView)findViewById(R.id.selected_track_title);
         mSelectedTrackImage = (ImageView)findViewById(R.id.selected_track_image);
         mPlayerControl = (ImageView)findViewById(R.id.player_control);
+        ProgressLoader = (ProgressBar) findViewById(R.id.progress_loader);
 
         mPlayerControl.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +89,8 @@ public class OnlineMusicPlayerMain extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                LoaderLayout.setVisibility(View.VISIBLE);
+                //LoaderLayout.setVisibility(View.VISIBLE);
+                ProgressLoader.setVisibility(View.VISIBLE);
                 Track track = mListItems.get(position);
                 mSelectedTrackTitle.setText(track.getTitle());
                 Picasso.with(OnlineMusicPlayerMain.this).load(track.getArtworkURL()).into(mSelectedTrackImage);
@@ -97,12 +102,18 @@ public class OnlineMusicPlayerMain extends Activity {
 
                 try {
                     System.out.println("getStreamURL :" + track.getStreamURL());
-                    LoaderLayout.setVisibility(View.GONE);
+                    //LoaderLayout.setVisibility(View.GONE);
                     mMediaPlayer.setDataSource(track.getStreamURL());
                     mMediaPlayer.prepareAsync();
                 } catch (IOException e) {
                     e.printStackTrace();
-                } catch (Exception e) {
+                } catch (IllegalArgumentException e){
+                    e.printStackTrace();
+                } catch (SecurityException e){
+                    e.printStackTrace();
+                } catch (IllegalStateException e){
+                    e.printStackTrace();
+                }catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -138,9 +149,11 @@ public class OnlineMusicPlayerMain extends Activity {
 
     private void togglePlayPause() {
         if (mMediaPlayer.isPlaying()) {
+            ProgressLoader.setVisibility(View.GONE);
             mMediaPlayer.pause();
             mPlayerControl.setImageResource(R.drawable.ic_play);
         } else {
+            ProgressLoader.setVisibility(View.VISIBLE);
             mMediaPlayer.start();
             mPlayerControl.setImageResource(R.drawable.ic_pause);
         }
