@@ -89,7 +89,6 @@ public class OnlineMusicPlayerMain extends Activity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //LoaderLayout.setVisibility(View.VISIBLE);
                 ProgressLoader.setVisibility(View.VISIBLE);
                 Track track = mListItems.get(position);
                 mSelectedTrackTitle.setText(track.getTitle());
@@ -102,7 +101,6 @@ public class OnlineMusicPlayerMain extends Activity {
 
                 try {
                     System.out.println("getStreamURL :" + track.getStreamURL());
-                    //LoaderLayout.setVisibility(View.GONE);
                     mMediaPlayer.setDataSource(track.getStreamURL());
                     mMediaPlayer.prepareAsync();
                 } catch (IOException e) {
