@@ -115,6 +115,7 @@ public class PackagePujaDetailActivity extends ActionBarActivity {
                     constants.LoginFrom = "PackagePuja";
                     Intent intent = new Intent(PackagePujaDetailActivity.this, LoginActivity.class);
                     intent.putExtra("login_type", "user");
+                    intent.putExtra("activity","PujaActivity");
                     startActivity(intent);
                     finish();
                 }else {

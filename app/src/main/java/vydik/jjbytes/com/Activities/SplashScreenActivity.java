@@ -132,6 +132,7 @@ public class SplashScreenActivity extends ActionBarActivity {
                     //CallPopup();
                     Intent intent = new Intent(SplashScreenActivity.this, LoginActivity.class);
                     intent.putExtra("login_type", "user");
+                    intent.putExtra("activity","splash");
                     startActivity(intent);
                     finish();
                 }

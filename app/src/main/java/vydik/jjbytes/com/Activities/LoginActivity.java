@@ -116,7 +116,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     EditText username,password,UserPhoneNumber,OTPVERIFY,FPassword,FConformPassword;
     Button normalLoginButton,SignUpButton,CreateUser,SubmitForgotPassword,CancelForgotPassword,SkipLogin;
     TextView ForgotPassword;
-    public static String type_for_login = "non";
+    public static String type_for_login = "non",fromActivity = "";
 
     MainDatabase database;
     Object content;
@@ -198,6 +198,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             type_for_login = extras.getString("login_type");
+            fromActivity = extras.getString("activity");
         }
 
         if(type_for_login.equals("purohit")){
@@ -290,7 +291,11 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
               LoginValidationMethod();
             }
         });
+        if(fromActivity.equals("splash")){
 
+        }else {
+            SkipLogin.setVisibility(View.GONE);
+        }
         SkipLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

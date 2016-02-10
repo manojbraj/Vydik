@@ -100,6 +100,7 @@ public class PurohithDetailsActivity extends ActionBarActivity{
                     constants.LoginFrom = "WithoutPackagePuja";
                     Intent intent = new Intent(PurohithDetailsActivity.this, LoginActivity.class);
                     intent.putExtra("login_type", "user");
+                    intent.putExtra("activity","PujaActivity");
                     startActivity(intent);
                     finish();
                 }else {
