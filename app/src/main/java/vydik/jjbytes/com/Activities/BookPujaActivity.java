@@ -783,7 +783,7 @@ public class BookPujaActivity extends ActionBarActivity implements OnItemSelecte
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
             Utilities.cancelProgressDialog();
-            System.out.println("out put of search" + s);
+            System.out.println("out put of search list :" + s);
             try {
                     JSONArray array = new JSONArray(s);
                 for (int i = 0; i < array.length(); i++) {

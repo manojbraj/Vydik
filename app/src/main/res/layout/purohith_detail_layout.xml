@@ -199,7 +199,7 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/search_sect_round"/>
+            android:src="@drawable/search_sect_round"/>
         <TextView
             android:id="@+id/purohith_sect"
             android:layout_width="match_parent"
@@ -213,12 +213,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
-    android:orientation="horizontal"
-    android:visibility="gone">
+    android:orientation="horizontal">
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:background="@drawable/education_icon"/>
+        android:src="@drawable/education_icon"/>
     <TextView
         android:id="@+id/purohith_univercity"
         android:layout_width="match_parent"
@@ -236,7 +235,7 @@
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:background="@drawable/location_image"/>
+        android:src="@drawable/location_image"/>
     <TextView
         android:id="@+id/purohith_location"
         android:layout_width="match_parent"
@@ -250,16 +249,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
-    android:orientation="horizontal"
-    android:visibility="gone">
+    android:orientation="horizontal">
     <ImageView
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:background="@drawable/education_icon"/>
+        android:src="@drawable/language_icon"/>
     <TextView
-        android:id="@+id/purohith_guru_name"
+        android:id="@+id/languages"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:textSize="16sp"
         android:textColor="#000"

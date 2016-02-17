@@ -104,7 +104,7 @@ public class Constants {
             searchDate = "date_pur", searchLanguage = "lang_id", searchLocation = "loc_id";
 
     /*purohith detail constants*/
-    public static String Education, Sect, Univercity;
+    public static String Education, Sect, Univercity, Languages;
 
     /*package purohith constants*/
     public static String package_Name, package_rating, package_price, package_expertise, package_sect, package_language, package_education, package_location, package_university, package_image,purohith_id;

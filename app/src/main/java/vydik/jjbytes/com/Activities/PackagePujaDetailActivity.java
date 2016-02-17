@@ -44,7 +44,7 @@ public class PackagePujaDetailActivity extends ActionBarActivity {
         PurohithName = (TextView) findViewById(R.id.purohith_name);
         PurohithUnivercity = (TextView) findViewById(R.id.purohith_univercity);
         PurohithSect = (TextView) findViewById(R.id.purohith_sect);
-        PurohithGuruName = (TextView) findViewById(R.id.purohith_guru_name);
+        PurohithGuruName = (TextView) findViewById(R.id.languages);
         PurohithLocation = (TextView) findViewById(R.id.purohith_location);
         PujaPrice = (TextView) findViewById(R.id.price);
         PurohitRating = (TextView) findViewById(R.id.rating);
@@ -96,8 +96,7 @@ public class PackagePujaDetailActivity extends ActionBarActivity {
         PurohithName.setText(constants.SPujaName);
         PurohithUnivercity.setText(constants.package_university);
         PujaDescription.setText(constants.PujaDescription);
-        //PurohithSect.setText(constants.package_sect);
-        PurohithGuruName.setText("");
+        PurohithGuruName.setText(constants.Languages);
         //PurohithLocation.setText(constants.package_location);
         if(constants.AdvanceAmount.equals("000")){
             AdvanceAmount.setText(constants.package_price);

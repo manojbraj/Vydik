@@ -140,6 +140,17 @@ public class  SearchResultPurohithActivity extends ActionBarActivity {
                     }else{
                         constants.Univercity = " ";
                     }
+
+                    if(object.has("languages")){
+                        if(object.getString("languages")!= null){
+                            constants.Languages = object.getString("languages").toString();
+                        }else {
+                            constants.Languages = " ";
+                        }
+                    }else {
+                        constants.Languages = " ";
+                    }
+
                 }
             }catch (Exception e){
 

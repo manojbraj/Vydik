@@ -116,7 +116,7 @@ public class LoginActivity extends FragmentActivity implements View.OnClickListe
     EditText username,password,UserPhoneNumber,OTPVERIFY,FPassword,FConformPassword;
     Button normalLoginButton,SignUpButton,CreateUser,SubmitForgotPassword,CancelForgotPassword,SkipLogin;
     TextView ForgotPassword;
-    public static String type_for_login = "non",fromActivity = "";
+    public static String type_for_login = "non",fromActivity = "non";
 
     MainDatabase database;
     Object content;

@@ -17,7 +17,7 @@ import vydik.jjbytes.com.constants.Constants;
  * Created by Manoj on 10/31/2015.
  */
 public class PurohithDetailsActivity extends ActionBarActivity{
-    TextView PurohithName,PurohithUnivercity,PurohithSect,PurohithGuruName,PurohithLocation,PujaPrice,Rating,AdvanceAmount,BalanceAmount,AdvanceText,BalanceText;
+    TextView PurohithName,PurohithUnivercity,PurohithSect,PurohithLanguages,PurohithLocation,PujaPrice,Rating,AdvanceAmount,BalanceAmount,AdvanceText,BalanceText;
     SearchResultPurohithActivity searchResultPurohithActivity;
     Constants constants;
     Button BookPurohit;
@@ -38,7 +38,7 @@ public class PurohithDetailsActivity extends ActionBarActivity{
         PurohithName = (TextView) findViewById(R.id.purohith_name);
         PurohithUnivercity = (TextView) findViewById(R.id.purohith_univercity);
         PurohithSect = (TextView) findViewById(R.id.purohith_sect);
-        PurohithGuruName = (TextView) findViewById(R.id.purohith_guru_name);
+        PurohithLanguages = (TextView) findViewById(R.id.languages);
         PurohithLocation = (TextView) findViewById(R.id.purohith_location);
         PujaPrice = (TextView) findViewById(R.id.price);
         Rating = (TextView) findViewById(R.id.rating);
@@ -80,7 +80,7 @@ public class PurohithDetailsActivity extends ActionBarActivity{
         PurohithName.setText(searchResultPurohithActivity.PurohithName);
         PurohithUnivercity.setText(constants.Univercity);
         PurohithSect.setText(constants.Sect);
-        PurohithGuruName.setText("");
+        PurohithLanguages.setText(constants.Languages);
         PurohithLocation.setText(searchResultPurohithActivity.PurohithLocation);
 
         if(constants.AdvanceAmount.equals("000")){
